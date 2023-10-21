@@ -9,7 +9,7 @@ specifiers:
   date-fns: ^2.30.0
   eslint: ^8
   eslint-config-next: 13.5.4
-  klabban-commerce: ^0.0.14
+  klabban-commerce: ^0.0.18
   next: 13.5.4
   postcss: ^8
   react: ^18
@@ -19,7 +19,7 @@ specifiers:
 
 dependencies:
   date-fns: 2.30.0
-  klabban-commerce: 0.0.14_react-dom@18.2.0
+  klabban-commerce: 0.0.18_react-dom@18.2.0
   next: 13.5.4_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1805,8 +1805,8 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
-  /klabban-commerce/0.0.14_react-dom@18.2.0:
-    resolution: {integrity: sha512-D+TQ+1d5147ZsJpp4GQnHmC2nINbDzu348nJ8vKsGbzCU4/Qqzf1dKgtwDZ/Z+UqTApB5lu/8DGd8HsVjF4lGQ==}
+  /klabban-commerce/0.0.18_react-dom@18.2.0:
+    resolution: {integrity: sha512-tyDgbTv2tHQQSd/mVOMdxubeP/m21cdY3vjOaKDASFyLviEaIp+gUXAsNOeVF5XO2bPVUEn6baGJaDH22r+sEg==}
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0_graphql@16.8.1
       '@headlessui/react': 1.7.17_biqbaboplfbrettd7655fr4n2y

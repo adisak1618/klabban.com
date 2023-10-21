@@ -8,7 +8,7 @@ export const PostCard = ({
   categories,
 }: PostFragmentFragment) => {
   return (
-    <div className="bg-white shadow-sm hover:shadow-2xl cursor-pointer zoom-in">
+    <div className="bg-white shadow-sm hover:shadow-2xl cursor-pointer zoom-in h-full">
       <div className="relative w-full pb-[56.25%] bg-gray-200">
         {featuredImage && (
           <img

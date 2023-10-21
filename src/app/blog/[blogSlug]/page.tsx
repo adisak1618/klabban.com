@@ -39,14 +39,19 @@ export default function Page({ params }: PageProps): JSX.Element {
             </div>
             {post?.featuredImage && (
               <img
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center mb-[30px]"
                 alt={post?.featuredImage?.node?.altText || ""}
                 src={post?.featuredImage?.node.sourceUrl || ""}
                 srcSet={post?.featuredImage?.node.sourceUrl || ""}
               />
             )}
           </header>
-          <GutenbergContent content={post?.content || ""} />
+          <main>
+            <GutenbergContent
+              entryClassName="!my-0"
+              content={post?.content || ""}
+            />
+          </main>
           {post?.id && (
             <RelateProducts
               postId={post?.id}
