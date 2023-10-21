@@ -1,3 +1,5 @@
+@import "klabban-commerce/react/index.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,6 +8,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --lightblue: #C0E2E2;
+  --text-black: #353535;
+  --darkpink: #D8C4C3;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,10 +23,24 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+}
+
+@layer components {
+  .zoom-in {
+    @apply transition-all ease-in-out hover:-translate-y-1 hover:scale-105;
+  }
+}
+
+.underline-hilight {
+  background-image: linear-gradient(transparent calc(100% - 0.45em),var(--darkpink) 0),linear-gradient(transparent calc(100% - 0.45em),var(--lightblue) 0);
+  background-repeat: no-repeat;
+  background-size: 0 100%,100% 100%;
+  transition: background-size .1s ease-in-out;
+  color: transparent;
+  text-shadow: 0 0 var(--text-black),0.06em 0 0 rgba(255,255,255,.7),0 0.05em 0 rgba(255,255,255,.7),-0.06em 0 0 rgba(255,255,255,.7);
+}
+
+.underline-hilight:hover {
+  background-size: 100% 100%,100% 100%;
+  text-decoration: none;
 }
