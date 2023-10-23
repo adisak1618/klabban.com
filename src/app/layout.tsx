@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryProvider GQL_URL="http://klabban-demo.local/graphql">
+        <QueryProvider GQL_URL={process.env.GQL_URL as string}>
           {children}
         </QueryProvider>
       </body>

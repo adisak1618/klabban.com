@@ -1,6 +1,6 @@
 
 
 export const KlabbanConfig = {
-  GQL_URL: "http://klabban-demo.local/graphql",
+  GQL_URL: process.env.GQL_URL as string
 }
 
