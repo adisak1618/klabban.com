@@ -19,7 +19,9 @@ export const PostCard = ({
         )}
       </div>
       <div className="p-3 space-y-1">
-        <p className="text-h5 font-medium leading-8 line-clamp-2">{title}</p>
+        <p className="text-h5 font-medium leading-8 line-clamp-2 text-black">
+          {title}
+        </p>
         <div className="text-caption text-center leading-4 text-gray-400 flex gap-3">
           <p className="">
             {format(new Date(date || new Date()), "MMMM dd, yyyy")}
