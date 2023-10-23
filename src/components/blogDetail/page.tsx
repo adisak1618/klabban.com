@@ -1,9 +1,10 @@
-import { GutenbergContent, PostProvider } from "klabban-commerce/react";
+import { GutenbergContent } from "klabban-commerce/react";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { format } from "date-fns";
 // import "klabban-commerce/react/index.css";
 import { RelatePost } from "./relatePost";
 import NextPreviousPostLink from "./nextPreviousPost";
+import { PostProvider } from "klabban-commerce";
 
 export interface BlogDetailPageProps {
   params: {

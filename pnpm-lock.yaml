@@ -7,6 +7,7 @@ specifiers:
   autoprefixer: ^10
   clsx: ^2.0.0
   date-fns: ^2.30.0
+  encoding: ^0.1.13
   eslint: ^8
   eslint-config-next: 13.5.4
   klabban-commerce: ^0.0.26
@@ -19,7 +20,7 @@ specifiers:
 
 dependencies:
   date-fns: 2.30.0
-  klabban-commerce: 0.0.26_react-dom@18.2.0
+  klabban-commerce: 0.0.26_3u7dma5vprfmvtv7sddiljavgy
   next: 13.5.6_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -30,6 +31,7 @@ devDependencies:
   '@types/react-dom': 18.2.14
   autoprefixer: 10.4.16_postcss@8.4.31
   clsx: 2.0.0
+  encoding: 0.1.13
   eslint: 8.52.0
   eslint-config-next: 13.5.4_i3vkbg2fztj7jno7sh3heeojya
   postcss: 8.4.31
@@ -709,10 +711,10 @@ packages:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
-  /cross-fetch/3.1.8:
+  /cross-fetch/3.1.8_encoding@0.1.13:
     resolution: {integrity: sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==}
     dependencies:
-      node-fetch: 2.7.0
+      node-fetch: 2.7.0_encoding@0.1.13
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -837,6 +839,11 @@ packages:
   /emoji-regex/9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
     dev: true
+
+  /encoding/0.1.13:
+    resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
+    dependencies:
+      iconv-lite: 0.6.3
 
   /enhanced-resolve/5.15.0:
     resolution: {integrity: sha512-LXYT42KJ7lpIKECr2mAXIaMldcNCh/7E0KBKOu4KSfkHmP+mZmSs+8V5gBAqisWBy0OO4W5Oyys0GO1Y8KtdKg==}
@@ -1479,13 +1486,13 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
-  /graphql-request/6.1.0_graphql@16.8.1:
+  /graphql-request/6.1.0_3sgwqflpx6s5nwzmoijwblqcx4:
     resolution: {integrity: sha512-p+XPfS4q7aIpKVcgmnZKhMNqhltk20hfXtkaIkTfjjmiKMJ5xrt5c743cL03y/K7y1rg3WrIC49xGiEQ4mxdNw==}
     peerDependencies:
       graphql: 14 - 16
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0_graphql@16.8.1
-      cross-fetch: 3.1.8
+      cross-fetch: 3.1.8_encoding@0.1.13
       graphql: 16.8.1
     transitivePeerDependencies:
       - encoding
@@ -1545,6 +1552,12 @@ packages:
     dependencies:
       react-is: 16.13.1
     dev: false
+
+  /iconv-lite/0.6.3:
+    resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      safer-buffer: 2.1.2
 
   /ignore/5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
@@ -1818,7 +1831,7 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
-  /klabban-commerce/0.0.26_react-dom@18.2.0:
+  /klabban-commerce/0.0.26_3u7dma5vprfmvtv7sddiljavgy:
     resolution: {integrity: sha512-TrBaLd8PGIDBDq5tHnCL6v5shvpnUV/mKyW3pXQNQCtkVoT3KmSyRkkvI8M0jfXelnJcJsrz/bELdM5CTHHZ6Q==}
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0_graphql@16.8.1
@@ -1827,7 +1840,7 @@ packages:
       clsx: 2.0.0
       formik: 2.4.5_react@18.2.0
       graphql: 16.8.1
-      graphql-request: 6.1.0_graphql@16.8.1
+      graphql-request: 6.1.0_3sgwqflpx6s5nwzmoijwblqcx4
       js-cookie: 3.0.5
       lucide-react: 0.284.0_react@18.2.0
       react: 18.2.0
@@ -1993,7 +2006,7 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /node-fetch/2.7.0:
+  /node-fetch/2.7.0_encoding@0.1.13:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
@@ -2002,6 +2015,7 @@ packages:
       encoding:
         optional: true
     dependencies:
+      encoding: 0.1.13
       whatwg-url: 5.0.0
     dev: false
 
@@ -2390,6 +2404,9 @@ packages:
       get-intrinsic: 1.2.2
       is-regex: 1.1.4
     dev: true
+
+  /safer-buffer/2.1.2:
+    resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
   /scheduler/0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}

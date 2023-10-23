@@ -1,6 +1,6 @@
-import { BlogPage, BlogSearchPageProps } from "components/blogSearch";
+import { BlogPage } from "components/blogSearch";
 
-function Page(props: BlogSearchPageProps) {
+function Page(props: PageSearchParams) {
   return (
     <>
       <div className="bg-gray-100 py-20">

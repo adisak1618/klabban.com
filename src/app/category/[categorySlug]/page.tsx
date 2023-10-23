@@ -1,6 +1,6 @@
-import { BlogPage, BlogSearchPageProps } from "components/blogSearch";
+import { BlogPage } from "components/blogSearch";
 
-interface PageProps extends BlogSearchPageProps {
+interface PageProps extends PageSearchParams {
   params: {
     categorySlug: string;
   };
