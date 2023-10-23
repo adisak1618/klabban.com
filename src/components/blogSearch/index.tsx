@@ -60,7 +60,7 @@ export function BlogPage({
           <div className="mx-auto !max-w-5xl mt-6 mb-3 lg:container px-5 md:flex justify-center md:gap-10 xl:gap-20">
             <div className="md:space-y-6 mb-6 md:block gap-6 flex-wrap hidden">
               <div className="">
-                <h3 className="text-h5 md:text-h4 font-bold underline-hilight inline">
+                <h3 className="text-h5 md:text-h4 font-bold underline-hilight inline-block whitespace-nowrap">
                   หมวดหมู่
                 </h3>
                 <div className="flex md:block gap-3">
