@@ -16,7 +16,9 @@ export default function NextPreviousPostLink(
             <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight pr-3">
               Previous
             </p>
-            <p className="font-bold line-clamp-1">{props.previous.title}</p>
+            <p className="text-black font-bold line-clamp-1">
+              {props.previous.title}
+            </p>
           </div>
         </Link>
       ) : (

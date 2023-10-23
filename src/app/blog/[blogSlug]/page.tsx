@@ -27,7 +27,7 @@ export default function BlogDetailPage({
         <>
           <header className="max-w-5xl mx-auto">
             <div className="my-10">
-              <div className="text-h2 text-center px-7 font-bold leading-[1.14em]">
+              <div className="text-h4 md:text-h3 lg:text-h2 text-center px-7 font-bold leading-[1.14em] text-black">
                 {post?.title}
               </div>
               <div className="text-body px-7 text-center leading-4 mt-4 font-medium text-[#787878] md:flex gap-3 justify-center">
