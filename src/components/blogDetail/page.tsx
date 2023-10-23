@@ -1,12 +1,9 @@
-import { GutenbergContent } from "klabban-commerce/react";
-import { PostProvider } from "klabban-commerce";
+import { GutenbergContent, PostProvider } from "klabban-commerce/react";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { format } from "date-fns";
 // import "klabban-commerce/react/index.css";
 import { RelatePost } from "./relatePost";
 import NextPreviousPostLink from "./nextPreviousPost";
-import Link from "next/link";
-import { PostTags } from "./tags";
 
 export interface BlogDetailPageProps {
   params: {
@@ -14,9 +11,7 @@ export interface BlogDetailPageProps {
   };
 }
 
-export default function BlogDetailPage({
-  params,
-}: BlogDetailPageProps): JSX.Element {
+export function BlogDetailPage({ params }: BlogDetailPageProps): JSX.Element {
   return (
     <PostProvider
       {...KlabbanConfig}
@@ -30,20 +25,16 @@ export default function BlogDetailPage({
               <div className="text-h2 text-center px-7 font-bold leading-[1.14em]">
                 {post?.title}
               </div>
-              <div className="text-body px-7 text-center leading-4 mt-4 font-medium text-[#787878] md:flex gap-3 justify-center">
-                <p className="border-b pb-3 inline-block border-gray-500 md:border-0 md:pb-0 ">
+              <div className="text-body px-7 text-center leading-4 mt-4 font-medium text-[#787878] flex gap-3 justify-center">
+                <p className="">
                   {format(new Date(post?.date || new Date()), "MMMM dd, yyyy")}
                 </p>
-                <div className="hidden md:block">|</div>
-                <div className="flex gap-3 mt-3 md:mt-0 justify-center flex-wrap">
+                <div>|</div>
+                <div className="flex gap-3">
                   {post?.categories?.nodes.map((category) => (
-                    <Link
-                      href={`/category/${category.slug}`}
-                      key={category.id}
-                      className="hover:underline-hilight"
-                    >
+                    <span key={category.id} className="">
                       {category.name}
-                    </Link>
+                    </span>
                   ))}
                 </div>
               </div>
@@ -63,20 +54,18 @@ export default function BlogDetailPage({
               content={post?.content || ""}
             />
           </main>
-          <div className="space-y-10 py-6 bg-gray-100">
-            {post && <PostTags {...post} />}
-            {post && <NextPreviousPostLink {...post} />}
-            {post?.id && (
-              <RelatePost
-                postId={post?.databaseId.toString()}
-                categoriesId={
-                  post?.categories?.nodes?.map((category) =>
-                    category.databaseId.toString()
-                  ) || []
-                }
-              />
-            )}
-          </div>
+
+          {post?.id && (
+            <RelatePost
+              postId={post?.databaseId.toString()}
+              categoriesId={
+                post?.categories?.nodes?.map((category) =>
+                  category.databaseId.toString()
+                ) || []
+              }
+            />
+          )}
+          {post && <NextPreviousPostLink {...post} />}
         </>
       )}
     </PostProvider>

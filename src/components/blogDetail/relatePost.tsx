@@ -22,7 +22,7 @@ export function RelatePost({
   if (fetching || !data || data.randomPosts.length === 0) return <></>;
 
   return (
-    <div>
+    <div className="bg-gray-100 pt-20 pb-10">
       <div className="max-w-5xl mx-auto mb-6 container px-5">
         <h3 className="text-h3 font-bold underline-hilight inline-block leading-[44px]">
           เนื้อหาที่เกี่ยวข้อง
