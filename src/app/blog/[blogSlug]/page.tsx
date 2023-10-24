@@ -40,7 +40,7 @@ export default function BlogDetailPage({
                     <Link
                       href={`/category/${category.slug}`}
                       key={category.id}
-                      className="hover:underline-hilight"
+                      className="hover:underline-hilight-secondary"
                     >
                       {category.name}
                     </Link>

@@ -18,7 +18,7 @@ export function PostTags(props: PostBySlugQuery["post"]): JSX.Element {
         <Link
           key={tag.id}
           href={`/tag/${tag.slug}`}
-          className="bg-gray-800 px-4 py-1 text-white rounded-full text-caption"
+          className="bg-gray-800 hover:bg-opacity-90 px-4 py-1 text-white rounded-full text-caption"
         >
           #{tag.name}
         </Link>
