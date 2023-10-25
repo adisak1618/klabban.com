@@ -60,3 +60,5 @@ function Page(props: PageSearchParams) {
 }
 
 export default Page;
+
+export const revalidate = 60 * 60;

@@ -162,3 +162,5 @@ export default function BlogDetailPage({
     </PostProvider>
   );
 }
+
+export const revalidate = 60 * 60;

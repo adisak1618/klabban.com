@@ -80,3 +80,5 @@ export default function Page(props: PageProps) {
     </>
   );
 }
+
+export const revalidate = 60 * 60;
