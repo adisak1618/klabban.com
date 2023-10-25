@@ -1,4 +1,10 @@
+import { Breadcrumb } from "components/Breadcrumb";
+import { HeadlineSection } from "components/Headline";
+import { NormalHeadlineSection } from "components/Headline/simple";
+import { AnimateCard } from "components/animateCard";
 import { BlogPage } from "components/blogSearch";
+import { CategoryProvider } from "klabban-commerce";
+import { KlabbanConfig } from "libs/klabbanConfig";
 
 interface PageProps extends PageSearchParams {
   params: {
@@ -9,13 +15,63 @@ interface PageProps extends PageSearchParams {
 export default function Page(props: PageProps) {
   return (
     <>
-      <div className=" py-6">
-        <div className="max-w-5xl mx-auto container px-5 text-center">
-          <h1 className="text-h1 font-bold text-center inline-block leading-[90px] uppercase text-gray-600 drop-shadow-lg underline-hilight underline-hilight-hover">
-            {props.params.categorySlug}
-          </h1>
-        </div>
-      </div>
+      <CategoryProvider {...KlabbanConfig} slug={props.params.categorySlug}>
+        {({ category }) => (
+          <>
+            {/* <HeadlineSection
+              backgroundImage={
+                category?.cover?.sourceUrl || "/images/tag-cover.jpg"
+              }
+              title={category?.name || ""}
+              subTitle={category?.description}
+            /> */}
+
+            <div className="mx-auto !max-w-5xl mt-6 mb-4 lg:container px-5">
+              <Breadcrumb
+                links={[
+                  {
+                    label: "Blog",
+                    href: "/blog",
+                  },
+                  {
+                    label: category?.name || "",
+                    href: `/category/${category?.slug}`,
+                  },
+                ]}
+              />
+            </div>
+            <div className="container-content xl:!max-w-7xl">
+              <AnimateCard
+                avatarClassName="md:min-w-[400px]"
+                avatarImage={
+                  category?.cover?.sourceUrl || "/images/tag-cover.jpg"
+                }
+                content={
+                  <div className="p-6 relative z-10 text-center md:text-left flex flex-col justify-center">
+                    <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">
+                      Category
+                    </p>
+                    <h1 className="text-h2 uppercase mb-2 font-bold leading-[1em] text-text-color drop-shadow-2xl tracking-widest">
+                      {category?.name || ""}
+                    </h1>
+
+                    {category?.description && (
+                      <p
+                        className={
+                          "text-h6 text-text-secondary mx-auto py-0 max-w-2xl line-clamp-5"
+                        }
+                      >
+                        {category?.description}
+                      </p>
+                    )}
+                  </div>
+                }
+              />
+            </div>
+          </>
+        )}
+      </CategoryProvider>
+
       <BlogPage
         categoryName={props.params.categorySlug}
         {...props}

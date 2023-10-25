@@ -10,17 +10,20 @@ specifiers:
   encoding: ^0.1.13
   eslint: ^8
   eslint-config-next: 13.5.4
-  klabban-commerce: ^0.0.26
+  framer-motion: ^10.16.4
+  klabban-commerce: ^0.0.33
   next: 13.5.6
   postcss: ^8
   react: ^18
   react-dom: ^18
+  tailwind-merge: ^1.14.0
   tailwindcss: ^3
   typescript: ^5
 
 dependencies:
   date-fns: 2.30.0
-  klabban-commerce: 0.0.26_3u7dma5vprfmvtv7sddiljavgy
+  framer-motion: 10.16.4_biqbaboplfbrettd7655fr4n2y
+  klabban-commerce: 0.0.33_3u7dma5vprfmvtv7sddiljavgy
   next: 13.5.6_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -35,6 +38,7 @@ devDependencies:
   eslint: 8.52.0
   eslint-config-next: 13.5.4_i3vkbg2fztj7jno7sh3heeojya
   postcss: 8.4.31
+  tailwind-merge: 1.14.0
   tailwindcss: 3.3.3
   typescript: 5.2.2
 
@@ -66,6 +70,19 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+
+  /@emotion/is-prop-valid/0.8.8:
+    resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}
+    requiresBuild: true
+    dependencies:
+      '@emotion/memoize': 0.7.4
+    dev: false
+    optional: true
+
+  /@emotion/memoize/0.7.4:
+    resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    dev: false
+    optional: true
 
   /@eslint-community/eslint-utils/4.4.0_eslint@8.52.0:
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
@@ -1343,6 +1360,24 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
+  /framer-motion/10.16.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-p9V9nGomS3m6/CALXqv6nFGMuFOxbWsmaOrdmhyQimMIlLl3LC7h7l86wge/Js/8cRu5ktutS/zlzgR7eBOtFA==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tslib: 2.6.2
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
+    dev: false
+
   /fs.realpath/1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
@@ -1831,8 +1866,8 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
-  /klabban-commerce/0.0.26_3u7dma5vprfmvtv7sddiljavgy:
-    resolution: {integrity: sha512-TrBaLd8PGIDBDq5tHnCL6v5shvpnUV/mKyW3pXQNQCtkVoT3KmSyRkkvI8M0jfXelnJcJsrz/bELdM5CTHHZ6Q==}
+  /klabban-commerce/0.0.33_3u7dma5vprfmvtv7sddiljavgy:
+    resolution: {integrity: sha512-mg/kq4fq5bRhOowNOU7KJ7gHGrHyGx9PVJGBqXfr9ntmex/xFyrcDEg/09b9rm8f01T3Rhu7OfXTK2VDc54V6g==}
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0_graphql@16.8.1
       '@headlessui/react': 1.7.17_biqbaboplfbrettd7655fr4n2y
@@ -2581,7 +2616,6 @@ packages:
 
   /tailwind-merge/1.14.0:
     resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
-    dev: false
 
   /tailwindcss/3.3.3:
     resolution: {integrity: sha512-A0KgSkef7eE4Mf+nKJ83i75TMyq8HqY3qmFIJSWy8bNt0v1lG7jUcpGpoTFxAwYcWOphcTBLPPJg+bDfhDf52w==}

@@ -4,11 +4,13 @@ import { PostFragmentFragment } from "klabban-commerce";
 export const PostCard = ({
   featuredImage,
   title,
+  excerpt,
   date,
+  author,
 }: PostFragmentFragment) => {
   return (
-    <div className="bg-white shadow-sm md:hover:shadow-2xl cursor-pointer md:zoom-in h-full rounded-lg border border-white overflow-hidden">
-      <div className="relative w-full pb-[56.25%] bg-gray-200">
+    <div className="hover:bg-secondary border-border hover:shadow-2xl cursor-pointer md:zoom-in h-full rounded-lg border overflow-hidden flex flex-col">
+      <div className="relative w-full pb-[60%] bg-third">
         {featuredImage && (
           <img
             className="absolute left-0 top-0 w-full h-full object-cover object-center"
@@ -18,12 +20,26 @@ export const PostCard = ({
           />
         )}
       </div>
-      <div className="p-3 space-y-1">
-        <p className="text-h5 font-medium leading-8 line-clamp-2 text-black">
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="text-h6 font-bold line-clamp-2 text-text-color">
           {title}
-        </p>
-        <div className="text-caption text-center leading-4 text-gray-400 flex gap-3">
+        </h3>
+        {excerpt ? (
+          <div className="flex-1">
+            <p className="line-clamp-2 text-text-third font-light">
+              {excerpt?.replaceAll(
+                /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g,
+                ""
+              )}
+            </p>
+          </div>
+        ) : (
+          <div className="flex-1"></div>
+        )}
+        <hr className="border-border !my-2.5" />
+        <div className="text-caption text-center leading-4 flex gap-3 text-text-third">
           <p className="">
+            By {author?.node.name} On{" "}
             {format(new Date(date || new Date()), "MMMM dd, yyyy")}
           </p>
           {/* <div>|</div>

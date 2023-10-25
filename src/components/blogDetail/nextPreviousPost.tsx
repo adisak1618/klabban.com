@@ -14,7 +14,7 @@ export default function NextPreviousPostLink(
             href={`/blog/${props.previous.slug}`}
           >
             <div className="text-left group cursor-pointer">
-              <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight">
+              <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight-secondary">
                 Previous
               </p>
               <p className="font-bold line-clamp-1">{props.previous.title}</p>
@@ -29,7 +29,7 @@ export default function NextPreviousPostLink(
             href={`/blog/${props.next.slug}`}
           >
             <div className="text-right group cursor-pointer">
-              <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight">
+              <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight-secondary">
                 Next
               </p>
               <p className="font-bold line-clamp-1">{props.next.title}</p>

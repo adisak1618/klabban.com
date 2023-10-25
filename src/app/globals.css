@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -14,94 +14,113 @@
   --primary-color: #F784AD;
   --secondary-color: #6BA9F9;
   --base-color: #CACFD6;
-  --font-headings: var(--font-anuphan, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
+  --font-headings: var(--font-sriracha, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
 	--font-base: var(--font-anuphan, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
+  --small-diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1183 42.14'%3E%3Cpath fill='%23fff' d='M0,0S535,78.49,1183,0V42.14H0Z'/%3E%3C/svg%3E%0A");
+} */
+:root {
+  --primary-color: #f0c029;
+  --header_font: var(--font-anuphan, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
+  --font-base: var(--font-anuphan, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
+  --temporary_content_font: -apple-system, default-fonts, "Helvetica Neue", BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu,Cantarell,sans-serif;
+  --bg: #fff;
+  --bg-secondary: #f8f8f8;
+  --bg-third: #f3f3f3;
+  --bg-darker: #f8f8f8;
+  --text-color: #333;
+  --text-hover: #0085a1;
+  --text-secondary: #4e4e4e;
+  --text-third: #555;
+  --text-bold: #000;
+  --text-light: #79776d;
+  --text-link: #005fee;
+  --text-link-hover: #0050c7;
+  --text-link-bg: RGBA(255, 234, 243, 0);
+  --text-link-bg-hover: RGBA(0, 205, 238, 0.18);
+  --lighter-gray: #eee;
+  --light-gray: #ddd;
+  --medium-light-gray: #ccc;
+  --slim-border: #eee;
+  --toc-bg: #f8f3f3;
+  --toc-text: #724c24;
+  --toc-link: #5b2e00;
+  --toc-number: #b46e03;
+  --new-gradient: linear-gradient(to bottom right, #a2a2a2, #cfcecc);
+  --diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1367 172.7'%3E%3Cpath d='M1367 172.7v-14.6C385.1 158.1 0 0 0 0v172.7z' fill='%23fff'/%3E%3C/svg%3E");
+  --small-diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1183 42.14'%3E%3Cpath fill='%23fff' d='M0,0S535,78.49,1183,0V42.14H0Z'/%3E%3C/svg%3E%0A");
+  --loading: linear-gradient(to right, var(--lighter-gray) 8%, var(--light-gray) 18%, var(--lighter-gray) 33%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer utilities {
+  .headline-shape:after {
+    background: var(--small-diagonal-line) no-repeat center bottom;
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    min-width: 550px;
+    transform: translateX(-50%);
+    content: '';
+    bottom: 0px;
+    
+    @apply lg:w-full sm:w-[120%] w-[150%];
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    height: 50px;
+  }
+  .shape-fit {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    min-width: 550px;
+    transform: translateX(-50%);
+    content: '';
+    bottom: 0px;
+    
+    @apply lg:w-full sm:w-[120%] w-[150%];
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    height: 50px;
+  }
+  .fill-third:hover {
+    fill: var( --bg-third);
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  /* font-family: 'Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif; */
+html {
+  font-size: 16px;
+  color: var(--text-color);
+  background: var(--bg);
   font-family: var(--font-base, 'Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif);
 }
 
 @layer components {
+  .container-content {
+    @apply mx-auto !max-w-5xl lg:container px-5;
+  }
+  .font-title {
+    font-family: var(--font-headings, 'Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif);
+  }
   .zoom-in {
     @apply transition-all ease-in-out hover:-translate-y-1 hover:scale-105;
   }
-  .underline-hilight {
-    background-image: linear-gradient(transparent calc(100% - 0.45em),var(--darkpink) 0),linear-gradient(transparent calc(100% - 0.45em),var(--darkpink) 0);
-    background-repeat: no-repeat;
-    background-size: 0 100%,100% 100%;
-    transition: background-size .2s ease-in-out;
-    color: transparent;
-    text-shadow: 0 0 var(--text-black),0.06em 0 0 rgba(255,255,255,1),0 0.05em 0 rgba(255,255,255,1),-0.06em 0 0 rgba(255,255,255,1);
-  }
-
-  .underline-hilight-secondary {
-    background-image: linear-gradient(transparent calc(100% - 0.45em),var(--darkpink) 0),linear-gradient(transparent calc(100% - 0.45em),var(--lightblue) 0);
-    background-repeat: no-repeat;
-    background-size: 0 100%,100% 100%;
-    transition: background-size .2s ease-in-out;
-    color: transparent;
-    text-shadow: 0 0 var(--text-black),0.06em 0 0 rgba(255,255,255,1),0 0.05em 0 rgba(255,255,255,1),-0.06em 0 0 rgba(255,255,255,1);
-  }
   
-  
-  .underline-hilight-hover:hover {
-    background-size: 100% 100%,100% 100%;
-    text-decoration: none;
-  }
-
 }
 
 
-
-/* For Home Page */
-.header-font {
-  font-family: "Oswald", sans-serif;
-}
-.wrapper {
-  display: grid;
-  place-content: center;
-  
-  min-height: 100vh;
-  font-family: "Oswald", sans-serif;
-  font-size: clamp(1.5rem, 1rem + 15vw, 15rem);
-  
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #FFF;
-  transform: translateY(-0.5em);
+.bg-fade-black {
+  background: linear-gradient(0deg,rgba(0,0,0,0.9) 0%,transparent 60%);
 }
 
-.wrapper > div {
-  grid-area: 1/1/-1/-1;
-}
-.top {
-  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 80%);
-          clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 80%);
-}
-.bottom {
-  -webkit-clip-path: polygon(0% 50%, 100% 20%, 100% 100%, 0% 100%);
-          clip-path: polygon(0% 50%, 100% 20%, 100% 100%, 0% 100%);
-  color: transparent;
-  /* background: linear-gradient(177deg, #F9B572 53%, #FFF 65%); */
-  background-clip: text;
-  -webkit-background-clip: text;
-  transform: translateY(0.5em);
+.dark-fade-bg {
+  background: linear-gradient(0deg,rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,transparent 90%);
 }
 
-
-/* Background 1 */
-.bg-1 {
-  background-color: #DFDBE5;
-  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0h2v20H9V0zm25.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm-20 20l1.732 1-10 17.32-1.732-1 10-17.32zM58.16 4.134l1 1.732-17.32 10-1-1.732 17.32-10zm-40 40l1 1.732-17.32 10-1-1.732 17.32-10zM80 9v2H60V9h20zM20 69v2H0v-2h20zm79.32-55l-1 1.732-17.32-10L82 4l17.32 10zm-80 80l-1 1.732-17.32-10L2 84l17.32 10zm96.546-75.84l-1.732 1-10-17.32 1.732-1 10 17.32zm-100 100l-1.732 1-10-17.32 1.732-1 10 17.32zM38.16 24.134l1 1.732-17.32 10-1-1.732 17.32-10zM60 29v2H40v-2h20zm19.32 5l-1 1.732-17.32-10L62 24l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM111 40h-2V20h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zM40 49v2H20v-2h20zm19.32 5l-1 1.732-17.32-10L42 44l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM91 60h-2V40h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM39.32 74l-1 1.732-17.32-10L22 64l17.32 10zm16.546 4.16l-1.732 1-10-17.32 1.732-1 10 17.32zM71 80h-2V60h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM120 89v2h-20v-2h20zm-84.134 9.16l-1.732 1-10-17.32 1.732-1 10 17.32zM51 100h-2V80h2v20zm3.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm24.026 3.294l1 1.732-17.32 10-1-1.732 17.32-10zM100 109v2H80v-2h20zm19.32 5l-1 1.732-17.32-10 1-1.732 17.32 10zM31 120h-2v-20h2v20z' fill='%239c92ac' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transform-origin: 0%;
+  z-index: 20;
 }

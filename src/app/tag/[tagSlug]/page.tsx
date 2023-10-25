@@ -1,4 +1,8 @@
+import { Breadcrumb } from "components/Breadcrumb";
+import { HeadlineSection } from "components/Headline";
 import { BlogPage } from "components/blogSearch";
+import { TagProvider } from "klabban-commerce";
+import { KlabbanConfig } from "libs/klabbanConfig";
 
 interface PageProps extends PageSearchParams {
   params: {
@@ -7,16 +11,39 @@ interface PageProps extends PageSearchParams {
 }
 
 export default function Page(props: PageProps) {
-  console.log("props", props);
   return (
     <>
-      <div className="bg-gray-100 py-20">
-        <div className="max-w-5xl mx-auto container px-5 text-center">
-          <h1 className="text-h1 font-bold text-center inline-block leading-[90px]">
-            บทความ
-          </h1>
-        </div>
-      </div>
+      <TagProvider {...KlabbanConfig} slug={props.params.tagSlug}>
+        {({ tag }) => (
+          <>
+            <HeadlineSection
+              header={
+                <p className="text-body uppercase leading-[1em] text-white tracking-widest">
+                  หัวข้อ
+                </p>
+              }
+              backgroundImage={"/images/tag-cover.jpg"}
+              title={tag?.name || ""}
+              subTitle={tag?.description}
+              hideSubTitle
+            />
+            <div className="mx-auto !max-w-5xl mt-6 mb-4 lg:container px-5">
+              <Breadcrumb
+                links={[
+                  {
+                    label: "Blog",
+                    href: "/blog",
+                  },
+                  {
+                    label: tag?.name || "",
+                    href: `/tag/${tag?.slug}`,
+                  },
+                ]}
+              />
+            </div>
+          </>
+        )}
+      </TagProvider>
       <BlogPage
         tagName={props.params.tagSlug}
         {...props}
