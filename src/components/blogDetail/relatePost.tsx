@@ -16,7 +16,7 @@ export function RelatePost({
     notIn: [postId],
     categoryIn: categoriesId,
     limit: 3,
-    full: false,
+    includeContent: false,
   });
 
   if (fetching || !data || data.randomPosts.length === 0) return <></>;
