@@ -11,7 +11,7 @@ export function PostTags(tags: PostFragmentFragment["tags"]): JSX.Element {
         <Link
           key={tag.id}
           href={`/tag/${tag.slug}`}
-          className="bg-text-color hover:opacity-90 px-4 py-1 text-white rounded-full text-caption"
+          className="bg-text-color inline-block hover:opacity-90 px-4 py-1 text-white rounded-full text-caption"
         >
           #{tag.name}
         </Link>
