@@ -25,6 +25,8 @@ const config: Config = {
       "secondary": "var(--bg-secondary)",
       "light": "var(--text-light)",
       "third": "var(--bg-third)",
+      "light-gray": "var(--light-gray)",
+      "lighter-gray": "var(--lighter-gray)",
       "text-color": "var(--text-color)",
       "text-secondary": "var(--text-secondary)",
       "text-third": "var(--text-third)",

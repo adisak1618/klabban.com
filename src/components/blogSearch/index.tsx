@@ -16,16 +16,18 @@ export interface BlogSearchPageProps {
   tagName?: string;
   pagePath: string;
   className?: string;
+  parentCategoryId?: number | null;
 }
 
 const defaultPageSize = 9;
 
-export function BlogPage({
+export function BlogSearch({
   searchParams,
   categoryName,
   tagName,
   pagePath,
   className,
+  parentCategoryId,
 }: BlogSearchPageProps): JSX.Element {
   const before = Array.isArray(searchParams.before)
     ? searchParams.before[0]
@@ -55,20 +57,54 @@ export function BlogPage({
         last,
         after,
       }}
+      // queryCategories={false}
+      querytags={false}
       categoriesQueryOption={{
         where: {
           orderby: TermObjectsConnectionOrderbyEnum.Count,
+          hideEmpty: true,
+          parent: parentCategoryId,
         },
       }}
     >
-      {({ posts, categories, tags }) => (
-        <div
-          className={clsx(
-            "mx-auto !max-w-5xl mt-6 mb-3 lg:container px-5 md:flex justify-center md:gap-10 xl:gap-20",
-            className
+      {({ posts, categories }) => (
+        <>
+          {(categories?.nodes || []).length > 0 && (
+            <>
+              <div className="container-content !max-w-7xl mt-9 flex flex-wrap justify-center">
+                <p className="basis-full text-body uppercase leading-[1em] text-text-third tracking-widest text-center">
+                  หมวดหมู่ย่อย
+                </p>
+                <>
+                  {[1].map(() => (
+                    <>
+                      {categories?.nodes
+                        .filter((t) => t.slug !== "uncategorized")
+                        .map((category) => (
+                          <Link
+                            href={`/category/${category.slug}`}
+                            key={category.id}
+                            // className="basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4 relative p-3"
+                            className="px-3 text-h5 tracking-widest font-medium hover:font-bold"
+                          >
+                            {category.name}
+                          </Link>
+                        ))}
+                    </>
+                  ))}
+                </>
+              </div>
+              {/* <hr className="border-border my-6 basis-full" /> */}
+            </>
           )}
-        >
-          {/* <div className="md:space-y-6 mb-6 md:block gap-6 flex-wrap hidden">
+
+          <div
+            className={clsx(
+              "mx-auto !max-w-5xl mt-6 mb-3 lg:container px-5 md:flex justify-center md:gap-10 xl:gap-20",
+              className
+            )}
+          >
+            {/* <div className="md:space-y-6 mb-6 md:block gap-6 flex-wrap hidden">
             <div className="">
               <h3 className="text-h5 md:text-h4 font-bold underline-hilight-secondary inline-block whitespace-nowrap">
                 หมวดหมู่
@@ -102,63 +138,67 @@ export function BlogPage({
               </div>
             </div>
           </div> */}
-          <div className="flex-1">
-            {posts?.nodes.length === 0 && (
-              <div className="text-h4 text-gray-400 text-center py-20 border rounded-2xl border-dashed">
-                ไม่มีเนื้อหา
+            <div className="flex-1">
+              {posts?.nodes.length === 0 && (
+                <div className="text-h4 bg-secondary text-center py-20 rounded-2xl">
+                  <p className="text-text-color opacity-50">ไม่มีเนื้อหา</p>
+                  <p className="text-text-color text-caption opacity-50">
+                    โปรดลองเข้าดูในหัวข้ออื่น
+                  </p>
+                </div>
+              )}
+              <div className="flex flex-wrap justify-center -mx-3">
+                {posts?.nodes.map((post) => (
+                  <Link
+                    className="basis-full md:basis-1/2 lg:basis-1/3 p-3"
+                    key={post.id}
+                    href={`/blog/${post.slug}`}
+                  >
+                    <PostCard {...post} />
+                  </Link>
+                ))}
               </div>
-            )}
-            <div className="flex flex-wrap justify-center -mx-3">
-              {posts?.nodes.map((post) => (
-                <Link
-                  className="basis-full md:basis-1/2 lg:basis-1/3 p-3"
-                  key={post.id}
-                  href={`/blog/${post.slug}`}
-                >
-                  <PostCard {...post} />
-                </Link>
-              ))}
-            </div>
-            <div className="pb-10">
-              <div className="grid grid-cols-2 gap-3">
-                {posts?.pageInfo.hasPreviousPage ? (
-                  <Link
-                    className="hover:bg-white/50 p-2 rounded-md"
-                    href={{
-                      pathname: pagePath,
-                      query: { before: posts.pageInfo.startCursor },
-                    }}
-                  >
-                    <div className="text-left group cursor-pointer">
-                      <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight">
-                        Previous
-                      </p>
-                    </div>
-                  </Link>
-                ) : (
-                  <div />
-                )}
-                {posts?.pageInfo.hasNextPage ? (
-                  <Link
-                    className="hover:bg-white/50 p-2 rounded-md"
-                    href={{
-                      pathname: pagePath,
-                      query: { after: posts.pageInfo.endCursor },
-                    }}
-                  >
-                    <div className="text-right group cursor-pointer">
-                      <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight">
-                        Next
-                      </p>
-                    </div>
-                  </Link>
-                ) : (
-                  <div />
-                )}
+              <div className="pb-10">
+                <div className="grid grid-cols-2 gap-3">
+                  {posts?.pageInfo.hasPreviousPage ? (
+                    <Link
+                      className="hover:bg-white/50 p-2 rounded-md"
+                      href={{
+                        pathname: pagePath,
+                        query: { before: posts.pageInfo.startCursor },
+                      }}
+                    >
+                      <div className="text-left group cursor-pointer">
+                        <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight">
+                          Previous
+                        </p>
+                      </div>
+                    </Link>
+                  ) : (
+                    <div />
+                  )}
+                  {posts?.pageInfo.hasNextPage ? (
+                    <Link
+                      className="hover:bg-white/50 p-2 rounded-md"
+                      href={{
+                        pathname: pagePath,
+                        query: { after: posts.pageInfo.endCursor },
+                      }}
+                    >
+                      <div className="text-right group cursor-pointer">
+                        <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight">
+                          Next
+                        </p>
+                      </div>
+                    </Link>
+                  ) : (
+                    <div />
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </PostsProvider>
   );

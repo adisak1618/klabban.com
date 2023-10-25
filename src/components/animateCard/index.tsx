@@ -6,6 +6,7 @@ interface AuthorCardProps {
   avatarImage?: string;
   content?: JSX.Element;
   avatarClassName?: string;
+  small?: boolean;
 }
 
 export function AnimateCard({
@@ -13,11 +14,14 @@ export function AnimateCard({
   avatarImage,
   content,
   avatarClassName,
+  small = false,
 }: AuthorCardProps) {
   return (
     <div
       className={clsx(
-        "group flex flex-col md:flex-row bg-secondary hover:bg-third rounded-[25px] overflow-hidden relative group hover:shadow-xl border border-border transition-shadow shadow-none duration-300",
+        "group flex flex-col md:flex-row bg-secondary hover:bg-third overflow-hidden relative group hover:shadow-xl border border-border transition-shadow shadow-none duration-300",
+        !small && "rounded-[25px]",
+        small && "rounded-2xl",
         className
       )}
     >
@@ -27,7 +31,13 @@ export function AnimateCard({
             width="20"
             role="img"
             aria-hidden="true"
-            className="hidden text-secondary group-hover:text-third md:block absolute -scale-x-100 z-[2] right-[-10px] top-0 bg-right-top w-[40px] md:w-[50px] h-[200%] transition-all duration-[800ms] ease-linear group-hover:top-[-100%] group-hover:w-[20px]  md:group-hover:w-[30px]"
+            className={clsx(
+              "transition-all ease-linea hidden text-secondary group-hover:text-third md:block absolute -scale-x-100 z-[2] top-0 bg-right-top  h-[200%] group-hover:top-[-100%]",
+              !small &&
+                "w-[40px] right-[-10px] md:w-[50px] group-hover:w-[20px]  md:group-hover:w-[30px] duration-[800ms]",
+              small &&
+                "w-[20px] right-[-5px] md:w-[20px] group-hover:w-[10px]  md:group-hover:w-[15px] duration-[400ms]"
+            )}
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 66.46 526"

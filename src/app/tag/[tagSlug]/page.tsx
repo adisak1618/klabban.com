@@ -1,6 +1,6 @@
 import { Breadcrumb } from "components/Breadcrumb";
 import { HeadlineSection } from "components/Headline";
-import { BlogPage } from "components/blogSearch";
+import { BlogSearch } from "components/blogSearch";
 import { TagProvider } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 
@@ -44,7 +44,7 @@ export default function Page(props: PageProps) {
           </>
         )}
       </TagProvider>
-      <BlogPage
+      <BlogSearch
         tagName={props.params.tagSlug}
         {...props}
         pagePath={`/tag/${props.params.tagSlug}`}
