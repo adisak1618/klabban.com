@@ -1,22 +1,21 @@
 import { Breadcrumb } from "components/Breadcrumb";
 import { HeadlineSection } from "components/Headline";
 import { MainMenu } from "components/MainMenu";
-import { BlogSearch } from "components/blogSearch";
-import { TagProvider } from "klabban-commerce";
+import { PageProvider } from "klabban-commerce";
+import { GutenbergContent } from "klabban-commerce/react";
 import { KlabbanConfig } from "libs/klabbanConfig";
-
-interface PageProps extends PageSearchParams {
+interface CustomPageParams extends PageSearchParams {
   params: {
-    tagSlug: string;
+    pageSlug: string;
   };
 }
 
-export default function Page(props: PageProps) {
+function Page(props: CustomPageParams) {
   return (
     <>
       <MainMenu light />
-      <TagProvider {...KlabbanConfig} slug={props.params.tagSlug}>
-        {({ tag }) => (
+      <PageProvider {...KlabbanConfig} slug={props.params.pageSlug}>
+        {({ page }) => (
           <>
             <HeadlineSection
               header={
@@ -25,34 +24,25 @@ export default function Page(props: PageProps) {
                 </p>
               }
               backgroundImage={"/images/cover.jpg"}
-              title={tag?.name || ""}
-              subTitle={tag?.description}
+              title={page?.title || ""}
               hideSubTitle
             />
             <div className="mx-auto !max-w-5xl mt-6 mb-4 lg:container px-5">
               <Breadcrumb
                 links={[
                   {
-                    label: "Blog",
-                    href: "/blog",
-                  },
-                  {
-                    label: tag?.name || "",
-                    href: `/tag/${tag?.slug}`,
+                    label: page?.title || "",
+                    href: `/${page?.databaseId}`,
                   },
                 ]}
               />
             </div>
+            <GutenbergContent content={page?.content || ""} />
           </>
         )}
-      </TagProvider>
-      <BlogSearch
-        tagName={props.params.tagSlug}
-        {...props}
-        pagePath={`/tag/${props.params.tagSlug}`}
-      />
+      </PageProvider>
     </>
   );
 }
 
-export const revalidate = 60 * 60;
+export default Page;

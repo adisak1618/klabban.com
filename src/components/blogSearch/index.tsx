@@ -79,22 +79,18 @@ export function BlogSearch({
                   หมวดหมู่ย่อย
                 </p>
                 <>
-                  {[1].map(() => (
-                    <>
-                      {categories?.nodes
-                        .filter((t) => t.slug !== "uncategorized")
-                        .map((category) => (
-                          <Link
-                            href={`/category/${category.slug}`}
-                            key={category.id}
-                            // className="basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4 relative p-3"
-                            className="px-3 text-h5 tracking-widest uppercase font-medium hover:font-bold"
-                          >
-                            {category.name}
-                          </Link>
-                        ))}
-                    </>
-                  ))}
+                  {categories?.nodes
+                    .filter((t) => t.slug !== "uncategorized")
+                    .map((category) => (
+                      <Link
+                        href={`/category/${category.slug}`}
+                        key={category.id}
+                        // className="basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4 relative p-3"
+                        className="px-3 text-h5 tracking-[0.15em] uppercase font-bold transition-transform hover:scale-105"
+                      >
+                        {category.name}
+                      </Link>
+                    ))}
                 </>
               </div>
               <hr className="my-3 border-border max-w-sm mx-auto" />
@@ -185,7 +181,7 @@ export function BlogSearch({
                             role="img"
                             aria-hidden="true"
                             className="-scale-x-100"
-                            enable-background="new 0 0 19 18"
+                            enableBackground="new 0 0 19 18"
                             viewBox="0 0 19 18"
                             xmlns="http://www.w3.org/2000/svg"
                           >
@@ -218,7 +214,7 @@ export function BlogSearch({
                             role="img"
                             aria-hidden="true"
                             className=""
-                            enable-background="new 0 0 19 18"
+                            enableBackground="new 0 0 19 18"
                             viewBox="0 0 19 18"
                             xmlns="http://www.w3.org/2000/svg"
                           >

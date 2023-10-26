@@ -35,7 +35,7 @@
   --text-bold: #000;
   --text-light: #79776d;
   --text-link: #005fee;
-  --text-link-hover: #0050c7;
+  --text-link-hover: #b46e03;
   --text-link-bg: RGBA(255, 234, 243, 0);
   --text-link-bg-hover: RGBA(0, 205, 238, 0.18);
   --lighter-gray: #eee;
@@ -50,6 +50,9 @@
   --diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1367 172.7'%3E%3Cpath d='M1367 172.7v-14.6C385.1 158.1 0 0 0 0v172.7z' fill='%23fff'/%3E%3C/svg%3E");
   --small-diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1183 42.14'%3E%3Cpath fill='%23fff' d='M0,0S535,78.49,1183,0V42.14H0Z'/%3E%3C/svg%3E%0A");
   --loading: linear-gradient(to right, var(--lighter-gray) 8%, var(--light-gray) 18%, var(--lighter-gray) 33%);
+  --navigation-text: var(--text-color);
+  --navigation-bg: var(--bg);
+  --bg-fade-reverse: linear-gradient(180deg,rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,transparent 90%);
 }
 
 @layer utilities {
@@ -85,6 +88,10 @@
   .fill-third:hover {
     fill: var( --bg-third);
   }
+  .light-navigation {
+    --navigation-text: var(--bg);
+    --navigation-bg: linear-gradient(180deg,rgb(0 0 0 / 0.5) 0%,transparent 90%);
+  }
 }
 html {
   font-size: 16px;
@@ -115,6 +122,10 @@ html {
   background: linear-gradient(0deg,rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,transparent 90%);
 }
 
+.dark-fade-bg-reverse {
+  background: linear-gradient(180deg,rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,transparent 90%);
+}
+
 .progress-bar {
   position: fixed;
   top: 0;
@@ -125,3 +136,4 @@ html {
   transform-origin: 0%;
   z-index: 20;
 }
+

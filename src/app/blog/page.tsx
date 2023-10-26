@@ -3,10 +3,12 @@ import { PageProvider } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { Breadcrumb } from "components/Breadcrumb";
 import { AnimateCard } from "components/animateCard";
+import { MainMenu } from "components/MainMenu";
 
 function Page(props: PageSearchParams) {
   return (
     <>
+      <MainMenu />
       <div className="container-content mt-3 mb-4">
         <Breadcrumb
           links={[
@@ -24,10 +26,10 @@ function Page(props: PageSearchParams) {
               <AnimateCard
                 avatarClassName="md:min-w-[350px] xl:min-w-[500px]"
                 avatarImage={
-                  page?.featuredImage?.node.sourceUrl || "/images/tag-cover.jpg"
+                  page?.featuredImage?.node.sourceUrl || "/images/cover.jpg"
                 }
                 content={
-                  <div className="p-6 relative z-10 text-center md:text-left flex flex-col justify-center md:min-h-[320px]">
+                  <div className="p-6 relative text-center md:text-left flex flex-col justify-center md:min-h-[320px]">
                     <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">
                       Category
                     </p>

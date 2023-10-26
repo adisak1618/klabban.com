@@ -21,6 +21,7 @@ const config: Config = {
       tiny: "10px",
     },
     colors: {
+      "transparent": "transparent",
       "primary": "var(--primary-color)",
       "secondary": "var(--bg-secondary)",
       "light": "var(--text-light)",
@@ -32,7 +33,7 @@ const config: Config = {
       "text-third": "var(--text-third)",
       "text-hover": "var(--text-hover)",
       "white": "#ffffff",
-      "border": "var(--slim-border)"
+      "border": "var(--slim-border)",
     }
   },
   plugins: [],

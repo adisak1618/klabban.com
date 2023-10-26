@@ -1,6 +1,7 @@
 import { Breadcrumb } from "components/Breadcrumb";
 import { HeadlineSection } from "components/Headline";
 import { NormalHeadlineSection } from "components/Headline/simple";
+import { MainMenu } from "components/MainMenu";
 import { AnimateCard } from "components/animateCard";
 import { BlogSearch } from "components/blogSearch";
 import { CategoryProvider } from "klabban-commerce";
@@ -15,12 +16,13 @@ interface PageProps extends PageSearchParams {
 export default function Page(props: PageProps) {
   return (
     <>
+      <MainMenu />
       <CategoryProvider {...KlabbanConfig} slug={props.params.categorySlug}>
         {({ category }) => (
           <>
             {/* <HeadlineSection
               backgroundImage={
-                category?.cover?.sourceUrl || "/images/tag-cover.jpg"
+                category?.cover?.sourceUrl || "/images/cover.jpg"
               }
               title={category?.name || ""}
               subTitle={category?.description}
@@ -43,11 +45,9 @@ export default function Page(props: PageProps) {
             <div className="container-content xl:!max-w-7xl py-3">
               <AnimateCard
                 avatarClassName="md:min-w-[400px]"
-                avatarImage={
-                  category?.cover?.sourceUrl || "/images/tag-cover.jpg"
-                }
+                avatarImage={category?.cover?.sourceUrl || "/images/cover.jpg"}
                 content={
-                  <div className="p-6 relative z-10 text-center md:text-left flex flex-col justify-center">
+                  <div className="p-6 relative text-center md:text-left flex flex-col justify-center">
                     <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">
                       Category
                     </p>

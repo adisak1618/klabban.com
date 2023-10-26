@@ -26,14 +26,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  ...otherProps
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={`${anuphan.variable} ${sriracha.variable}`}>
-      <body>
+      <body className="">
         <QueryProvider GQL_URL={process.env.GQL_URL as string}>
-          <MainMenu />
           {children}
         </QueryProvider>
       </body>

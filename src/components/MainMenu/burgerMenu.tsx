@@ -2,20 +2,50 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { MenuWrapper } from "./wrapper";
+import { Logo } from "components/Logo";
+import { MenuType } from "klabban-commerce";
+import Link from "next/link";
 
-export function HamburgerMenu() {
+function RenderMenu({
+  menus,
+  root = false,
+}: {
+  menus: MenuType[];
+  root?: boolean;
+}) {
+  return (
+    <div className="">
+      {menus.map((menu) => (
+        <div className="" key={menu.label}>
+          <Link
+            className="mt-2 font-medium text-text-color text-h6 hover:text-[var(--text-link-hover)] px-3 py-1 hover:font-bold "
+            href={menu.url || ""}
+          >
+            {!root && "-"} {menu.label}
+          </Link>
+          <div className="pl-3">
+            {menu.children && <RenderMenu menus={menu.children} />}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function HamburgerMenu({ menus }: { menus: MenuType[] }) {
   const [isOpen, setOpen] = useState(false);
   return (
     <>
       <MenuWrapper
         onClick={() => setOpen(true)}
-        className="py-2 !px-0 text-text-color lg:hidden hover:scale-110 transition-transform ease-in-out "
+        className="py-3 !px-0 text-[var(--navigation-text)] lg:hidden hover:scale-110 transition-transform ease-in-out "
       >
         <svg
           version="1.1"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           height="100%"
+          fill="currentColor"
         >
           <g id="grid_system" />
           <g id="_icons">
@@ -32,18 +62,12 @@ export function HamburgerMenu() {
         )}
         aria-labelledby="drawer-label"
       >
-        <h5
-          id="drawer-label"
-          className="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
-        >
-          Info
-        </h5>
         <button
           type="button"
           onClick={() => setOpen(false)}
           data-drawer-hide="drawer-example"
           aria-controls="drawer-example"
-          className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
+          className="text-gray-400 text-text-color bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
         >
           <svg
             className="w-4 h-4"
@@ -54,53 +78,20 @@ export function HamburgerMenu() {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
             />
           </svg>
           <span className="sr-only">Close menu</span>
         </button>
-        <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">
-          Supercharge your hiring by taking advantage of our{" "}
-          <a
-            href="#"
-            className="text-blue-600 underline dark:text-blue-500 hover:no-underline"
-          >
-            limited-time sale
-          </a>{" "}
-          for Flowbite Docs + Job Board. Unlimited access to over 190K
-          top-ranked candidates and the #1 design job board.
-        </p>
-        <div className="grid grid-cols-2 gap-4">
-          <a
-            href="#"
-            className="px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-          >
-            Learn more
-          </a>
-          <a
-            href="#"
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          >
-            Get access{" "}
-            <svg
-              className="w-3.5 h-3.5 ml-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </a>
+        <div className="flex justify-center mb-10 text-text-color">
+          <Logo />
+        </div>
+        <div>
+          {/* body */}
+          <RenderMenu menus={menus} root />
         </div>
       </div>
     </>
