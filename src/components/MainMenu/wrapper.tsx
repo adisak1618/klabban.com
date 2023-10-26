@@ -13,7 +13,7 @@ export function MenuWrapper({
     <div
       onClick={onClick}
       className={clsx(
-        "h-[50px] px-1.5 md:px-3 flex-nowrap whitespace-nowrap",
+        "h-[60px] px-1.5 md:px-3 flex-nowrap whitespace-nowrap cursor-pointer",
         className
       )}
     >
