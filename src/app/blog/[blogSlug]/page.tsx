@@ -82,7 +82,7 @@ export default function BlogDetailPage({
           </header> */}
 
           <HeadlineSection
-            className="h-[95vh] !bg-center"
+            className="h-[80vh] md:h-[95vh] !bg-center"
             backgroundImage={post?.featuredImage?.node.sourceUrl || ""}
             title={post?.title || ""}
             subTitle={post?.excerpt}

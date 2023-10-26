@@ -40,7 +40,7 @@ export default function Page(props: PageProps) {
                 ]}
               />
             </div>
-            <div className="container-content xl:!max-w-7xl">
+            <div className="container-content xl:!max-w-7xl py-3">
               <AnimateCard
                 avatarClassName="md:min-w-[400px]"
                 avatarImage={
@@ -69,7 +69,8 @@ export default function Page(props: PageProps) {
               />
             </div>
             <BlogSearch
-              categoryName={props.params.categorySlug}
+              categoryName={category?.name}
+              categorySlug={props.params.categorySlug}
               {...props}
               pagePath={`/category/${props.params.categorySlug}`}
               parentCategoryId={category?.databaseId}

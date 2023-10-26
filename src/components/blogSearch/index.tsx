@@ -9,9 +9,11 @@ import {
 import { KlabbanConfig } from "libs/klabbanConfig";
 import clsx from "clsx";
 import { fi } from "date-fns/locale";
+import { OutlineButton } from "components/Button/outline";
 
 export interface BlogSearchPageProps {
   searchParams: { [key: string]: string | string[] };
+  categorySlug?: string;
   categoryName?: string;
   tagName?: string;
   pagePath: string;
@@ -28,6 +30,7 @@ export function BlogSearch({
   pagePath,
   className,
   parentCategoryId,
+  categorySlug,
 }: BlogSearchPageProps): JSX.Element {
   const before = Array.isArray(searchParams.before)
     ? searchParams.before[0]
@@ -49,7 +52,7 @@ export function BlogSearch({
               order: OrderEnum.Desc,
             },
           ],
-          categoryName,
+          categoryName: categorySlug,
           tag: tagName,
         },
         first,
@@ -71,7 +74,7 @@ export function BlogSearch({
         <>
           {(categories?.nodes || []).length > 0 && (
             <>
-              <div className="container-content !max-w-7xl mt-9 flex flex-wrap justify-center">
+              <div className="container-content !max-w-7xl mt-6 flex flex-wrap justify-center">
                 <p className="basis-full text-body uppercase leading-[1em] text-text-third tracking-widest text-center">
                   หมวดหมู่ย่อย
                 </p>
@@ -85,7 +88,7 @@ export function BlogSearch({
                             href={`/category/${category.slug}`}
                             key={category.id}
                             // className="basis-1/2 md:basis-1/3 lg:basis-1/3 xl:basis-1/4 relative p-3"
-                            className="px-3 text-h5 tracking-widest font-medium hover:font-bold"
+                            className="px-3 text-h5 tracking-widest uppercase font-medium hover:font-bold"
                           >
                             {category.name}
                           </Link>
@@ -94,13 +97,19 @@ export function BlogSearch({
                   ))}
                 </>
               </div>
-              {/* <hr className="border-border my-6 basis-full" /> */}
+              <hr className="my-3 border-border max-w-sm mx-auto" />
             </>
           )}
 
+          <p className=" basis-full text-caption leading-[1em] text-text-third tracking-widest text-center pt-3">
+            <span className="font-medium">{posts?.pageInfo.total}</span>{" "}
+            เนื้อหาในหัวข้อ&nbsp;
+            <span className="font-medium">{categoryName || "บทความ"}</span>
+          </p>
+
           <div
             className={clsx(
-              "mx-auto !max-w-5xl mt-6 mb-3 lg:container px-5 md:flex justify-center md:gap-10 xl:gap-20",
+              "mx-auto !max-w-5xl my-3 lg:container px-5 md:flex justify-center md:gap-10 xl:gap-20",
               className
             )}
           >
@@ -159,7 +168,7 @@ export function BlogSearch({
                 ))}
               </div>
               <div className="pb-10">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="flex justify-between gap-3">
                   {posts?.pageInfo.hasPreviousPage ? (
                     <Link
                       className="hover:bg-white/50 p-2 rounded-md"
@@ -168,11 +177,26 @@ export function BlogSearch({
                         query: { before: posts.pageInfo.startCursor },
                       }}
                     >
-                      <div className="text-left group cursor-pointer">
-                        <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight">
-                          Previous
-                        </p>
-                      </div>
+                      <OutlineButton>
+                        <div className="flex gap-3 items-center">
+                          <svg
+                            width="15"
+                            height="15"
+                            role="img"
+                            aria-hidden="true"
+                            className="-scale-x-100"
+                            enable-background="new 0 0 19 18"
+                            viewBox="0 0 19 18"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m9.3.3c-.4.4-.4 1 0 1.4l6.3 6.3h-14.6c-.6 0-1 .4-1 1s.4 1 1 1h14.6l-6.3 6.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l8-8c.1-.1.2-.2.2-.3.1-.1.1-.3.1-.4s0-.3-.1-.4c0-.1-.1-.2-.2-.3l-8-8c-.4-.4-1-.4-1.4 0z"
+                              fill="currentColor"
+                            ></path>
+                          </svg>
+                          <p>ก่อนหน้า</p>
+                        </div>
+                      </OutlineButton>
                     </Link>
                   ) : (
                     <div />
@@ -185,11 +209,26 @@ export function BlogSearch({
                         query: { after: posts.pageInfo.endCursor },
                       }}
                     >
-                      <div className="text-right group cursor-pointer">
-                        <p className="text-h6 font-medium text-gray-500 inline-block group-hover:underline-hilight">
-                          Next
-                        </p>
-                      </div>
+                      <OutlineButton>
+                        <div className="flex gap-3 items-center">
+                          <p>ต่อไป</p>
+                          <svg
+                            width="15"
+                            height="15"
+                            role="img"
+                            aria-hidden="true"
+                            className=""
+                            enable-background="new 0 0 19 18"
+                            viewBox="0 0 19 18"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m9.3.3c-.4.4-.4 1 0 1.4l6.3 6.3h-14.6c-.6 0-1 .4-1 1s.4 1 1 1h14.6l-6.3 6.3c-.4.4-.4 1 0 1.4s1 .4 1.4 0l8-8c.1-.1.2-.2.2-.3.1-.1.1-.3.1-.4s0-.3-.1-.4c0-.1-.1-.2-.2-.3l-8-8c-.4-.4-1-.4-1.4 0z"
+                              fill="currentColor"
+                            ></path>
+                          </svg>
+                        </div>
+                      </OutlineButton>
                     </Link>
                   ) : (
                     <div />
