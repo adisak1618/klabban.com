@@ -27,14 +27,14 @@ export default function NextPreviousPostLink(
       {props?.next ? (
         <Link
           className="hover:bg-secondary py-3 px-4 rounded-lg"
-          href={`/blog/${props.next.slug}`}
+          href={`/blog/${props?.next?.slug}`}
         >
           <div className="text-right group cursor-pointer">
             <p className="text-h6 font-bold text-text-color inline-block leading-[1em]">
               Next
             </p>
             <p className="text-text-third line-clamp-1 leading-[1em]">
-              {props.next.title}
+              {props?.next?.title}
             </p>
           </div>
         </Link>
