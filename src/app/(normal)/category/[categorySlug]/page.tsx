@@ -6,6 +6,7 @@ import { AnimateCard } from "components/animateCard";
 import { BlogSearch } from "components/blogSearch";
 import { CategoryProvider } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
+import { Suspense } from "react";
 
 interface PageProps extends PageSearchParams {
   params: {
@@ -16,7 +17,6 @@ interface PageProps extends PageSearchParams {
 export default function Page(props: PageProps) {
   return (
     <>
-      <MainMenu />
       <CategoryProvider {...KlabbanConfig} slug={props.params.categorySlug}>
         {({ category }) => (
           <>
@@ -68,13 +68,16 @@ export default function Page(props: PageProps) {
                 }
               />
             </div>
-            <BlogSearch
-              categoryName={category?.name}
-              categorySlug={props.params.categorySlug}
-              {...props}
-              pagePath={`/category/${props.params.categorySlug}`}
-              parentCategoryId={category?.databaseId}
-            />
+
+            <Suspense>
+              <BlogSearch
+                categoryName={category?.name}
+                categorySlug={props.params.categorySlug}
+                {...props}
+                pagePath={`/category/${props.params.categorySlug}`}
+                parentCategoryId={category?.databaseId}
+              />
+            </Suspense>
           </>
         )}
       </CategoryProvider>

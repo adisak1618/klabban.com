@@ -16,6 +16,7 @@ import { AuthorCard } from "./author";
 import { Breadcrumb } from "components/Breadcrumb";
 import { MainMenu } from "components/MainMenu";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 export interface BlogDetailPageProps {
   params: {
@@ -49,7 +50,6 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   if (!post) return notFound();
   return (
     <>
-      <MainMenu light />
       <Provider>
         <>
           <HeadlineSection
@@ -97,6 +97,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               content={post?.content || ""}
             />
           </main>
+
           <div className="max-w-5xl mx-auto mb-12 container px-5 grid lg:grid-cols-3 gap-6 overflow-hidden">
             {post?.author && (
               <AuthorCard

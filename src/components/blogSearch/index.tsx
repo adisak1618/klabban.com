@@ -109,40 +109,6 @@ export function BlogSearch({
               className
             )}
           >
-            {/* <div className="md:space-y-6 mb-6 md:block gap-6 flex-wrap hidden">
-            <div className="">
-              <h3 className="text-h5 md:text-h4 font-bold underline-hilight-secondary inline-block whitespace-nowrap">
-                หมวดหมู่
-              </h3>
-              <div className="flex md:block gap-3">
-                {categories?.nodes.map((category) => (
-                  <Link
-                    href={`/category/${category.slug}`}
-                    key={category.id}
-                    className="hover:underline block text-gray-800 font-medium"
-                  >
-                    {category.name} ({category.count || 0})
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div className="">
-              <h3 className="text-h5 md:text-h4 font-bold underline-hilight-secondary inline">
-                หัวข้อ
-              </h3>
-              <div className="flex md:block gap-3">
-                {tags?.nodes.map((tag) => (
-                  <Link
-                    href={`/tag/${tag.slug}`}
-                    key={tag.id}
-                    className="hover:underline block text-gray-800 font-medium"
-                  >
-                    {tag.name} ({tag.count || 0})
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div> */}
             <div className="flex-1">
               {posts?.nodes.length === 0 && (
                 <div className="text-h4 bg-secondary text-center py-20 rounded-2xl">

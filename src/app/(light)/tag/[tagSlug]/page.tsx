@@ -14,7 +14,6 @@ interface PageProps extends PageSearchParams {
 export default function Page(props: PageProps) {
   return (
     <>
-      <MainMenu light />
       <TagProvider {...KlabbanConfig} slug={props.params.tagSlug}>
         {({ tag }) => (
           <>

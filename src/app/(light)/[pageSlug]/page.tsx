@@ -1,6 +1,5 @@
 import { Breadcrumb } from "components/Breadcrumb";
 import { HeadlineSection } from "components/Headline";
-import { MainMenu } from "components/MainMenu";
 import { PageProvider } from "klabban-commerce";
 import { GutenbergContent } from "klabban-commerce/react";
 import { KlabbanConfig } from "libs/klabbanConfig";
@@ -13,7 +12,6 @@ interface CustomPageParams extends PageSearchParams {
 function Page(props: CustomPageParams) {
   return (
     <>
-      <MainMenu light />
       <PageProvider {...KlabbanConfig} slug={props.params.pageSlug}>
         {({ page }) => (
           <>

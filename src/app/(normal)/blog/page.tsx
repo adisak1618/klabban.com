@@ -4,11 +4,11 @@ import { KlabbanConfig } from "libs/klabbanConfig";
 import { Breadcrumb } from "components/Breadcrumb";
 import { AnimateCard } from "components/animateCard";
 import { MainMenu } from "components/MainMenu";
+import { Suspense } from "react";
 
 function Page(props: PageSearchParams) {
   return (
     <>
-      <MainMenu />
       <div className="container-content mt-3 mb-4">
         <Breadcrumb
           links={[
@@ -53,7 +53,9 @@ function Page(props: PageSearchParams) {
                 }
               />
             </div>
-            <BlogSearch {...props} pagePath="/blog" parentCategoryId={null} />
+            <Suspense>
+              <BlogSearch {...props} pagePath="/blog" parentCategoryId={null} />
+            </Suspense>
           </>
         )}
       </PageProvider>

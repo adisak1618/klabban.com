@@ -10,7 +10,7 @@ interface BreadcrumbProps {
 export function Breadcrumb({ links }: BreadcrumbProps) {
   return (
     <nav className="flex" aria-label="Breadcrumb">
-      <ol className="inline-flex items-center space-x-1 md:space-x-3">
+      <ol className="flex items-center gap-3">
         <Link href="/" className="inline-flex items-center">
           <div className="inline-flex items-center text-text-third italic text-caption hover:text-text-hover">
             <svg
