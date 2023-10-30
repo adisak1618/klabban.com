@@ -4,7 +4,7 @@ export default function Loading() {
       <div>
         <h2 className="text-h1 font-bold text-third">Loading...</h2>
         <p className="text-h5 text-text-secondary">
-          Hopefully not for to long :)
+          Getting Everything ready for you soon
         </p>
       </div>
     </main>
