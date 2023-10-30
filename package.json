@@ -11,15 +11,17 @@
   "dependencies": {
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
-    "klabban-commerce": "^0.0.37",
+    "klabban-commerce": "^0.0.38",
     "next": "13.5.6",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-headroom": "^3.2.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-headroom": "^3.2.2",
     "autoprefixer": "^10",
     "clsx": "^2.0.0",
     "encoding": "^0.1.13",

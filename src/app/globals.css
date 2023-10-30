@@ -21,7 +21,7 @@
 :root {
   --primary-color: #f0c029;
   --header_font: var(--font-anuphan, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
-  --font-base: var(--font-anuphan, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
+  --font-base: var('Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif);
   --temporary_content_font: -apple-system, default-fonts, "Helvetica Neue", BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu,Cantarell,sans-serif;
   --bg: #fff;
   --bg-secondary: #f8f8f8;
@@ -100,6 +100,7 @@ html {
   font-family: var(--font-base, 'Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif);
 }
 
+
 @layer components {
   .container-content {
     @apply mx-auto !max-w-5xl lg:container px-5;
@@ -111,6 +112,10 @@ html {
     @apply transition-all ease-in-out hover:-translate-y-1 hover:scale-105;
   }
   
+}
+
+h1, h2, h3, h4, h5, h5 {
+  font-family: var(--header_font, 'Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif);
 }
 
 
@@ -137,3 +142,10 @@ html {
   z-index: 20;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
+.headroom {
+  z-index: 40 !important;
+}

@@ -1,9 +1,5 @@
 import { GutenbergContent } from "klabban-commerce/react";
-import {
-  PostBySlugQuery,
-  PostFragmentFragment,
-  PostProvider,
-} from "klabban-commerce";
+import { PostFragmentFragment, PostProvider } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { format } from "date-fns";
 // import "klabban-commerce/react/index.css";
@@ -14,7 +10,6 @@ import { PostTags } from "./tags";
 import { HeadlineSection } from "components/Headline";
 import { AuthorCard } from "./author";
 import { Breadcrumb } from "components/Breadcrumb";
-import { AddLightNavigation } from "components/AddLightNavigation";
 import { MainMenu } from "components/MainMenu";
 
 export interface BlogDetailPageProps {
@@ -171,4 +166,4 @@ export default function BlogDetailPage({
   );
 }
 
-export const revalidate = 60 * 60;
+export const revalidate = 360000;
