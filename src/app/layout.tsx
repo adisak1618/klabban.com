@@ -3,8 +3,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { QueryProvider } from "klabban-commerce/react";
 import { Anuphan, Sriracha } from "next/font/google";
-import { MainMenu } from "components/MainMenu";
-import { Suspense } from "react";
 
 const anuphan = Anuphan({
   display: "swap",
@@ -35,7 +33,7 @@ export default function RootLayout({
     <html lang="en" className={`${anuphan.variable} ${sriracha.variable}`}>
       <body className="">
         <QueryProvider GQL_URL={process.env.GQL_URL as string}>
-          <Suspense>{children}</Suspense>
+          {children}
         </QueryProvider>
       </body>
     </html>
