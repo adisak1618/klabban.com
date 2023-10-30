@@ -26,21 +26,28 @@ export function SubMenu({ menus, root, full = false }: SubMenuProps) {
             key={menu.id}
             href={menu.uri || "#"}
             className={clsx(
-              "block leading-[1em] py-2 hover:bg-secondary hover:underline",
+              "block leading-[1em] py-2 hover:bg-secondary hover:text-primary",
 
-              full && "min-w-[150px] max-w-[250px] px-3",
+              full && "min-w-[150px] max-w-[250px] px-3"
 
-              (menu.children || []).length > 0 ? "font-bold" : "font-normal"
               // !root && "pl-10"
             )}
           >
-            {menu.label}
+            <p
+              className={clsx(
+                (menu.children || []).length > 0
+                  ? "font-bold underline"
+                  : "font-normal"
+              )}
+            >
+              {menu.label}
+            </p>
+            {(menu.children || []).length > 0 && (
+              <div className="">
+                <SubMenu menus={menu.children || []} />
+              </div>
+            )}
           </Link>
-          {(menu.children || []).length > 0 && (
-            <div className="">
-              <SubMenu menus={menu.children || []} />
-            </div>
-          )}
         </>
       ))}
     </div>

@@ -45,7 +45,7 @@ export function MainMenu({ light = false }: { light?: boolean }) {
                   return (
                     <MenuWrapper
                       key={menu.id}
-                      className="group leading-[70px] font-medium hover:font-semibold content-stretch capitalize hover:border-b-2 border-primary"
+                      className="group leading-[70px] font-bold hover:text-primary hover:font-semibold content-stretch capitalize hover:border-b-2 border-primary"
                     >
                       <Link href={menu.uri || "#"}>
                         {menu.label}

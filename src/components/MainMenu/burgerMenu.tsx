@@ -10,9 +10,11 @@ import { Social } from "./social";
 function RenderMenu({
   menus,
   root = false,
+  onLinkClick,
 }: {
   menus: MenuType[];
   root?: boolean;
+  onLinkClick?: () => void;
 }) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
@@ -21,28 +23,35 @@ function RenderMenu({
       {/* <p>{activeMenu}</p> */}
       {menus.map((menu) => (
         <div className="" key={menu.label}>
-          <Link
+          <div
             className={clsx(
-              "mt-2 flex items-center w-full uppercase text-left text-text-color hover:text-[var(--text-link-hover)] px-6 py-3",
+              "mt-2 flex gap-3 items-center w-full uppercase text-left text-text-color hover:text-[var(--text-link-hover)]",
               root && "text-h6 border-b border-border font-bold",
               (menu.children || [])?.length > 0 && "font-bold"
             )}
-            href={menu.url || ""}
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveMenu(menu.id);
-            }}
           >
             {/* {!root && "-"}  */}
-            <p className="flex-1">{menu.label}</p>
+            <Link
+              href={menu.uri || ""}
+              className="flex-1 px-6 py-3"
+              onClick={() => {
+                menu.uri != "#" ? onLinkClick?.() : setActiveMenu(menu.id);
+              }}
+            >
+              {menu.label}
+            </Link>
             {(menu.children || []).length > 0 && (
               <div
                 className={clsx(
-                  "w-6 h-6 relative",
+                  "p-3 cursor-pointer hover:text-[var(--text-link-hover)] relative",
                   activeMenu === menu.id && "-rotate-180"
                 )}
+                onClick={(e) => {
+                  setActiveMenu(menu.id);
+                }}
               >
                 <svg
+                  className="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
                   height="100%"
@@ -51,7 +60,7 @@ function RenderMenu({
                 >
                   <path
                     d="M7 10L12 15L17 10"
-                    stroke="#000000"
+                    stroke="currentColor"
                     stroke-width="1.5"
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -59,7 +68,7 @@ function RenderMenu({
                 </svg>
               </div>
             )}
-          </Link>
+          </div>
           <div
             className={clsx(
               "pl-3 transition-all overflow-hidden",
@@ -148,7 +157,7 @@ export function HamburgerMenu({ menus }: { menus: MenuType[] }) {
         </div>
         <div className="flex-1 text-text-color mt-3">
           {/* body */}
-          <RenderMenu menus={menus} root />
+          <RenderMenu onLinkClick={() => setOpen(false)} menus={menus} root />
           <div className="flex justify-center border-t border-border pt-3">
             <Social />
           </div>
