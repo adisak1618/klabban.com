@@ -130,8 +130,7 @@ export function HamburgerMenu({ menus }: { menus: MenuType[] }) {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            data-drawer-hide="drawer-example"
-            aria-controls="drawer-example"
+            aria-label="open mobile menu"
             className="text-gray-400 text-text-color bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
