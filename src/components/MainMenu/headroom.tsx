@@ -34,16 +34,13 @@ export function HeadroomWrapper({
         className
       )}
       onPin={() => {
-        console.log("onPin");
         setIsSticky(true);
         setIsUnfix(false);
       }}
       onUnpin={() => {
-        console.log("onUnpin");
         setIsSticky(false);
       }}
       onUnfix={() => {
-        console.log("onUnfix");
         setIsSticky(false);
         setIsUnfix(true);
       }}

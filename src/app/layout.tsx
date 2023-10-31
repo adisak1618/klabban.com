@@ -3,12 +3,13 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { QueryProvider } from "klabban-commerce/react";
 import { Anuphan } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 
 const anuphan = Anuphan({
   display: "swap",
   preload: true,
   variable: "--font-anuphan",
-  subsets: ["thai", "latin"],
+  subsets: ["thai"],
 });
 
 export const metadata: Metadata = {
@@ -18,13 +19,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  ...otherProps
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="th" className={anuphan.variable}>
       <body className="">
+        <NextTopLoader color="var(--primary-color)" />
         <QueryProvider GQL_URL={process.env.GQL_URL as string}>
           {children}
         </QueryProvider>
