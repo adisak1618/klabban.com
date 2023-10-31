@@ -69,18 +69,18 @@ export default async function Page(props: PageProps) {
               avatarClassName="md:min-w-[400px]"
               avatarImage={category?.cover?.sourceUrl || "/images/cover.webp"}
               content={
-                <div className="p-6 relative text-center md:text-left flex flex-col justify-center">
+                <div className="p-6 relative text-center md:text-left flex flex-col justify-center items-start">
                   <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">
                     Category
                   </p>
-                  <h1 className="text-h2 uppercase mb-2 font-bold leading-[1em] text-text-color drop-shadow-2xl tracking-widest">
+                  <h1 className="text-h4 sm:text-h3 leading-[1.5em] xl:text-h2 uppercase mb-2 font-bold md:leading-[1em] text-text-color drop-shadow-2xl tracking-widest break-words whitespace-break-spaces">
                     {category?.name || ""}
                   </h1>
 
                   {category?.description && (
                     <p
                       className={
-                        "text-h6 text-text-secondary mx-auto py-0 max-w-2xl line-clamp-5"
+                        "text-h6 text-text-secondary py-0 line-clamp-5"
                       }
                     >
                       {category?.description}
