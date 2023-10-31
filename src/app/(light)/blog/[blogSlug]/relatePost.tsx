@@ -24,9 +24,9 @@ export function RelatePost({
   return (
     <div>
       <div className="max-w-5xl mx-auto mb-6 container px-5">
-        <h3 className="text-h3 font-bold underline-hilight inline-block leading-[44px]">
+        <h2 className="text-h3 font-bold underline-hilight inline-block leading-[44px]">
           เนื้อหาที่เกี่ยวข้อง
-        </h3>
+        </h2>
       </div>
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 container px-5">
         {data?.randomPosts?.map((post) => (
