@@ -1,9 +1,11 @@
 "use client";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useScroll } from "framer-motion";
 
 interface HeadlineSectionProps {
   backgroundImage: string;
+  backgroundSrcSet?: string;
   title: string;
   subTitle?: string;
   subTitleClassName?: string;
@@ -22,20 +24,21 @@ export function HeadlineSection({
   className,
   footer,
   header,
+  backgroundSrcSet,
 }: HeadlineSectionProps) {
   return (
     <div
-      style={{
-        backgroundImage: `url(${backgroundImage})` || "",
-      }}
+      // style={{
+      //   backgroundImage: `url(${backgroundImage})` || "",
+      // }}
       className={twMerge(
         clsx(
-          "bg-third max-w-full overflow-hidden relative headline-shape bg-fixed bg-cover bg-top flex items-end",
+          "bg-third max-w-full overflow-hidden relative bg-fixed bg-cover bg-top flex items-end",
           className
         )
       )}
     >
-      <div className="dark-fade-bg flex-1 pt-20 pb-10">
+      <div className="z-10 dark-fade-bg headline-shape flex-1 pt-20 pb-10">
         <div className="mx-auto container px-5 text-center relative z-10">
           {header}
           <h1 className="text-h3 mb-6 sm:h2 md:text-h1 font-bold text-center inline-block leading-[1em] md:leading-[1em] text-white px-6 drop-shadow-2xl">
@@ -59,6 +62,11 @@ export function HeadlineSection({
           {footer}
         </div>
       </div>
+      <img
+        src={backgroundImage}
+        srcSet={backgroundSrcSet}
+        className="w-full h-full object-cover object-top absolute"
+      />
 
       {/* <span className="bg-black opacity-30 absolute w-full h-full top-0 left-0"></span> */}
       {/* <div className="bg-fade-black absolute w-full h-full top-0 left-0" /> */}
