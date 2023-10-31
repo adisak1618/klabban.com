@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 
 interface AuthorCardProps {
@@ -52,10 +53,13 @@ export function AnimateCard({
           </svg>
         </div>
         <div className="relative w-full h-full pb-[75%] text-secondary group-hover:text-third bg-cover bg-center overflow-hidden">
-          <img
-            src={avatarImage}
-            srcSet={avatarSrcSetImage}
+          <Image
+            width={400}
+            height={400}
+            src={avatarImage || ""}
+            // srcSet={avatarSrcSetImage}
             className="absolute w-full h-full object-cover transition-all ease-linear duration-500 group-hover:scale-110"
+            alt={""}
           />
           <svg
             className="shape-fit md:hidden"
