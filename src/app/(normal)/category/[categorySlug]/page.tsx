@@ -69,7 +69,7 @@ export default async function Page(props: PageProps) {
               avatarClassName="md:min-w-[400px]"
               avatarImage={category?.cover?.sourceUrl || "/images/cover.webp"}
               content={
-                <div className="p-6 relative text-center md:text-left flex flex-col justify-center items-start">
+                <div className="p-6 relative text-center md:text-left flex flex-col justify-center items-stretch">
                   <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">
                     Category
                   </p>
