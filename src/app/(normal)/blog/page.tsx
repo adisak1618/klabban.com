@@ -3,12 +3,32 @@ import { PageProvider } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { Breadcrumb } from "components/Breadcrumb";
 import { AnimateCard } from "components/animateCard";
+import { siteName } from "config/siteConfig";
+
+async function fetchData(slug: string) {
+  return await PageProvider({
+    ...KlabbanConfig,
+    slug: slug,
+  });
+}
+
+export async function generateMetadata({}: PageSearchParams) {
+  const { data: page } = await fetchData("blog");
+  return {
+    title: `${siteName} | ${page?.title}`,
+    description: page?.content
+      ?.substring(0, 500)
+      ?.replaceAll(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>|\s/g, ""),
+    siteName,
+    url: `${process.env.BASE_URL}/${page?.slug}`,
+    images: [page?.featuredImage?.node.medium_large],
+    locale: "th_TH",
+    type: "website",
+  };
+}
 
 async function Page(props: PageSearchParams) {
-  const { data: page, Provider } = await PageProvider({
-    ...KlabbanConfig,
-    slug: "blog",
-  });
+  const { data: page, Provider } = await fetchData("blog");
   return (
     <>
       <div className="container-content mt-3 mb-4">

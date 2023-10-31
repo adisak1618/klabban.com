@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 interface HeadlineSectionProps {
-  backgroundImage: string;
+  backgroundImage?: string;
   backgroundSrcSet?: string;
   imageAlt?: string;
   title: string;
@@ -48,7 +48,12 @@ export function HeadlineSection({
         )
       )}
     >
-      <div className="z-10 dark-fade-bg headline-shape flex-1 pt-20 pb-10">
+      <div
+        className={clsx(
+          "z-10 headline-shape flex-1 pt-20 pb-10",
+          backgroundImage && "dark-fade-bg"
+        )}
+      >
         <div className="mx-auto container px-5 text-center relative z-10">
           {header}
           <h1 className="text-h3 mb-6 sm:h2 md:text-h1 font-bold text-center inline-block leading-[1em] md:leading-[1em] text-white px-6 drop-shadow-2xl">
@@ -75,9 +80,9 @@ export function HeadlineSection({
       {backgroundImage && (
         <motion.img
           src={backgroundImage}
-          alt={imageAlt || "cover image"}
+          alt={imageAlt || "cover"}
           srcSet={backgroundSrcSet}
-          className="w-full h-full object-cover object-top absolute"
+          className="w-full h-full object-cover object-center absolute"
           style={{
             y: backgroundY,
           }}
