@@ -47,7 +47,7 @@ const findRootCategory = (categories: PostFragmentFragment["categories"]) => {
 export async function generateMetadata({ params }: BlogDetailPageProps) {
   const { data: post } = await fetchPost(params.blogSlug);
   return {
-    title: post?.title,
+    title: `${siteName} | ${post?.title}`,
     description: post?.excerpt?.replaceAll(
       /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g,
       ""
