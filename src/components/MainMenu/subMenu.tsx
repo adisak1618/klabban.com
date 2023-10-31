@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 import { MenuType } from "klabban-commerce";
 import Link from "next/link";

@@ -1,4 +1,3 @@
-"use client";
 import clsx from "clsx";
 import { MenuProvider } from "klabban-commerce";
 import { HamburgerMenu } from "./burgerMenu";
@@ -48,8 +47,8 @@ export function MainMenu({ light = false }: { light?: boolean }) {
                       key={menu.id}
                       className="group leading-[70px] font-bold hover:text-primary hover:font-semibold content-stretch capitalize hover:border-b-2 border-primary"
                     >
-                      <Link href={menu.uri || "#"}>
-                        {menu.label}
+                      <>
+                        <Link href={menu.uri || "#"}>{menu.label}</Link>
                         {(menu.children || [])?.length > 0 && (
                           <div
                             className={clsx(
@@ -65,7 +64,7 @@ export function MainMenu({ light = false }: { light?: boolean }) {
                             />
                           </div>
                         )}
-                      </Link>
+                      </>
                     </MenuWrapper>
                   );
                 })}
