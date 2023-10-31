@@ -74,9 +74,9 @@ export function BlogSearch({
           {(categories?.nodes || []).length > 0 && (
             <>
               <div className="container-content !max-w-7xl mt-6 flex flex-wrap justify-center">
-                <p className="basis-full text-body uppercase leading-[1em] text-text-third tracking-widest text-center">
+                <h2 className="basis-full text-body uppercase leading-[1em] text-text-third tracking-widest text-center">
                   หมวดหมู่ย่อย
-                </p>
+                </h2>
                 <>
                   {categories?.nodes
                     .filter((t) => t.slug !== "uncategorized")
