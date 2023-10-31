@@ -17,7 +17,7 @@ export function AuthorCard({
   return (
     <AnimateCard
       className={clsx("flex-1 col-span-2", className)}
-      avatarImage={avatarImage || "/images/cover.jpg"}
+      avatarImage={avatarImage || "/images/cover.webp"}
       content={
         <div className="p-6 relative text-center md:text-left flex flex-col justify-center">
           <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">

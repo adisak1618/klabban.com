@@ -21,7 +21,7 @@ function Page(props: CustomPageParams) {
                   หัวข้อ
                 </p>
               }
-              backgroundImage={"/images/cover.jpg"}
+              backgroundImage={"/images/cover.webp"}
               title={page?.title || ""}
               hideSubTitle
             />

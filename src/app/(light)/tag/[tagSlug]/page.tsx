@@ -23,7 +23,7 @@ export default function Page(props: PageProps) {
                   หัวข้อ
                 </p>
               }
-              backgroundImage={"/images/cover.jpg"}
+              backgroundImage={"/images/cover.webp"}
               title={tag?.name || ""}
               subTitle={tag?.description}
               hideSubTitle

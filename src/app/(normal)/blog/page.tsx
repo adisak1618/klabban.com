@@ -26,8 +26,9 @@ function Page(props: PageSearchParams) {
               <AnimateCard
                 avatarClassName="md:min-w-[350px] xl:min-w-[500px]"
                 avatarImage={
-                  page?.featuredImage?.node.sourceUrl || "/images/cover.jpg"
+                  page?.featuredImage?.node.sourceUrl || "/images/cover.webp"
                 }
+                avatarSrcSetImage={page?.featuredImage?.node.srcSet}
                 content={
                   <div className="p-6 relative text-center md:text-left flex flex-col justify-center md:min-h-[320px]">
                     <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">

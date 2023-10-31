@@ -17,7 +17,7 @@ export default function Loading() {
       <div className="container-content xl:!max-w-7xl py-3">
         <AnimateCard
           avatarClassName="md:min-w-[400px]"
-          avatarImage={"/images/cover.jpg"}
+          avatarImage={"/images/cover.webp"}
           content={
             <div className="p-6 relative text-center md:text-left flex flex-col justify-center">
               <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">

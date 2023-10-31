@@ -22,7 +22,7 @@ export default function Page(props: PageProps) {
           <>
             {/* <HeadlineSection
               backgroundImage={
-                category?.cover?.sourceUrl || "/images/cover.jpg"
+                category?.cover?.sourceUrl || "/images/cover.webp"
               }
               title={category?.name || ""}
               subTitle={category?.description}
@@ -45,7 +45,7 @@ export default function Page(props: PageProps) {
             <div className="container-content xl:!max-w-7xl py-3">
               <AnimateCard
                 avatarClassName="md:min-w-[400px]"
-                avatarImage={category?.cover?.sourceUrl || "/images/cover.jpg"}
+                avatarImage={category?.cover?.sourceUrl || "/images/cover.webp"}
                 content={
                   <div className="p-6 relative text-center md:text-left flex flex-col justify-center">
                     <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">

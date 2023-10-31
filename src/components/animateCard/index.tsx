@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 interface AuthorCardProps {
   className?: string;
   avatarImage?: string;
+  avatarSrcSetImage?: string;
   content?: JSX.Element;
   avatarClassName?: string;
   small?: boolean;
@@ -12,6 +13,7 @@ interface AuthorCardProps {
 export function AnimateCard({
   className,
   avatarImage,
+  avatarSrcSetImage,
   content,
   avatarClassName,
   small = false,
@@ -52,6 +54,7 @@ export function AnimateCard({
         <div className="relative w-full h-full pb-[75%] text-secondary group-hover:text-third bg-cover bg-center overflow-hidden">
           <img
             src={avatarImage}
+            srcSet={avatarSrcSetImage}
             className="absolute w-full h-full object-cover transition-all ease-linear duration-500 group-hover:scale-110"
           />
           <svg
