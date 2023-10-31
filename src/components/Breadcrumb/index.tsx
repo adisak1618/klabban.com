@@ -11,12 +11,11 @@ export function Breadcrumb({ links }: BreadcrumbProps) {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="flex items-center gap-1.5 md:gap-3">
-        <Link
-          href="/"
-          aria-label="go to home page"
-          className="inline-flex items-center"
-        >
-          <div className="inline-flex items-center text-text-third italic text-caption hover:text-text-hover">
+        <li aria-label="go to home page" className="inline-flex items-center">
+          <Link
+            href="/"
+            className="inline-flex items-center text-text-third italic text-caption hover:text-text-hover"
+          >
             <svg
               className="w-3 h-3 mr-2.5"
               aria-hidden="true"
@@ -27,11 +26,11 @@ export function Breadcrumb({ links }: BreadcrumbProps) {
               <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
             </svg>
             Home
-          </div>
-        </Link>
+          </Link>
+        </li>
         {links.map(({ href, label }) => (
-          <Link href={href} key={label}>
-            <div className="flex items-center">
+          <li key={label}>
+            <Link href={href} className="flex items-center">
               <svg
                 className="w-2 h-2"
                 viewBox="0 0 32 32"
@@ -44,8 +43,8 @@ export function Breadcrumb({ links }: BreadcrumbProps) {
               <p className="ml-1 text-sm italic text-text-color text-caption hover:text-text-hover md:ml-2">
                 {label}
               </p>
-            </div>
-          </Link>
+            </Link>
+          </li>
         ))}
       </ol>
     </nav>
