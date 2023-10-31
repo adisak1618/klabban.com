@@ -1,7 +1,8 @@
 "use client";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
-import { useScroll } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 interface HeadlineSectionProps {
   backgroundImage: string;
@@ -26,6 +27,13 @@ export function HeadlineSection({
   header,
   backgroundSrcSet,
 }: HeadlineSectionProps) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   return (
     <div
       // style={{
@@ -62,11 +70,16 @@ export function HeadlineSection({
           {footer}
         </div>
       </div>
-      <img
-        src={backgroundImage}
-        srcSet={backgroundSrcSet}
-        className="w-full h-full object-cover object-top absolute"
-      />
+      {backgroundImage && (
+        <motion.img
+          src={backgroundImage}
+          srcSet={backgroundSrcSet}
+          className="w-full h-full object-cover object-top absolute"
+          style={{
+            y: backgroundY,
+          }}
+        />
+      )}
 
       {/* <span className="bg-black opacity-30 absolute w-full h-full top-0 left-0"></span> */}
       {/* <div className="bg-fade-black absolute w-full h-full top-0 left-0" /> */}

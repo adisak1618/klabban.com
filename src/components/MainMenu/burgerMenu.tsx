@@ -96,7 +96,7 @@ export function HamburgerMenu({ menus }: { menus: MenuType[] }) {
     <>
       <MenuWrapper
         onClick={() => setOpen(true)}
-        className="py-5 !px-0 text-[var(--navigation-text)] lg:hidden hover:scale-110 transition-transform ease-in-out "
+        className="py-3.5 !px-0 text-[var(--navigation-text)] lg:hidden hover:scale-110 transition-transform ease-in-out "
       >
         <svg
           version="1.1"

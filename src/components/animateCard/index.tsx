@@ -21,7 +21,7 @@ export function AnimateCard({
   return (
     <div
       className={clsx(
-        "group flex flex-col md:flex-row bg-secondary hover:bg-third overflow-hidden relative group hover:shadow-xl border border-border transition-shadow shadow-none duration-300",
+        "group flex flex-col md:flex-row shadow-md md:shadow-none bg-secondary md:hover:bg-third overflow-hidden relative group md:hover:shadow-xl border border-border transition-shadow duration-300",
         !small && "rounded-[25px]",
         small && "rounded-2xl",
         className
