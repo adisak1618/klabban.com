@@ -1,6 +1,7 @@
 "use client";
 import { format } from "date-fns";
 import { PostFragmentFragment } from "klabban-commerce";
+import Image from "next/image";
 
 export const PostCard = ({
   featuredImage,
@@ -13,11 +14,13 @@ export const PostCard = ({
     <div className="md:hover:bg-secondary border-border shadow-sm md:shadow-none md:hover:shadow-2xl cursor-pointer md:zoom-in h-full rounded-lg border overflow-hidden flex flex-col">
       <div className="relative w-full pb-[60%] bg-third">
         {featuredImage && (
-          <img
+          <Image
             className="absolute left-0 top-0 w-full h-full object-cover object-center"
             alt={featuredImage?.node?.altText || ""}
             src={featuredImage?.node.sourceUrl || ""}
-            srcSet={featuredImage?.node.sourceUrl || ""}
+            width={250}
+            height={200}
+            // srcSet={featuredImage?.node.sourceUrl || ""}
           />
         )}
       </div>
