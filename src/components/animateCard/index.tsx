@@ -3,6 +3,7 @@ import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 
 interface AuthorCardProps {
+  priorityLoadImage?: boolean;
   className?: string;
   avatarImage?: string;
   avatarSrcSetImage?: string;
@@ -12,6 +13,7 @@ interface AuthorCardProps {
 }
 
 export function AnimateCard({
+  priorityLoadImage = false,
   className,
   avatarImage,
   avatarSrcSetImage,
@@ -54,12 +56,13 @@ export function AnimateCard({
         </div>
         <div className="relative w-full h-full pb-[75%] text-secondary group-hover:text-third bg-cover bg-center overflow-hidden">
           <Image
+            priority={priorityLoadImage}
             width={400}
             height={400}
             src={avatarImage || ""}
             // srcSet={avatarSrcSetImage}
             className="absolute w-full h-full object-cover transition-all ease-linear duration-500 group-hover:scale-110"
-            alt={""}
+            alt={"cover"}
           />
           <svg
             className="shape-fit md:hidden"

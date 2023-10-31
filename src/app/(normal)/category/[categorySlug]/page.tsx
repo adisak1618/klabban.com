@@ -65,6 +65,7 @@ export default async function Page(props: PageProps) {
           </div>
           <div className="container-content xl:!max-w-7xl py-3">
             <AnimateCard
+              priorityLoadImage
               avatarClassName="md:min-w-[400px]"
               avatarImage={category?.cover?.sourceUrl || "/images/cover.webp"}
               content={
