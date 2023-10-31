@@ -3,8 +3,6 @@ import { PageProvider } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { Breadcrumb } from "components/Breadcrumb";
 import { AnimateCard } from "components/animateCard";
-import { MainMenu } from "components/MainMenu";
-import { Suspense } from "react";
 
 function Page(props: PageSearchParams) {
   return (
@@ -54,9 +52,7 @@ function Page(props: PageSearchParams) {
                 }
               />
             </div>
-            <Suspense>
-              <BlogSearch {...props} pagePath="/blog" parentCategoryId={null} />
-            </Suspense>
+            <BlogSearch {...props} pagePath="/blog" parentCategoryId={null} />
           </>
         )}
       </PageProvider>

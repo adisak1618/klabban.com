@@ -1,12 +1,8 @@
 import { Breadcrumb } from "components/Breadcrumb";
-import { HeadlineSection } from "components/Headline";
-import { NormalHeadlineSection } from "components/Headline/simple";
-import { MainMenu } from "components/MainMenu";
 import { AnimateCard } from "components/animateCard";
 import { BlogSearch } from "components/blogSearch";
 import { CategoryProvider } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
-import { Suspense } from "react";
 
 interface PageProps extends PageSearchParams {
   params: {
@@ -68,16 +64,13 @@ export default function Page(props: PageProps) {
                 }
               />
             </div>
-
-            <Suspense>
-              <BlogSearch
-                categoryName={category?.name}
-                categorySlug={props.params.categorySlug}
-                {...props}
-                pagePath={`/category/${props.params.categorySlug}`}
-                parentCategoryId={category?.databaseId}
-              />
-            </Suspense>
+            <BlogSearch
+              categoryName={category?.name}
+              categorySlug={props.params.categorySlug}
+              {...props}
+              pagePath={`/category/${props.params.categorySlug}`}
+              parentCategoryId={category?.databaseId}
+            />
           </>
         )}
       </CategoryProvider>
