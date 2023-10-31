@@ -2,20 +2,13 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { QueryProvider } from "klabban-commerce/react";
-import { Anuphan, Sriracha } from "next/font/google";
+import { Anuphan } from "next/font/google";
 
 const anuphan = Anuphan({
   display: "swap",
   preload: true,
   variable: "--font-anuphan",
   subsets: ["thai", "latin"],
-});
-
-const sriracha = Sriracha({
-  display: "swap",
-  variable: "--font-sriracha",
-  subsets: ["thai", "latin"],
-  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -30,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${anuphan.variable} ${sriracha.variable}`}>
+    <html lang="th" className={anuphan.variable}>
       <body className="">
         <QueryProvider GQL_URL={process.env.GQL_URL as string}>
           {children}
