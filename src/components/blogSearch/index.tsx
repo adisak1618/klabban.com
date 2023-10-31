@@ -8,7 +8,6 @@ import {
 } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import clsx from "clsx";
-import { fi } from "date-fns/locale";
 import { OutlineButton } from "components/Button/outline";
 
 export interface BlogSearchPageProps {
