@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 interface HeadlineSectionProps {
   backgroundImage?: string;
@@ -56,7 +57,7 @@ export function HeadlineSection({
       >
         <div className="mx-auto container px-5 text-center relative z-10">
           {header}
-          <h1 className="text-h3 mb-6 sm:h2 md:text-h1 font-bold text-center inline-block leading-[1em] md:leading-[1em] text-white px-6 drop-shadow-2xl">
+          <h1 className="text-h3 mb-6 sm:h3 md:text-h2 font-bold text-center inline-block leading-[1em] md:leading-[1em] text-white px-6 drop-shadow-2xl">
             {title}
           </h1>
           <br />
@@ -78,15 +79,22 @@ export function HeadlineSection({
         </div>
       </div>
       {backgroundImage && (
-        <motion.img
-          src={backgroundImage}
-          alt={imageAlt || "cover"}
-          srcSet={backgroundSrcSet}
-          className="w-full h-full object-cover object-center absolute"
+        <motion.div
+          className="w-full h-full absolute"
           style={{
             y: backgroundY,
           }}
-        />
+        >
+          <Image
+            priority
+            src={backgroundImage}
+            alt={imageAlt || "cover"}
+            // srcSet={backgroundSrcSet}
+            fill
+            sizes="(max-width: 5000px) 100vw"
+            className="w-full h-full object-cover object-center absolute"
+          />
+        </motion.div>
       )}
 
       {/* <span className="bg-black opacity-30 absolute w-full h-full top-0 left-0"></span> */}
