@@ -22,9 +22,8 @@ export function SubMenu({ menus, root, full = false }: SubMenuProps) {
     >
       {menus.map((menu) => (
         <>
-          <Link
+          <div
             key={menu.id}
-            href={menu.uri || "#"}
             className={clsx(
               "block leading-[1em] py-2 hover:bg-secondary hover:text-primary",
 
@@ -33,7 +32,8 @@ export function SubMenu({ menus, root, full = false }: SubMenuProps) {
               // !root && "pl-10"
             )}
           >
-            <p
+            <Link
+              href={menu.uri || "#"}
               className={clsx(
                 (menu.children || []).length > 0
                   ? "font-bold underline"
@@ -41,13 +41,13 @@ export function SubMenu({ menus, root, full = false }: SubMenuProps) {
               )}
             >
               {menu.label}
-            </p>
+            </Link>
             {(menu.children || []).length > 0 && (
               <div className="">
                 <SubMenu menus={menu.children || []} />
               </div>
             )}
-          </Link>
+          </div>
         </>
       ))}
     </div>

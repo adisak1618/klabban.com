@@ -37,12 +37,9 @@ export function Breadcrumb({ links }: BreadcrumbProps) {
               >
                 <path d="M24.5 18c1.1-1 1.2-2.8.2-3.9l-.1-.1-7.2-7.2-2.3-2.3L11.5.9C10.4-.2 8.7-.3 7.6.8s-1.2 2.8-.1 3.9l.1.1 11.1 11.1-5.4 5.4-2.3 2.3-3.6 3.6c-1.1 1.1-1.2 2.8-.1 3.9 1.1 1.1 2.8 1.2 3.9.1l.1-.1L24.5 18z"></path>
               </svg>
-              <a
-                href="#"
-                className="ml-1 text-sm italic text-text-color text-caption hover:text-text-hover md:ml-2"
-              >
+              <p className="ml-1 text-sm italic text-text-color text-caption hover:text-text-hover md:ml-2">
                 {label}
-              </a>
+              </p>
             </div>
           </Link>
         ))}
