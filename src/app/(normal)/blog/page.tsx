@@ -45,6 +45,7 @@ async function Page(props: PageSearchParams) {
         <>
           <div className="container-content xl:!max-w-7xl">
             <AnimateCard
+              priorityLoadImage
               avatarClassName="md:min-w-[350px] xl:min-w-[500px]"
               avatarImage={
                 page?.featuredImage?.node.sourceUrl || "/images/cover.webp"

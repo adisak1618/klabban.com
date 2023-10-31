@@ -57,8 +57,8 @@ export function AnimateCard({
         <div className="relative w-full h-full pb-[75%] text-secondary group-hover:text-third bg-cover bg-center overflow-hidden">
           <Image
             priority={priorityLoadImage}
-            width={400}
-            height={400}
+            width={300}
+            height={300}
             src={avatarImage || ""}
             // srcSet={avatarSrcSetImage}
             className="absolute w-full h-full object-cover transition-all ease-linear duration-500 group-hover:scale-110"
