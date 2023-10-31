@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 import { MenuProvider } from "klabban-commerce";
 import { HamburgerMenu } from "./burgerMenu";

@@ -20,7 +20,6 @@ function RenderMenu({
 
   return (
     <div className="">
-      {/* <p>{activeMenu}</p> */}
       {menus.map((menu) => (
         <div className="" key={menu.label}>
           <div
