@@ -7,6 +7,7 @@ import { useRef } from "react";
 interface HeadlineSectionProps {
   backgroundImage: string;
   backgroundSrcSet?: string;
+  imageAlt?: string;
   title: string;
   subTitle?: string;
   subTitleClassName?: string;
@@ -18,6 +19,7 @@ interface HeadlineSectionProps {
 
 export function HeadlineSection({
   backgroundImage,
+  imageAlt,
   title,
   subTitle,
   subTitleClassName,
@@ -73,6 +75,7 @@ export function HeadlineSection({
       {backgroundImage && (
         <motion.img
           src={backgroundImage}
+          alt={imageAlt || "cover image"}
           srcSet={backgroundSrcSet}
           className="w-full h-full object-cover object-top absolute"
           style={{

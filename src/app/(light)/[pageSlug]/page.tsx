@@ -21,6 +21,7 @@ function Page(props: CustomPageParams) {
                   หัวข้อ
                 </p>
               }
+              imageAlt={page?.featuredImage?.node.altText}
               backgroundImage={"/images/cover.webp"}
               title={page?.title || ""}
               hideSubTitle

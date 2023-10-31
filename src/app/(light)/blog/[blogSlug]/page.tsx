@@ -55,6 +55,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           <HeadlineSection
             className="h-[80vh] md:h-[95vh] !bg-center"
             backgroundImage={post?.featuredImage?.node.sourceUrl || ""}
+            backgroundSrcSet={post.featuredImage?.node.srcSet}
+            imageAlt={post.featuredImage?.node.altText}
             title={post?.title || ""}
             subTitle={post?.excerpt}
             hideSubTitle

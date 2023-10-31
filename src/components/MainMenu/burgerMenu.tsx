@@ -151,7 +151,11 @@ export function HamburgerMenu({ menus }: { menus: MenuType[] }) {
             </svg>
             <span className="sr-only">Close menu</span>
           </button>
-          <Link href="/" className="flex justify-center mb-4 text-text-color">
+          <Link
+            href="/"
+            aria-label="go to home page"
+            className="flex justify-center mb-4 text-text-color"
+          >
             <Logo />
           </Link>
         </div>

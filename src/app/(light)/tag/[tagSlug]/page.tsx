@@ -25,6 +25,7 @@ export default function Page(props: PageProps) {
               }
               backgroundImage={"/images/cover.webp"}
               title={tag?.name || ""}
+              imageAlt="Tag cover image"
               subTitle={tag?.description}
               hideSubTitle
             />

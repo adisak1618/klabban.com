@@ -32,7 +32,7 @@ export function MainMenu({ light = false }: { light?: boolean }) {
             <div className="container-content w-full flex flex-wrap items-center">
               <HamburgerMenu menus={menus} />
               <MenuWrapper className="flex-1 md:flex-none flex items-center">
-                <Link href="/">
+                <Link href="/" aria-label="go to home page">
                   <Logo />
                 </Link>
               </MenuWrapper>
