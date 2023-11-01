@@ -152,5 +152,5 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     </>
   );
 }
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const revalidate = 360000;
