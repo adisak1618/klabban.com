@@ -153,4 +153,4 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   );
 }
 
-export const revalidate = 360000;
+// export const revalidate = 360000;
