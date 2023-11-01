@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@faustwp/experimental-app-router": "^0.1.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "klabban-commerce": "^0.0.44",
