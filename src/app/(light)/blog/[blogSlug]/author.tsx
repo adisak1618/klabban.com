@@ -19,7 +19,7 @@ export function AuthorCard({
       className={clsx("flex-1 col-span-2", className)}
       avatarImage={avatarImage || "/images/cover.webp"}
       content={
-        <div className="p-6 relative text-center md:text-left flex flex-col justify-center">
+        <div className="p-6 relative text-center md:text-left flex flex-col justify-center items-stretch">
           <p className="text-body uppercase leading-[1em] text-text-third tracking-widest">
             Craft by
           </p>
@@ -30,7 +30,7 @@ export function AuthorCard({
           {description && (
             <p
               className={
-                "text-body text-text-secondary mx-auto py-0 max-w-2xl line-clamp-5"
+                "text-body text-text-secondary py-0 max-w-2xl line-clamp-5"
               }
             >
               {description}
