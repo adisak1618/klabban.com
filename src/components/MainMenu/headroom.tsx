@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useState } from "react";
+import React, { useState } from "react";
 import Headroom from "react-headroom";
 
 interface HeadroomWrapperProps {
@@ -46,7 +46,7 @@ export function HeadroomWrapper({
       }}
       style={(isSticky ? cssVars : {}) as any}
     >
-      {children}
+      {children as any}
     </Headroom>
   );
 }

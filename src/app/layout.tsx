@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { QueryProvider } from "klabban-commerce/react";
 import { Anuphan } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
-import { NextAuthProvider } from "./provider";
 
 const anuphan = Anuphan({
   display: "swap",
@@ -26,12 +25,10 @@ export default function RootLayout({
   return (
     <html lang="th" className={anuphan.variable}>
       <body className="">
-        <NextAuthProvider>
-          <NextTopLoader color="var(--primary-color)" />
-          <QueryProvider GQL_URL={process.env.GQL_URL as string}>
-            {children}
-          </QueryProvider>
-        </NextAuthProvider>
+        <NextTopLoader color="var(--primary-color)" />
+        <QueryProvider GQL_URL={process.env.GQL_URL as string}>
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

@@ -3,15 +3,15 @@ import { PostFragmentFragment, PostProvider } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { format } from "date-fns";
 // import "klabban-commerce/react/index.css";
-import { RelatePost } from "./relatePost";
-import NextPreviousPostLink from "./nextPreviousPost";
 import Link from "next/link";
-import { PostTags } from "./tags";
 import { HeadlineSection } from "components/Headline";
-import { AuthorCard } from "./author";
 import { Breadcrumb } from "components/Breadcrumb";
 import { notFound } from "next/navigation";
 import { siteName } from "config/siteConfig";
+import { PostTags } from "container/blogDetail/tags";
+import NextPreviousPostLink from "container/blogDetail/nextPreviousPost";
+import { RelatePost } from "container/blogDetail/relatePost";
+import { AuthorCard } from "container/blogDetail/author";
 
 export interface BlogDetailPageProps {
   params: {

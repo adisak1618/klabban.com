@@ -1,6 +1,5 @@
 "use client";
 import clsx from "clsx";
-import { twMerge } from "tailwind-merge";
 
 interface HeadlineSectionProps {
   backgroundImage: string;
@@ -30,7 +29,7 @@ export function NormalHeadlineSection({
       )}
     >
       <div className="max-w">
-        <img className="max-w-[400px]" src={backgroundImage} />
+        <img className="max-w-[400px]" alt="cover" src={backgroundImage} />
       </div>
       <div className="flex-1 pt-10 pb-10">
         <div className="mx-auto container px-5 text-center relative z-10">

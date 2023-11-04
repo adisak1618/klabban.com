@@ -21,6 +21,7 @@
     "paths": {
       "libs/*": ["./src/libs/*"],
       "components/*": ["./src/components/*"],
+      "container/*": ["./src/container/*"],
       "config/*": ["./src/config/*"],
     }
   },
