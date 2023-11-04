@@ -1,23 +1,32 @@
-import Image from "next/image";
+"use client";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
+import {} from "./api/auth/[...nextauth]/route";
+import { useEffect } from "react";
+import { useViewer } from "klabban-commerce/react";
 
 export default function Home() {
-  return (
-    <div className="bg-gradient-to-r from-[#884A39] to-[#C38154]">
-      <section className="wrapper text-center !translate-y-[0px]">
-        <div className="flex items-center justify-center transform translate-y-[-0.55em]">
-          <h1 className="text-white header-font uppercase font-bold text-h5 md:h4 lg:text-h3 text-center">
-            Klabban Commerce
-          </h1>
-        </div>
-        <div className="top">Comming</div>
+  const { data, status } = useSession();
+  // const tryGetSession = async () => {
+  //   const session = await getSession();
+  //   console.log("tryGetSession", session);
+  // };
+  const [{ data: viewer }] = useViewer({});
 
-        <div
-          className="bottom text-center bg-gradient-to-r from-[#FFC26F] to-[#F9E0BB]"
-          aria-hidden="true"
-        >
-          Soon
-        </div>
-      </section>
+  // useEffect(() => {
+  //   tryGetSession();
+  // }, []);
+
+  if (!data) {
+    return <button onClick={() => signIn()}>login</button>;
+  }
+
+  return (
+    <div>
+      <p>Hello, {viewer?.viewer?.email}</p>
+      <p>status: {status}</p>
+      <p>{JSON.stringify(data)}</p>
+
+      <button onClick={() => signOut()}>logout</button>
     </div>
   );
 }
