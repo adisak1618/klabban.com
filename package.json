@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "date-fns": "^2.30.0",
@@ -19,6 +20,9 @@
     "react-headroom": "^3.2.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/typed-document-node": "^5.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
     "@types/node": "^20.8.10",
     "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",

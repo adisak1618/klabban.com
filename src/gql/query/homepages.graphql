@@ -1,0 +1,136 @@
+query pageCustomUI($id: ID!, $preview: Boolean! = false) {
+  page(id: $id, idType: URI, asPreview: $preview) {
+    id
+    title
+    customPageUI {
+      aboutMe {
+        image {
+          ...ImageFragment
+        }
+        title
+        description
+        cta {
+          title
+          url
+          target
+        }
+      }
+      slideshow {
+        enable
+        content1 {
+          title
+          subTitle
+          image {
+            altText
+            ...ImageFragment
+          }
+          cta {
+            target
+            title
+            url
+          }
+          fieldGroupName
+        }
+        content2 {
+          title
+          subTitle
+          image {
+            altText
+            ...ImageFragment
+          }
+          cta {
+            target
+            title
+            url
+          }
+          fieldGroupName
+        }
+        content3 {
+          title
+          subTitle
+          image {
+            altText
+            ...ImageFragment
+          }
+          cta {
+            target
+            title
+            url
+          }
+          fieldGroupName
+        }
+        content4 {
+          title
+          subTitle
+          image {
+            altText
+            ...ImageFragment
+          }
+          cta {
+            target
+            title
+            url
+          }
+          fieldGroupName
+        }
+        content5 {
+          title
+          subTitle
+          image {
+            altText
+            ...ImageFragment
+          }
+          cta {
+            target
+            title
+            url
+          }
+          fieldGroupName
+        }
+        content6 {
+          title
+          subTitle
+          image {
+            altText
+            ...ImageFragment
+          }
+          cta {
+            target
+            title
+            url
+          }
+          fieldGroupName
+        }
+      }
+      topCategories {
+        title
+        description
+        cta {
+          title
+          target
+          url
+        }
+        categories {
+          name
+          slug
+          cover {
+            ...ImageFragment
+          }
+        }
+      }
+      lastedPost {
+        enable
+        title
+        description
+        cta {
+          target
+          title
+          url
+        }
+      }
+      popularPosts {
+        ...EditorPickFragment
+      }
+    }
+  }
+}

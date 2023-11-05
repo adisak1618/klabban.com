@@ -1,0 +1,55 @@
+fragment EditorPickFragment on Page_Custompageui_PopularPosts {
+  enable
+  title
+  description
+  cta {
+    target
+    title
+    url
+  }
+  posts {
+    ...PostFragment
+  }
+}
+
+fragment PostFragment on Post {
+  title
+  excerpt
+  slug
+  uri
+  author {
+    node {
+      id
+      databaseId
+      email
+      firstName
+      lastName
+      nicename
+      name
+      description
+      avatar(size: 500) {
+        height
+        size
+        url
+        width
+      }
+    }
+  }
+  featuredImage {
+    node {
+      ...ImageFragment
+    }
+  }
+}
+
+fragment ImageFragment on MediaItem {
+  id
+  databaseId
+  thumbnial: sourceUrl(size: WOOCOMMERCE_THUMBNAIL)
+  medium: sourceUrl(size: MEDIUM)
+  medium_large: sourceUrl(size: MEDIUM_LARGE)
+  sourceUrl: sourceUrl(size: LARGE)
+  caption
+  altText
+  srcSet
+}
