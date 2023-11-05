@@ -18,41 +18,118 @@
 	--font-base: var(--font-anuphan, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
   --small-diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1183 42.14'%3E%3Cpath fill='%23fff' d='M0,0S535,78.49,1183,0V42.14H0Z'/%3E%3C/svg%3E%0A");
 } */
-:root {
-  --primary-color: #f0c029;
-  --header_font: var(--font-anuphan, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
-  --font-base: var('Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif);
-  --temporary_content_font: -apple-system, default-fonts, "Helvetica Neue", BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu,Cantarell,sans-serif;
-  --bg: #fff;
-  --bg-secondary: #f8f8f8;
-  --bg-third: #f3f3f3;
-  --bg-darker: #f8f8f8;
-  --text-color: #333;
-  --text-hover: #b46e03;
-  /* --text-hover: #0085a1; */
-  --text-secondary: #4e4e4e;
-  --text-third: #555;
-  --text-bold: #000;
-  --text-light: #79776d;
-  --text-link: #005fee;
-  --text-link-hover: #b46e03;
-  --text-link-bg: RGBA(255, 234, 243, 0);
-  --text-link-bg-hover: RGBA(0, 205, 238, 0.18);
-  --lighter-gray: #eee;
-  --light-gray: #ddd;
-  --medium-light-gray: #ccc;
-  --slim-border: #eee;
-  --toc-bg: #f8f3f3;
-  --toc-text: #724c24;
-  --toc-link: #5b2e00;
-  --toc-number: #b46e03;
-  --new-gradient: linear-gradient(to bottom right, #a2a2a2, #cfcecc);
-  --diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1367 172.7'%3E%3Cpath d='M1367 172.7v-14.6C385.1 158.1 0 0 0 0v172.7z' fill='%23fff'/%3E%3C/svg%3E");
-  --small-diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1183 42.14'%3E%3Cpath fill='%23fff' d='M0,0S535,78.49,1183,0V42.14H0Z'/%3E%3C/svg%3E%0A");
-  --loading: linear-gradient(to right, var(--lighter-gray) 8%, var(--light-gray) 18%, var(--lighter-gray) 33%);
-  --navigation-text: var(--text-color);
-  --navigation-bg: var(--bg);
-  --bg-fade-reverse: linear-gradient(180deg,rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,transparent 90%);
+@layer base {
+  :root {
+    /* wordpress */
+    --primary-color: #f0c029;
+    --header_font: var(
+      --font-anuphan,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen-Sans,
+      Ubuntu,
+      Cantarell,
+      "Helvetica Neue",
+      sans-serif
+    );
+    --font-base: var(
+      "Sukhumvit Set",
+      "Helvetica Neue",
+      Helvetica,
+      Arial,
+      sans-serif
+    );
+    --temporary_content_font: -apple-system, default-fonts, "Helvetica Neue",
+      BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu,
+      Cantarell, sans-serif;
+    --bg: #fff;
+    --bg-secondary: #f8f8f8;
+    --bg-third: #f3f3f3;
+    --bg-darker: #f8f8f8;
+    --text-color: #333;
+    --text-hover: #b46e03;
+    /* --text-hover: #0085a1; */
+    --text-secondary: #4e4e4e;
+    --text-third: #555;
+    --text-bold: #000;
+    --text-light: #79776d;
+    --text-link: #005fee;
+    --text-link-hover: #b46e03;
+    --text-link-bg: RGBA(255, 234, 243, 0);
+    --text-link-bg-hover: RGBA(0, 205, 238, 0.18);
+    --lighter-gray: #eee;
+    --light-gray: #ddd;
+    --medium-light-gray: #ccc;
+    --slim-border: #eee;
+    --toc-bg: #f8f3f3;
+    --toc-text: #724c24;
+    --toc-link: #5b2e00;
+    --toc-number: #b46e03;
+  
+    /* custom */
+    --new-gradient: linear-gradient(to bottom right, #a2a2a2, #cfcecc);
+    --diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1367 172.7'%3E%3Cpath d='M1367 172.7v-14.6C385.1 158.1 0 0 0 0v172.7z' fill='%23fff'/%3E%3C/svg%3E");
+    --small-diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1183 42.14'%3E%3Cpath fill='%23fff' d='M0,0S535,78.49,1183,0V42.14H0Z'/%3E%3C/svg%3E%0A");
+    --loading: linear-gradient(
+      to right,
+      var(--lighter-gray) 8%,
+      var(--light-gray) 18%,
+      var(--lighter-gray) 33%
+    );
+    --navigation-text: var(--text-color);
+    --navigation-bg: var(--bg);
+    --bg-fade-reverse: linear-gradient(
+      180deg,
+      rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,
+      transparent 90%
+    );
+  
+    /* shadcn */
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 47.9 95.8% 53.1%;
+    --primary-foreground: 26 83.3% 14.1%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+    --radius: 0.5rem;
+  }
+  
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 47.9 95.8% 53.1%;
+    --primary-foreground: 26 83.3% 14.1%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 35.5 91.7% 32.9%;
+  }
 }
 
 @layer utilities {
@@ -63,12 +140,12 @@
     left: 50%;
     min-width: 550px;
     transform: translateX(-50%);
-    content: '';
+    content: "";
     bottom: 0px;
-    
+
     @apply lg:w-full sm:w-[120%] w-[150%];
     -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+    backface-visibility: hidden;
     height: 50px;
   }
   .page-hero-shape:after {
@@ -77,65 +154,92 @@
     z-index: 2;
     left: 50%;
     transform: translateX(-50%);
-    content: '';
+    content: "";
     bottom: -6px;
     width: 100%;
     min-width: 2400px;
     -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+    backface-visibility: hidden;
     height: 305px;
     background-size: cover;
-}
+  }
   .shape-fit {
     position: absolute;
     z-index: 2;
     left: 50%;
     min-width: 550px;
     transform: translateX(-50%);
-    content: '';
+    content: "";
     bottom: 0px;
-    
+
     @apply lg:w-full sm:w-[120%] w-[150%];
     -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+    backface-visibility: hidden;
     height: 50px;
   }
   .fill-third:hover {
-    fill: var( --bg-third);
+    fill: var(--bg-third);
   }
   .light-navigation {
     --navigation-text: var(--bg);
-    --navigation-bg: linear-gradient(180deg,rgb(0 0 0 / 0.3) 0%,transparent 90%);
+    --navigation-bg: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 0.3) 0%,
+      transparent 90%
+    );
   }
 }
 html {
   font-size: 16px;
   color: var(--text-color);
   background: var(--bg);
-  font-family: var(--font-base, 'Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif);
+  font-family: var(
+    --font-base,
+    "Sukhumvit Set",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif
+  );
 }
-
 
 @layer components {
   .container-content {
     @apply mx-auto !max-w-5xl lg:container px-5;
   }
   .font-title {
-    font-family: var(--font-headings, 'Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif);
+    font-family: var(
+      --font-headings,
+      "Sukhumvit Set",
+      "Helvetica Neue",
+      Helvetica,
+      Arial,
+      sans-serif
+    );
   }
   .zoom-in {
     @apply transition-all ease-in-out hover:-translate-y-1 hover:scale-105;
   }
-  
 }
 
-h1, h2, h3, h4, h5, h5 {
-  font-family: var(--header_font, 'Sukhumvit Set','Helvetica Neue',Helvetica,Arial,sans-serif);
+h1,
+h2,
+h3,
+h4,
+h5,
+h5 {
+  font-family: var(
+    --header_font,
+    "Sukhumvit Set",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif
+  );
 }
-
 
 .bg-fade-black {
-  background: linear-gradient(0deg,rgba(0,0,0,0.9) 0%,transparent 60%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, transparent 60%);
 }
 
 .gray-gradient {
@@ -143,11 +247,19 @@ h1, h2, h3, h4, h5, h5 {
 }
 
 .dark-fade-bg {
-  background: linear-gradient(0deg,rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,transparent 90%);
+  background: linear-gradient(
+    0deg,
+    rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,
+    transparent 90%
+  );
 }
 
 .dark-fade-bg-reverse {
-  background: linear-gradient(180deg,rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,transparent 90%);
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,
+    transparent 90%
+  );
 }
 
 .progress-bar {

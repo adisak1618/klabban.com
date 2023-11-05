@@ -23,6 +23,7 @@
       "components/*": ["./src/components/*"],
       "container/*": ["./src/container/*"],
       "config/*": ["./src/config/*"],
+      "ui/*": ["./src/components/ui/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
