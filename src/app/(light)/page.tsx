@@ -24,3 +24,7 @@ export default async function Home() {
     </div>
   );
 }
+
+export const revalidate = 60 * 60 * 24; // 1 day cache
+
+export const fetchCache = "default-cache";
