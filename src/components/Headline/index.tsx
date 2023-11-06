@@ -51,7 +51,7 @@ export function HeadlineSection({
     >
       <div
         className={clsx(
-          "z-10 headline-shape flex-1 pt-20 pb-10",
+          "z-10 headline-shape flex-1 pt-20 pb-10 text-white",
           backgroundImage && "dark-fade-bg"
         )}
       >

@@ -65,7 +65,7 @@ module.exports = {
         // old
         "transparent": "transparent",
         "primary": "var(--primary-color)",
-        "secondary": "var(--bg-secondary)",
+        // "secondary": "var(--bg-secondary)",
         "light": "var(--text-light)",
         "third": "var(--bg-third)",
         "light-gray": "var(--light-gray)",

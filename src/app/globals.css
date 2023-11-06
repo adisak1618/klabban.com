@@ -134,7 +134,9 @@
 
 @layer utilities {
   .headline-shape:after {
-    background: var(--small-diagonal-line) no-repeat center bottom;
+    /* background: var(--small-diagonal-line) no-repeat center bottom; */
+    -webkit-mask:var(--small-diagonal-line) no-repeat center bottom;
+    background-color: currentColor;
     position: absolute;
     z-index: 2;
     left: 50%;

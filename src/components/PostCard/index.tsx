@@ -11,7 +11,7 @@ export const PostCard = ({
   author,
 }: PostFragmentFragment) => {
   return (
-    <div className="md:hover:bg-secondary border-border shadow-sm md:shadow-none md:hover:shadow-2xl cursor-pointer md:zoom-in h-full rounded-lg border overflow-hidden flex flex-col">
+    <div className="md:hover:bg-secondary border-border shadow-sm md:shadow-none md:hover:shadow-2xl cursor-pointer md:zoom-in h-full rounded-lg overflow-hidden flex flex-col bg-white">
       <div className="relative w-full pb-[60%] bg-third">
         {featuredImage && (
           <Image

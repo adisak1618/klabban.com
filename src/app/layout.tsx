@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { QueryProvider } from "klabban-commerce/react";
 import { Anuphan } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
+import { Footer } from "components/Footer.tsx";
 
 const anuphan = Anuphan({
   display: "swap",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <NextTopLoader color="var(--primary-color)" />
         <QueryProvider GQL_URL={process.env.GQL_URL as string}>
           {children}
+          <Footer />
         </QueryProvider>
       </body>
     </html>
