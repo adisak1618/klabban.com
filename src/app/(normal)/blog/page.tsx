@@ -85,4 +85,5 @@ async function Page(props: PageSearchParams) {
 
 export default Page;
 
-export const revalidate = 60 * 60;
+export const revalidate = 60 * 60 * 24 * 30; // 1 month
+export const fetchCache = "default-cache";

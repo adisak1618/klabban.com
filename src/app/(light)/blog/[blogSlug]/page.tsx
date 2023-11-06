@@ -19,7 +19,14 @@ export interface BlogDetailPageProps {
   };
 }
 
+// const option: RequestConfig = {};
+
 async function fetchPost(slug: string) {
+  // fetch("/", {
+  //   next: {
+
+  //   }
+  // })
   return await PostProvider({
     ...KlabbanConfig,
     slug: slug,
@@ -27,6 +34,7 @@ async function fetchPost(slug: string) {
       includeNextPreviousPost: true,
       includeTags: true,
     },
+    option: {},
   });
 }
 
@@ -153,6 +161,10 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   );
 }
 
-export const revalidate = 360000;
-
-export const fetchCache = "default-cache";
+export const revalidate = 60 * 60 * 24 * 30; // 1 month
+// export const runtime = "edge";
+// export const fetchCache = "force-cache";
+// const dynamic = "force-static";
+export async function generateStaticParams() {
+  return [];
+}
