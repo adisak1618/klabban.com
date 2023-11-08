@@ -6,14 +6,14 @@ import {
   PostObjectsConnectionOrderbyEnum,
   TermObjectsConnectionOrderbyEnum,
 } from "klabban-commerce";
+import { usePostsQuery, useCategoriesQuery } from "klabban-commerce/queryHooks";
 import clsx from "clsx";
 import { OutlineButton } from "components/Button/outline";
-import { usePosts, useCategories } from "klabban-commerce/react";
 import { BlogSearchSkeleton } from "./BlogSearchSkeleton";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export interface BlogSearchPageProps {
-  searchParams: { [key: string]: string | string[] };
   categorySlug?: string;
   categoryName?: string;
   tagName?: string;
@@ -25,7 +25,6 @@ export interface BlogSearchPageProps {
 const defaultPageSize = 9;
 
 export function BlogSearch({
-  searchParams,
   categoryName,
   tagName,
   pagePath,
@@ -33,34 +32,36 @@ export function BlogSearch({
   parentCategoryId,
   categorySlug,
 }: BlogSearchPageProps): JSX.Element {
+  const searchParams = useSearchParams();
   const [total, setTotal] = useState(0);
-  const before = Array.isArray(searchParams.before)
-    ? searchParams.before[0]
-    : searchParams.before;
-  const after = Array.isArray(searchParams.after)
-    ? searchParams.after[0]
-    : searchParams.after;
+  const before = searchParams.get("before");
+  const after = searchParams.get("after");
   const last = !!before ? defaultPageSize : undefined;
   const first = !!after || (!before && !after) ? defaultPageSize : undefined;
 
-  const [{ data: postsData, fetching: fetchingPosts }] = usePosts({
-    where: {
-      orderby: [
-        {
-          field: PostObjectsConnectionOrderbyEnum.Date,
-          order: OrderEnum.Desc,
-        },
-      ],
-      categoryName: categorySlug,
-      tag: tagName,
+  const { data: postsData, loading: loadingPosts } = usePostsQuery({
+    variables: {
+      where: {
+        orderby: [
+          {
+            field: PostObjectsConnectionOrderbyEnum.Date,
+            order: OrderEnum.Desc,
+          },
+        ],
+        categoryName: categorySlug,
+        tag: tagName,
+      },
+      first,
+      before,
+      last,
+      after,
     },
-    first,
-    before,
-    last,
-    after,
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-first",
+    pollInterval: 0,
   });
 
-  const [{ data: categoriesData }] = useCategories({
+  const { data: categoriesData } = useCategoriesQuery({
     variables: {
       where: {
         orderby: TermObjectsConnectionOrderbyEnum.Count,
@@ -68,6 +69,8 @@ export function BlogSearch({
         parent: parentCategoryId,
       },
     },
+    canonizeResults: true,
+    pollInterval: 0,
   });
 
   useEffect(() => {
@@ -100,7 +103,7 @@ export function BlogSearch({
         </>
       )}
 
-      {!fetchingPosts && (
+      {!loadingPosts && (
         <p className=" basis-full text-caption leading-[1em] text-text-third tracking-widest text-center pt-3">
           <span className="font-medium">{total}</span> เนื้อหาในหัวข้อ&nbsp;
           <span className="font-medium">{categoryName || "บทความ"}</span>
@@ -123,7 +126,7 @@ export function BlogSearch({
             </div>
           )}
           <div className="flex flex-wrap justify-center -mx-3">
-            {fetchingPosts && <BlogSearchSkeleton />}
+            {loadingPosts && <BlogSearchSkeleton />}
             {postsData?.posts?.nodes.map((post) => (
               <Link
                 className="basis-full md:basis-1/2 lg:basis-1/3 p-3"

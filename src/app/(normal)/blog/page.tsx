@@ -1,5 +1,5 @@
 import { BlogSearch } from "components/blogSearch";
-import { PageProvider } from "klabban-commerce";
+import { PageIdType, PageProvider, PostIdType } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { Breadcrumb } from "components/Breadcrumb";
 import { AnimateCard } from "components/animateCard";
@@ -8,7 +8,9 @@ import { siteName } from "config/siteConfig";
 async function fetchData(slug: string) {
   return await PageProvider({
     ...KlabbanConfig,
-    slug: slug,
+    variables: {
+      id: slug,
+    },
   });
 }
 
@@ -87,3 +89,4 @@ export default Page;
 
 export const revalidate = 60 * 60 * 24 * 30; // 1 month
 export const fetchCache = "default-cache";
+export const dynamic = "force-static";

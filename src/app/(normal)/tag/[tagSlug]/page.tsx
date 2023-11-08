@@ -15,7 +15,9 @@ interface PageProps extends PageSearchParams {
 async function fetchData(slug: string) {
   return await TagProvider({
     ...KlabbanConfig,
-    slug: slug,
+    variables: {
+      id: slug,
+    },
   });
 }
 

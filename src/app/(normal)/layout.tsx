@@ -7,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <MainMenu />
+      {/* <MainMenu /> */}
       {children}
     </>
   );

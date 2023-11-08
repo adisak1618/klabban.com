@@ -1,6 +1,6 @@
 "use client";
 import { PostCard } from "components/PostCard";
-import { useRandomPosts } from "klabban-commerce/react";
+import { useRandomPostsQuery } from "klabban-commerce/queryHooks";
 import Link from "next/link";
 
 interface RelatePostProps {
@@ -12,14 +12,16 @@ export function RelatePost({
   postId,
   categoriesId,
 }: RelatePostProps): JSX.Element {
-  const [{ data, fetching, error }, refresh] = useRandomPosts({
-    notIn: [postId],
-    categoryIn: categoriesId,
-    limit: 3,
-    includeContent: false,
+  const { data, loading } = useRandomPostsQuery({
+    variables: {
+      notIn: [postId],
+      categoryIn: categoriesId,
+      limit: 3,
+      includeContent: false,
+    },
   });
 
-  if (fetching || !data || data.randomPosts.length === 0) return <></>;
+  if (loading || !data || data.randomPosts.length === 0) return <></>;
 
   return (
     <div>

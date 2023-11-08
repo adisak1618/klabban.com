@@ -1,9 +1,10 @@
-import { Breadcrumb } from "components/Breadcrumb";
-import { HeadlineSection } from "components/Headline";
 import { siteName } from "config/siteConfig";
-import { PageProvider } from "klabban-commerce";
-import { GutenbergContent } from "klabban-commerce/react";
+import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
+import { PageIdType, PageProvider } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
+import { PageContent } from "container/pageDetail/content";
+import { PreviewPage } from "container/pageDetail/preview";
 interface CustomPageParams extends PageSearchParams {
   params: {
     pageSlug: string;
@@ -13,7 +14,12 @@ interface CustomPageParams extends PageSearchParams {
 async function fetchData(slug: string) {
   return await PageProvider({
     ...KlabbanConfig,
-    slug: slug,
+    variables: {
+      id: slug,
+      idType: Number.isNaN(Number(slug))
+        ? PageIdType.Uri
+        : PageIdType.DatabaseId,
+    },
   });
 }
 
@@ -33,28 +39,16 @@ export async function generateMetadata({ params }: CustomPageParams) {
 }
 
 async function Page(props: CustomPageParams) {
+  const { isEnabled } = draftMode();
   const { Provider, data: page } = await fetchData(props.params.pageSlug);
+  if (!page && !isEnabled) return notFound();
   return (
     <Provider {...KlabbanConfig}>
       <>
-        <div className="container-content pt-6">
-          <h1 className="text-h3 font-bold text-center">{page?.title}</h1>
-        </div>
-        <div className="mx-auto !max-w-5xl mt-6 mb-4 lg:container px-5">
-          <Breadcrumb
-            links={[
-              {
-                label: page?.title || "",
-                href: `/${page?.databaseId}`,
-              },
-            ]}
-          />
-        </div>
-        <GutenbergContent
-          entryClassName="!my-0"
-          className="!my-0"
-          content={page?.content || ""}
-        />
+        {isEnabled && (
+          <PreviewPage slug={props.params.pageSlug} isEnabled={isEnabled} />
+        )}
+        {!isEnabled && <PageContent page={page} />}
       </>
     </Provider>
   );
@@ -63,3 +57,6 @@ async function Page(props: CustomPageParams) {
 export default Page;
 
 export const revalidate = 60 * 60 * 24 * 30; // 1 month
+export async function generateStaticParams() {
+  return [];
+}

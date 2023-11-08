@@ -1,9 +1,9 @@
 "use client";
-import { PostBySlugQuery } from "klabban-commerce";
+import { PostQuery } from "klabban-commerce";
 import Link from "next/link";
 
 export default function NextPreviousPostLink(
-  props: PostBySlugQuery["post"]
+  props: PostQuery["post"]
 ): JSX.Element {
   return (
     <div className="max-w-5xl mx-auto flex justify-between container px-5 gap-3">
