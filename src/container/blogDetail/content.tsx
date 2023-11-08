@@ -24,12 +24,11 @@ const findRootCategory = (categories: PostFragmentFragment["categories"]) => {
 
 export function BlogContent({
   post,
-  isDraftMode = false,
 }: {
   post: PostQuery["post"];
   isDraftMode?: boolean;
 }) {
-  if (!post && !isDraftMode) return notFound();
+  if (!post) return notFound();
   return (
     <>
       <HeadlineSection

@@ -63,12 +63,10 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   return (
     <>
       <>
-        {isEnabled && (
-          <PreviewPost slug={params.blogSlug} isEnabled={isEnabled} />
-        )}
+        {isEnabled && <PreviewPost slug={params.blogSlug} />}
         {!isEnabled && <BlogContent post={post} />}
 
-        {post && (
+        {post && !isEnabled && (
           <div className="space-y-10 py-6 bg-gray-100 overflow-hidden">
             <NextPreviousPostLink {...post} />
             <RelatePost

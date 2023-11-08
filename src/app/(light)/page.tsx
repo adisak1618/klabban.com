@@ -47,6 +47,7 @@ import { PreviewPage } from "container/pageDetail/preview";
 import { PageCustomUiDocument } from "../../gql/generated";
 
 async function fetchData() {
+  const { isEnabled } = draftMode();
   return await pageRequest({
     ...KlabbanConfig,
     variables: {
@@ -54,6 +55,7 @@ async function fetchData() {
       idType: Number.isNaN(Number("/"))
         ? PageIdType.Uri
         : PageIdType.DatabaseId,
+      asPreview: isEnabled ? true : false,
     },
   });
 }
@@ -80,7 +82,7 @@ async function Page() {
   const client = initRequestClient(KlabbanConfig);
   const data = await client.request(PageCustomUiDocument, {
     id: "/",
-    preview: false,
+    preview: isEnabled ? true : false,
     idType: PageIdType.Uri,
   });
   return (
