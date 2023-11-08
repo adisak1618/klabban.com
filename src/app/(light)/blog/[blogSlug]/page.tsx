@@ -104,7 +104,7 @@ export async function generateStaticParams() {
         },
       ],
     },
-    first: 6,
+    first: 100,
   });
 
   return (
