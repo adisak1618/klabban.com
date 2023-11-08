@@ -29,7 +29,7 @@ export function PreviewPost({ slug }: { slug: string }) {
   if (status === "unauthenticated") {
     signIn();
   }
-  if (searchParams.get("preview") === "true" && !isEnabled) {
+  if (searchParams.get("preview") === "true") {
     redirect(`/api/draft-mode/enable?redirect=${path}`);
   }
 
