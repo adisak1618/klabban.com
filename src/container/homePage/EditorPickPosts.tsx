@@ -2,23 +2,31 @@ import { PostCard } from "components/PostCard";
 import Link from "next/link";
 import { PageCustomUiQuery } from "../../gql/generated";
 import { Button } from "components/ui/button";
+import clsx from "clsx";
 
-export function EditorPickPosts(data: PageCustomUiQuery["page"]) {
-  if (!data?.customPageUI?.popularPosts?.enable) return null;
+export function EditorPickPosts(
+  data: NonNullable<
+    NonNullable<PageCustomUiQuery["page"]>["customPageUI"]
+  >["popularPosts"]
+) {
   return (
-    <div className="bg-gradient-to-b from-slate-400 to-slate-600 py-10 relative headline-shape text-secondary overflow-hidden">
+    <div
+      style={{ order: data?.order }}
+      className={clsx(
+        "bg-gradient-to-b from-slate-400 to-slate-600 py-10 relative text-secondary overflow-hidden",
+        data?.enableShape && "headline-shape"
+      )}
+    >
       <div className="container-content text-center mb-6">
         <h2 className="text-h2 font-title font-bold text-primary">
-          {data?.customPageUI?.popularPosts?.title}
+          {data?.title}
         </h2>
-        <p className="text-h6 text-white">
-          {data?.customPageUI?.popularPosts?.description}
-        </p>
+        <p className="text-h6 text-white">{data?.description}</p>
       </div>
       <div className="mx-auto !max-w-5xl my-3 lg:container px-5 md:flex justify-center md:gap-10 xl:gap-20">
         <div className="flex-1">
           <div className="flex flex-wrap justify-center -mx-3">
-            {data?.customPageUI?.popularPosts?.posts?.map((post) => (
+            {data?.posts?.map((post) => (
               <Link
                 className="basis-full md:basis-1/2 lg:basis-1/3 p-3"
                 key={post?.slug}
@@ -35,16 +43,14 @@ export function EditorPickPosts(data: PageCustomUiQuery["page"]) {
           </div>
         </div>
       </div>
-      {data.customPageUI?.popularPosts?.cta?.title && (
+      {data?.cta?.title && (
         <div className="container-content flex justify-center">
           <Link
             className="mx-auto"
-            href={data.customPageUI?.popularPosts?.cta.url || "#"}
-            target={data.customPageUI?.popularPosts?.cta.target}
+            href={data?.cta.url || "#"}
+            target={data?.cta.target}
           >
-            <Button variant="default">
-              {data.customPageUI?.popularPosts?.cta?.title}
-            </Button>
+            <Button variant="default">{data?.cta?.title}</Button>
           </Link>
         </div>
       )}

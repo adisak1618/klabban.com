@@ -13,7 +13,7 @@ export function PreviewModeProvider({ children }: PreviewModeProviderProps) {
   return (
     <>
       {children}
-      {/* {<PreviewBox isEnabled={isEnabled} />} */}
+      {<PreviewBox isEnabled={isEnabled} />}
     </>
   );
 }

@@ -27,8 +27,11 @@ async function fetchPost(slug: string) {
         : PostIdType.DatabaseId,
       includeNextPreviousPost: true,
       includeTags: true,
+      asPreview: false,
     },
-    option: {},
+    option: {
+      cache: "no-cache",
+    },
   });
 }
 
@@ -50,30 +53,28 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { isEnabled } = draftMode();
-  const { Provider, data: post } = await fetchPost(params.blogSlug);
+  const { data: post } = await fetchPost(params.blogSlug);
 
   return (
     <>
-      <Provider>
-        <>
-          <PreviewPost slug={params.blogSlug} isEnabled={isEnabled} />
-          {!isEnabled && <BlogContent post={post} />}
+      <>
+        <PreviewPost slug={params.blogSlug} isEnabled={isEnabled} />
+        {!isEnabled && <BlogContent post={post} />}
 
-          {post && (
-            <div className="space-y-10 py-6 bg-gray-100 overflow-hidden">
-              <NextPreviousPostLink {...post} />
-              <RelatePost
-                postId={post?.databaseId.toString()}
-                categoriesId={
-                  post?.categories?.nodes?.map((category) =>
-                    category.databaseId.toString()
-                  ) || []
-                }
-              />
-            </div>
-          )}
-        </>
-      </Provider>
+        {post && (
+          <div className="space-y-10 py-6 bg-gray-100 overflow-hidden">
+            <NextPreviousPostLink {...post} />
+            <RelatePost
+              postId={post?.databaseId.toString()}
+              categoriesId={
+                post?.categories?.nodes?.map((category) =>
+                  category.databaseId.toString()
+                ) || []
+              }
+            />
+          </div>
+        )}
+      </>
     </>
   );
 }

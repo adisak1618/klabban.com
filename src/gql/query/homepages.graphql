@@ -1,22 +1,42 @@
-query pageCustomUI($id: ID!, $preview: Boolean! = false) {
-  page(id: $id, idType: URI, asPreview: $preview) {
+query pageCustomUI($id: ID!, $idType: PageIdType! = URI, $preview: Boolean! = false) {
+  page(id: $id, idType: $idType, asPreview: $preview) {
     id
     title
     customPageUI {
-      aboutMe {
-        image {
+      mainContent {
+        enable
+        order
+        headerStyle
+        lightNavigation
+        showHeader
+        showBreadcrumbs
+      }
+      parallax {
+        enable
+        order
+        title
+        subTitle
+        mainImage {
           ...ImageFragment
         }
-        title
-        description
-        cta {
+        backgroundImage {
+          ...ImageFragment
+        }
+        primaryButton {
+          target
           title
           url
-          target
         }
+        secondaryButton {
+          target
+          title
+          url
+        }
+        backgroundText
       }
       slideshow {
         enable
+        order
         content1 {
           title
           subTitle
@@ -103,6 +123,8 @@ query pageCustomUI($id: ID!, $preview: Boolean! = false) {
         }
       }
       topCategories {
+        enable
+        order
         title
         description
         cta {
@@ -120,6 +142,7 @@ query pageCustomUI($id: ID!, $preview: Boolean! = false) {
       }
       lastedPost {
         enable
+        order
         title
         description
         cta {

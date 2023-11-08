@@ -1,9 +1,16 @@
 "use client";
+import { Button } from "components/ui/button";
+import { PageCustomUiQuery } from "../../gql/generated";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Button } from "ui/button";
+import Link from "next/link";
+import clsx from "clsx";
 
-export function HeroBlock() {
+export function HeroBlock(
+  data: NonNullable<
+    NonNullable<PageCustomUiQuery["page"]>["customPageUI"]
+  >["parallax"]
+) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -12,9 +19,9 @@ export function HeroBlock() {
   const backgroundY = useTransform(scrollYProgress || 0, [0, 1], ["0%", "20%"]);
 
   const backgroundTextY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-
+  const backgroundTextArray = (data?.backgroundText || "")?.split(" ");
   return (
-    <div className="">
+    <div style={{ order: data?.order }}>
       <div className="relative page-hero-shape h-[98vh] w-full overflow-hidden gray-gradient">
         <motion.div
           style={{
@@ -22,18 +29,17 @@ export function HeroBlock() {
           }}
           className="leading-[200px] mt-20 lg:mt-10 lg:leading-[250px] text-white text-[150px] lg:text-[250px] opacity-30 font-bold absolute w-full h-full left-0 top-0 text-center"
         >
-          <p className=" animate-marquee whitespace-nowrap">
-            WELCOME WELCOME WELCOME WELCOME WELCOME WELCOME
-          </p>
-          <p className=" animate-marquee2 whitespace-nowrap">
-            WELCOME WELCOME WELCOME WELCOME WELCOME WELCOME
-          </p>
-          <p className=" animate-marquee whitespace-nowrap">
-            WELCOME WELCOME WELCOME WELCOME WELCOME WELCOME
-          </p>
-          <p className=" animate-marquee2 whitespace-nowrap">
-            WELCOME WELCOME WELCOME WELCOME WELCOME WELCOME
-          </p>
+          {data?.backgroundText?.split("/").map((text, index) => (
+            <p
+              key={text}
+              className={clsx(
+                "whitespace-nowrap",
+                index % 2 === 0 ? "animate-marquee" : "animate-marquee2"
+              )}
+            >
+              {text}
+            </p>
+          ))}
         </motion.div>
         {/* <div className="hidden lg:flex text-[250px] animate-marquee lg:animate-none text-white opacity-30 font-bold absolute w-full h-1/2 justify-center items-center">
             <p className="">WELCOME</p>
@@ -49,27 +55,47 @@ export function HeroBlock() {
             <img
               alt="hero"
               ref={ref}
-              src="/images/hero.webp"
+              src={data?.mainImage?.sourceUrl || "/images/hero.webp"}
               className="absolute bottom-8 right-0"
             />
           </motion.div>
 
           <div className="absolute flex flex-col justify-center items-center bottom-0 mb-28 lg:mb-40 w-full lg:max-w-lg px-10 left-0">
-            <h1 className="text-h2 leading-[1em] text-center sm:text-h1 font-title font-bold text-white uppercase">
-              Im Soryor.
-            </h1>
-            <p className="text-h6 font-title font-medium text-white text-center lg:text-left">
-              I create travel guides and backpacking itineraries for countries
-              such as Thailand and New Zealand, in addition to sharing
-              photography resources and more.
-            </p>
-            <div className="flex gap-4 mt-4">
-              <Button variant="primary" size="xl" className="rounded-full">
-                Read My Blog
-              </Button>
-              <Button variant="secondary" size="xl" className="rounded-full">
-                About Me
-              </Button>
+            {data?.title && (
+              <h1 className="text-h2 leading-[1em] text-center sm:text-h1 font-title font-bold text-white uppercase">
+                {data?.title}
+              </h1>
+            )}
+            {data?.subTitle && (
+              <p className="text-h6 font-title font-medium text-white text-center lg:text-left">
+                {data.subTitle}
+              </p>
+            )}
+            <div className="flex gap-4 mt-4 z-10">
+              {data?.primaryButton?.url && (
+                <Link
+                  href={data?.primaryButton?.url}
+                  target={data?.primaryButton.target}
+                >
+                  <Button variant="primary" size="xl" className="rounded-full">
+                    {data?.primaryButton.title}
+                  </Button>
+                </Link>
+              )}
+              {data?.secondaryButton?.url && (
+                <Link
+                  href={data?.secondaryButton?.url}
+                  target={data?.secondaryButton?.target}
+                >
+                  <Button
+                    variant="secondary"
+                    size="xl"
+                    className="rounded-full"
+                  >
+                    {data?.secondaryButton?.title}
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>

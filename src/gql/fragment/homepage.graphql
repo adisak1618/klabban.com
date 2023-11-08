@@ -1,6 +1,7 @@
 fragment EditorPickFragment on Page_Custompageui_PopularPosts {
   enable
   title
+  order
   description
   cta {
     target
@@ -10,6 +11,7 @@ fragment EditorPickFragment on Page_Custompageui_PopularPosts {
   posts {
     ...PostFragment
   }
+  enableShape
 }
 
 fragment PostFragment on Post {

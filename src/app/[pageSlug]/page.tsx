@@ -1,10 +1,13 @@
 import { siteName } from "config/siteConfig";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-import { PageIdType, PageProvider } from "klabban-commerce";
+import { PageIdType, PageProvider, initRequestClient } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { PageContent } from "container/pageDetail/content";
 import { PreviewPage } from "container/pageDetail/preview";
+import { PageCustomUiDocument } from "../../gql/generated";
+import { MainMenu } from "components/MainMenu";
+
 interface CustomPageParams extends PageSearchParams {
   params: {
     pageSlug: string;
@@ -15,8 +18,8 @@ async function fetchData(slug: string) {
   return await PageProvider({
     ...KlabbanConfig,
     variables: {
-      id: slug,
-      idType: Number.isNaN(Number(slug))
+      id: slug || "/",
+      idType: Number.isNaN(Number(slug || "/"))
         ? PageIdType.Uri
         : PageIdType.DatabaseId,
     },
@@ -40,17 +43,20 @@ export async function generateMetadata({ params }: CustomPageParams) {
 
 async function Page(props: CustomPageParams) {
   const { isEnabled } = draftMode();
-  const { Provider, data: page } = await fetchData(props.params.pageSlug);
-  if (!page && !isEnabled) return notFound();
+  const { data: page } = await fetchData(props.params.pageSlug);
+  const client = initRequestClient(KlabbanConfig);
+  const data = await client.request(PageCustomUiDocument, {
+    id: props.params.pageSlug,
+    preview: false,
+  });
   return (
-    <Provider {...KlabbanConfig}>
-      <>
-        {isEnabled && (
-          <PreviewPage slug={props.params.pageSlug} isEnabled={isEnabled} />
-        )}
-        {!isEnabled && <PageContent page={page} />}
-      </>
-    </Provider>
+    <>
+      <MainMenu light={data.page?.customPageUI?.mainContent?.lightNavigation} />
+
+      <PreviewPage slug={props.params.pageSlug} isEnabled={isEnabled} />
+      {/* <PageContent page={page} pageCustomUI={data.page} /> */}
+      {!isEnabled && <PageContent page={page} pageCustomUI={data.page} />}
+    </>
   );
 }
 

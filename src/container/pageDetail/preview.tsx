@@ -10,6 +10,8 @@ import {
   useSearchParams,
   usePathname,
 } from "next/navigation";
+import { PageCustomUiQuery, PageCustomUiDocument } from "../../gql/generated";
+import { useQuery } from "klabban-commerce/react";
 
 export function PreviewPage({
   slug,
@@ -22,15 +24,32 @@ export function PreviewPage({
   const searchParams = useSearchParams();
   const paramsString = searchParams.toString();
   const { status } = useSession();
-  const { data } = usePageQuery({
+  const { data, loading } = usePageQuery({
     variables: {
       id: slug,
       idType: Number.isNaN(Number(slug))
         ? PageIdType.Uri
         : PageIdType.DatabaseId,
+      asPreview: true,
     },
     fetchPolicy: "network-only",
   });
+
+  const { data: customPageUIData, loading: loadingCustomData } = useQuery(
+    PageCustomUiDocument,
+    {
+      variables: {
+        id: slug,
+        preview: false,
+        idType: Number.isNaN(Number(slug))
+          ? PageIdType.Uri
+          : PageIdType.DatabaseId,
+      },
+      fetchPolicy: "network-only",
+      canonizeResults: true,
+    }
+  );
+
   if (!searchParams.get("preview") && !isEnabled) return null;
   if (searchParams.get("preview") === "true" && status === "unauthenticated") {
     signIn();
@@ -44,5 +63,16 @@ export function PreviewPage({
   }
 
   // if (status === "unauthenticated") return <div></div>;
-  return <PageContent page={data?.page} />;
+  return (
+    <>
+      {!loading && !loadingCustomData && (
+        <PageContent
+          page={data?.page}
+          isDraftMode={isEnabled}
+          pageCustomUI={customPageUIData?.page}
+        />
+      )}
+    </>
+  );
+  return <div>Preivew</div>;
 }

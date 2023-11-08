@@ -1,18 +1,20 @@
 import Link from "next/link";
 import { PageCustomUiQuery } from "../../gql/generated";
 
-export function TopCategories(data: PageCustomUiQuery["page"]) {
+export function TopCategories(
+  data: NonNullable<
+    NonNullable<PageCustomUiQuery["page"]>["customPageUI"]
+  >["topCategories"]
+) {
   return (
-    <div className="py-10">
+    <div style={{ order: data?.order }} className="py-10">
       <div className="container-content text-center mb-6">
-        <h2 className="text-h6 font-title font-bold">
-          {data?.customPageUI?.topCategories?.title}
-        </h2>
-        <p>{data?.customPageUI?.topCategories?.description}</p>
+        <h2 className="text-h6 font-title font-bold">{data?.title}</h2>
+        <p>{data?.description}</p>
       </div>
 
       <div className="flex flex-wrap md:gap-4 md:justify-center md:container">
-        {data?.customPageUI?.topCategories?.categories?.map((cateogry) => (
+        {data?.categories?.map((cateogry) => (
           <Link
             className="inline-block group w-1/2 md:w-[250px] md:zoom-in bg-secondary overflow-hidden md:rounded-md relative"
             href={`/category/${cateogry?.slug}`}
