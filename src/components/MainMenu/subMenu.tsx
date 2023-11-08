@@ -40,6 +40,7 @@ export function SubMenu({ menus, root, full = false }: SubMenuProps) {
                   ? "font-bold underline"
                   : "font-normal"
               )}
+              prefetch={false}
             >
               {menu.label}
             </Link>

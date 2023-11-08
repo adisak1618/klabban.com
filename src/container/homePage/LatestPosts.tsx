@@ -1,8 +1,8 @@
-"use client";
 import { PostCard } from "components/PostCard";
 import {
   OrderEnum,
   PostObjectsConnectionOrderbyEnum,
+  PostsDocument,
   PostsProvider,
 } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
@@ -10,25 +10,40 @@ import Link from "next/link";
 import { PageCustomUiQuery } from "../../gql/generated";
 import { Button } from "components/ui/button";
 import { usePostsQuery } from "klabban-commerce/queryHooks";
+import { initRequestClient } from "klabban-commerce";
 
-export function LastestPosts(
+export async function LastestPosts(
   data: NonNullable<
     NonNullable<PageCustomUiQuery["page"]>["customPageUI"]
   >["lastedPost"]
 ) {
-  const { data: postsData } = usePostsQuery({
-    variables: {
-      where: {
-        orderby: [
-          {
-            field: PostObjectsConnectionOrderbyEnum.Date,
-            order: OrderEnum.Desc,
-          },
-        ],
-      },
-      first: 6,
-    },
+  const client = initRequestClient({
+    ...KlabbanConfig,
   });
+  const postsData = await client.request(PostsDocument, {
+    where: {
+      orderby: [
+        {
+          field: PostObjectsConnectionOrderbyEnum.Date,
+          order: OrderEnum.Desc,
+        },
+      ],
+    },
+    first: 6,
+  });
+  // const { data: postsData } = usePostsQuery({
+  //   variables: {
+  //     where: {
+  //       orderby: [
+  //         {
+  //           field: PostObjectsConnectionOrderbyEnum.Date,
+  //           order: OrderEnum.Desc,
+  //         },
+  //       ],
+  //     },
+  //     first: 6,
+  //   },
+  // });
   return (
     <div style={{ order: data?.order }} className="bg-secondary py-10">
       <>

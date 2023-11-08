@@ -19,6 +19,8 @@ export function RelatePost({
       limit: 3,
       includeContent: false,
     },
+    fetchPolicy: "cache-first",
+    canonizeResults: false,
   });
 
   if (loading || !data || data.randomPosts.length === 0) return <></>;

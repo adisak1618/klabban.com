@@ -36,6 +36,7 @@ function RenderMenu({
               onClick={() => {
                 menu.uri != "#" ? onLinkClick?.() : setActiveMenu(menu.id);
               }}
+              prefetch={false}
             >
               {menu.label}
             </Link>

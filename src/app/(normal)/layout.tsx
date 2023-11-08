@@ -7,10 +7,10 @@ export default function RootLayout({
 }) {
   return (
     <>
-      {/* <MainMenu /> */}
+      <MainMenu />
       {children}
     </>
   );
 }
 
-export const revalidate = 3600;
+// export const revalidate = 3600;

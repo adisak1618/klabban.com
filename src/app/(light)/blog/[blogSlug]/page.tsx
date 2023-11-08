@@ -1,6 +1,13 @@
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { PostIdType, PostProvider } from "klabban-commerce";
+import {
+  OrderEnum,
+  PostIdType,
+  PostObjectsConnectionOrderbyEnum,
+  PostRequest,
+  PostsDocument,
+  initRequestClient,
+} from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 // import "klabban-commerce/react/index.css";
 import { siteName } from "config/siteConfig";
@@ -18,7 +25,7 @@ export interface BlogDetailPageProps {
 // const option: RequestConfig = {};
 
 async function fetchPost(slug: string) {
-  return await PostProvider({
+  return await PostRequest({
     ...KlabbanConfig,
     variables: {
       id: slug,
@@ -29,14 +36,11 @@ async function fetchPost(slug: string) {
       includeTags: true,
       asPreview: false,
     },
-    option: {
-      cache: "no-cache",
-    },
   });
 }
 
 export async function generateMetadata({ params }: BlogDetailPageProps) {
-  const { data: post } = await fetchPost(params.blogSlug);
+  const { post } = await fetchPost(params.blogSlug);
   return {
     title: `${siteName} | ${post?.title}`,
     description: post?.excerpt?.replaceAll(
@@ -53,12 +57,15 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { isEnabled } = draftMode();
-  const { data: post } = await fetchPost(params.blogSlug);
+  const { post } = await fetchPost(params.blogSlug);
+  // console.log("post", post);
 
   return (
     <>
       <>
-        <PreviewPost slug={params.blogSlug} isEnabled={isEnabled} />
+        {isEnabled && (
+          <PreviewPost slug={params.blogSlug} isEnabled={isEnabled} />
+        )}
         {!isEnabled && <BlogContent post={post} />}
 
         {post && (
@@ -80,9 +87,29 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 }
 
 export const revalidate = 60 * 60 * 24 * 30; // 1 month
+// export const revalidate = true;
 // export const runtime = "edge";
-// export const fetchCache = "force-cache";
+export const fetchCache = "force-cache";
 // const dynamic = "force-static";
 export async function generateStaticParams() {
-  return [];
+  const client = initRequestClient({
+    ...KlabbanConfig,
+  });
+  const postsData = await client.request(PostsDocument, {
+    where: {
+      orderby: [
+        {
+          field: PostObjectsConnectionOrderbyEnum.Date,
+          order: OrderEnum.Desc,
+        },
+      ],
+    },
+    first: 6,
+  });
+
+  return (
+    postsData.posts?.nodes.map((post) => ({
+      blogSlug: post.slug,
+    })) || []
+  );
 }

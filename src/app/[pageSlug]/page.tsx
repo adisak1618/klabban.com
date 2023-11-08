@@ -51,9 +51,9 @@ async function Page(props: CustomPageParams) {
   });
   return (
     <>
-      <MainMenu light={data.page?.customPageUI?.mainContent?.lightNavigation} />
-
-      <PreviewPage slug={props.params.pageSlug} isEnabled={isEnabled} />
+      {isEnabled && (
+        <PreviewPage slug={props.params.pageSlug} isEnabled={isEnabled} />
+      )}
       {/* <PageContent page={page} pageCustomUI={data.page} /> */}
       {!isEnabled && <PageContent page={page} pageCustomUI={data.page} />}
     </>
@@ -62,7 +62,7 @@ async function Page(props: CustomPageParams) {
 
 export default Page;
 
-export const revalidate = 60 * 60 * 24 * 30; // 1 month
+export const revalidate = true;
 export async function generateStaticParams() {
   return [];
 }

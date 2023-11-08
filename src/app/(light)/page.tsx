@@ -39,16 +39,15 @@
 // export const dynamic = "force-static";
 
 import { siteName } from "config/siteConfig";
-import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-import { PageIdType, PageProvider, initRequestClient } from "klabban-commerce";
+import { PageIdType, pageRequest, initRequestClient } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { PageContent } from "container/pageDetail/content";
 import { PreviewPage } from "container/pageDetail/preview";
 import { PageCustomUiDocument } from "../../gql/generated";
 
 async function fetchData() {
-  return await PageProvider({
+  return await pageRequest({
     ...KlabbanConfig,
     variables: {
       id: "/",
@@ -60,7 +59,8 @@ async function fetchData() {
 }
 
 export async function generateMetadata() {
-  const { data: page } = await fetchData();
+  const { page } = await fetchData();
+
   return {
     title: `${siteName} | ${page?.title}`,
     description: page?.content
@@ -76,7 +76,7 @@ export async function generateMetadata() {
 
 async function Page() {
   const { isEnabled } = draftMode();
-  const { data: page } = await fetchData();
+  const { page } = await fetchData();
   const client = initRequestClient(KlabbanConfig);
   const data = await client.request(PageCustomUiDocument, {
     id: "/",
@@ -85,7 +85,7 @@ async function Page() {
   });
   return (
     <>
-      <PreviewPage slug="/" isEnabled={isEnabled} />
+      {isEnabled && <PreviewPage slug="/" isEnabled={isEnabled} />}
 
       {!isEnabled && <PageContent page={page} pageCustomUI={data.page} />}
     </>
@@ -93,6 +93,6 @@ async function Page() {
 }
 
 export default Page;
-
-export const revalidate = 60 * 60 * 24 * 30; // 1 month
-export const dynamic = "force-static";
+export const revalidate = true;
+// export const revalidate = 60 * 60 * 24 * 30; // 1 month
+// export const dynamic = "force-static";
