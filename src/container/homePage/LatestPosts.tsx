@@ -28,7 +28,7 @@ export function LastestPosts(
   });
 
   return (
-    <div className="bg-secondary py-10" style={{ order: data?.order }}>
+    <div className="bg-secondary py-10" style={{ order: data?.order || 99 }}>
       <>
         <div className="container-content text-center mb-6">
           <h2 className="text-h2 font-title font-bold">{data?.title}</h2>

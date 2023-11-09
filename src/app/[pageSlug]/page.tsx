@@ -56,7 +56,6 @@ async function Page(props: CustomPageParams) {
 
   return (
     <>
-      static page
       <MainMenu light={data.page?.customPageUI?.mainContent?.lightNavigation} />
       {isEnabled && <PreviewPage slug={props.params.pageSlug} />}
       {/* <PageContent page={page} pageCustomUI={data.page} /> */}

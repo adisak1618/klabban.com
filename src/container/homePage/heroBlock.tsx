@@ -21,7 +21,7 @@ export function HeroBlock(
   const backgroundTextY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
   const backgroundTextArray = (data?.backgroundText || "")?.split(" ");
   return (
-    <div style={{ order: data?.order }}>
+    <div style={{ order: data?.order || 99 }}>
       <div className="relative page-hero-shape h-[98vh] w-full overflow-hidden gray-gradient">
         <motion.div
           style={{

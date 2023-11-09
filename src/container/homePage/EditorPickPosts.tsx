@@ -11,7 +11,7 @@ export function EditorPickPosts(
 ) {
   return (
     <div
-      style={{ order: data?.order }}
+      style={{ order: data?.order || 99 }}
       className={clsx(
         "bg-gradient-to-b from-slate-400 to-slate-600 py-10 relative text-secondary overflow-hidden",
         data?.enableShape && "headline-shape"

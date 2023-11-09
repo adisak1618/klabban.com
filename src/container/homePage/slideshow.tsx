@@ -85,7 +85,10 @@ export function Slideshow(
   }, []);
 
   return (
-    <div style={{ order: slideshow?.order }} className=" w-full bg-secondary">
+    <div
+      style={{ order: slideshow?.order || 99 }}
+      className=" w-full bg-secondary"
+    >
       <Swiper
         wrapperClass={clsx(
           !mounted && "transform !translate-x-[16.666666666%]"

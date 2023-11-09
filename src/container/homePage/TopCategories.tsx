@@ -7,7 +7,7 @@ export function TopCategories(
   >["topCategories"]
 ) {
   return (
-    <div style={{ order: data?.order }} className="py-10">
+    <div style={{ order: data?.order || 99 }} className="py-10">
       <div className="container-content text-center mb-6">
         <h2 className="text-h6 font-title font-bold">{data?.title}</h2>
         <p>{data?.description}</p>

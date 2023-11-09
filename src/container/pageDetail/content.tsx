@@ -22,7 +22,9 @@ export function PageContent({
   return (
     <>
       {pageCustomUI?.customPageUI?.mainContent?.enable && (
-        <>
+        <div
+          style={{ order: pageCustomUI?.customPageUI?.mainContent.order || 99 }}
+        >
           {pageCustomUI?.customPageUI?.mainContent?.headerStyle !== "simple" &&
             pageCustomUI?.customPageUI?.mainContent?.showHeader && (
               <HeadlineSection
@@ -58,7 +60,7 @@ export function PageContent({
             // className="!my-0"
             content={page?.content || ""}
           />
-        </>
+        </div>
       )}
       <div>
         <div className="flex flex-col">
