@@ -1,11 +1,9 @@
 import { siteName } from "config/siteConfig";
 import { draftMode } from "next/headers";
 import {
-  OrderEnum,
   PageIdType,
   PageProvider,
-  PostObjectsConnectionOrderbyEnum,
-  PostsDocument,
+  PagesDocument,
   initRequestClient,
 } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
@@ -48,33 +46,21 @@ export async function generateMetadata({ params }: CustomPageParams) {
 }
 
 async function Page(props: CustomPageParams) {
-  // const { isEnabled } = draftMode();
-  // const { data: page } = await fetchData(props.params.pageSlug);
-  // const client = initRequestClient(KlabbanConfig);
-  // const data = await client.request(PageCustomUiDocument, {
-  //   id: props.params.pageSlug,
-  //   preview: false,
-  // });
-  // if (data.page?.customPageUI?.lastedPost?.enable) {
-  //   const latestPosts = await client.request(PostsDocument, {
-  //     where: {
-  //       orderby: [
-  //         {
-  //           field: PostObjectsConnectionOrderbyEnum.Date,
-  //           order: OrderEnum.Desc,
-  //         },
-  //       ],
-  //     },
-  //     first: 6,
-  //   });
-  // }
+  const { isEnabled } = draftMode();
+  const { data: page } = await fetchData(props.params.pageSlug);
+  const client = initRequestClient(KlabbanConfig);
+  const data = await client.request(PageCustomUiDocument, {
+    id: props.params.pageSlug,
+    preview: false,
+  });
+
   return (
     <>
       static page
-      {/* <MainMenu light={data.page?.customPageUI?.mainContent?.lightNavigation} /> */}
-      {/* {isEnabled && <PreviewPage slug={props.params.pageSlug} />} */}
+      <MainMenu light={data.page?.customPageUI?.mainContent?.lightNavigation} />
+      {isEnabled && <PreviewPage slug={props.params.pageSlug} />}
       {/* <PageContent page={page} pageCustomUI={data.page} /> */}
-      {/* {!isEnabled && <PageContent page={page} pageCustomUI={data.page} />} */}
+      {!isEnabled && <PageContent page={page} pageCustomUI={data.page} />}
     </>
   );
 }
@@ -86,5 +72,11 @@ export const revalidate = 60 * 60 * 24 * 30; // 1 month
 
 // export const fetchCache = "force-cache";
 export async function generateStaticParams() {
-  return [];
+  const client = initRequestClient({ ...KlabbanConfig });
+  const { pages } = await client.request(PagesDocument, {
+    first: 100,
+  });
+  return (pages?.nodes || []).map((page) => ({
+    pageSlug: page.slug,
+  }));
 }
