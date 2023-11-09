@@ -10,6 +10,7 @@ import { TopCategories } from "container/homePage/TopCategories";
 import { EditorPickPosts } from "container/homePage/EditorPickPosts";
 import { LastestPosts } from "container/homePage/LatestPosts";
 import { MainMenu } from "components/MainMenu";
+import { Main } from "next/document";
 
 export function PageContent({
   page,
@@ -21,9 +22,14 @@ export function PageContent({
   // if (!page && !isDraftMode) return notFound();
   return (
     <>
+      <MainMenu
+        light={pageCustomUI?.customPageUI?.mainContent?.lightNavigation}
+      />
       {pageCustomUI?.customPageUI?.mainContent?.enable && (
         <div
-          style={{ order: pageCustomUI?.customPageUI?.mainContent.order || 99 }}
+          style={{
+            order: pageCustomUI?.customPageUI?.mainContent?.order || 99,
+          }}
         >
           {pageCustomUI?.customPageUI?.mainContent?.headerStyle !== "simple" &&
             pageCustomUI?.customPageUI?.mainContent?.showHeader && (

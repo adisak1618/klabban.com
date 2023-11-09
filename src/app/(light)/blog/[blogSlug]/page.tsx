@@ -1,11 +1,13 @@
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { authOptions, getServerSession } from "klabban-commerce/auth";
 import {
   OrderEnum,
   PostIdType,
   PostObjectsConnectionOrderbyEnum,
   PostRequest,
   PostsDocument,
+  RefreshTokenDocument,
   initRequestClient,
 } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
@@ -13,8 +15,9 @@ import { KlabbanConfig } from "libs/klabbanConfig";
 import { siteName } from "config/siteConfig";
 import NextPreviousPostLink from "container/blogDetail/nextPreviousPost";
 import { RelatePost } from "container/blogDetail/relatePost";
-import { PreviewPost } from "container/blogDetail/preview";
 import { BlogContent } from "container/blogDetail/content";
+import { FourceLogin } from "components/ForceLogin";
+import { getTokenByRefreshToken } from "libs/refreshToken";
 
 export interface BlogDetailPageProps {
   params: {
@@ -24,7 +27,14 @@ export interface BlogDetailPageProps {
 
 // const option: RequestConfig = {};
 
-async function fetchPost(slug: string) {
+async function fetchPost(slug: string, token: string | null) {
+  const client = initRequestClient(KlabbanConfig);
+
+  const headers = token
+    ? {
+        Authorization: `Bearer ${token}`,
+      }
+    : {};
   return await PostRequest({
     ...KlabbanConfig,
     variables: {
@@ -34,13 +44,16 @@ async function fetchPost(slug: string) {
         : PostIdType.DatabaseId,
       includeNextPreviousPost: true,
       includeTags: true,
-      asPreview: false,
+      asPreview: token ? true : false,
+    },
+    option: {
+      headers,
     },
   });
 }
 
 export async function generateMetadata({ params }: BlogDetailPageProps) {
-  const { post } = await fetchPost(params.blogSlug);
+  const { post } = await fetchPost(params.blogSlug, null);
   return {
     title: `${siteName} | ${post?.title}`,
     description: post?.excerpt?.replaceAll(
@@ -62,14 +75,16 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { isEnabled } = draftMode();
-  const { post } = await fetchPost(params.blogSlug);
-  // console.log("post", post);
+  const token = isEnabled ? await getTokenByRefreshToken() : null;
+
+  const { post } = await fetchPost(params.blogSlug, token);
+
   if (!post && !isEnabled) return notFound();
   return (
     <>
       <>
-        {isEnabled && <PreviewPost slug={params.blogSlug} />}
-        {!isEnabled && <BlogContent post={post} />}
+        <BlogContent post={post} />
+        {isEnabled && <FourceLogin />}
 
         {post && !isEnabled && (
           <div className="space-y-10 py-6 bg-gray-100 overflow-hidden">
@@ -90,10 +105,9 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 }
 
 export const revalidate = 60 * 60 * 24 * 30; // 1 month
-// export const revalidate = true;
-// export const runtime = "edge";
+
 export const fetchCache = "force-cache";
-// const dynamic = "force-static";
+
 export async function generateStaticParams() {
   const client = initRequestClient({
     ...KlabbanConfig,
