@@ -45,7 +45,7 @@ export function PageContent({
               <div className="container-content pt-6">
                 <h1 className="text-h3 font-bold text-center">{page?.title}</h1>
               </div>
-            )}
+            )} */}
           {pageCustomUI?.customPageUI?.mainContent?.showBreadcrumbs && (
             <div className="mx-auto !max-w-5xl mt-6 mb-4 lg:container px-5">
               <Breadcrumb
@@ -57,7 +57,7 @@ export function PageContent({
                 ]}
               />
             </div>
-          )} */}
+          )}
 
           <GutenbergContent
             // entryClassName="!my-0"
