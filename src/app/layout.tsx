@@ -37,10 +37,10 @@ export default async function RootLayout({
           GQL_URL={process.env.GQL_URL as string}
           session={session}
         >
-          <PreviewModeProvider>
-            <div className="min-h-[85vh]">{children}</div>
-            <Footer />
-          </PreviewModeProvider>
+          {/* <PreviewModeProvider> */}
+          <div className="min-h-[85vh]">{children}</div>
+          <Footer />
+          {/* </PreviewModeProvider> */}
         </QueryProvider>
       </body>
     </html>

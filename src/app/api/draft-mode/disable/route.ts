@@ -7,5 +7,5 @@ export async function GET(request: Request) {
   
   draftMode().disable()
   redirectUrl && redirect(redirectUrl)
-  return new Response('Draft mode is enabled')
+  return new Response('Draft mode is disable')
 }

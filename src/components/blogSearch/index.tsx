@@ -75,6 +75,7 @@ export function BlogSearch({
 
   useEffect(() => {
     setTotal(postsData?.posts?.pageInfo.total || 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [!postsData?.posts?.pageInfo.total]);
   return (
     <>

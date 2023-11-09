@@ -81,8 +81,8 @@ export async function generateMetadata({ params }: CustomPageParams) {
 
 async function Page(props: CustomPageParams) {
   const { isEnabled } = draftMode();
-  // const token = isEnabled ? await getTokenByRefreshToken() : null;
-  const { page, customUI } = await fetchData(props.params.pageSlug, null);
+  const token = isEnabled ? await getTokenByRefreshToken() : null;
+  const { page, customUI } = await fetchData(props.params.pageSlug, token);
   // const client = initRequestClient({
   //   ...KlabbanConfig,
   // });
