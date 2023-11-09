@@ -22,41 +22,48 @@ interface CustomPageParams extends PageSearchParams {
 }
 
 async function fetchData(slug: string, token: string | null) {
-  const headers = token
-    ? {
-        Authorization: `Bearer ${token}`,
-      }
-    : {};
+  try {
+    const headers = token
+      ? {
+          Authorization: `Bearer ${token}`,
+        }
+      : {};
 
-  const client = initRequestClient({
-    ...KlabbanConfig,
-    option: {
-      headers,
-    },
-  });
-  const data = await client.request(PageCustomUiDocument, {
-    id: slug,
-    preview: false,
-    idType: Number.isNaN(Number(slug || "/"))
-      ? PageIdType.Uri
-      : PageIdType.DatabaseId,
-  });
-  const pageResult = await pageRequest({
-    ...KlabbanConfig,
-    variables: {
-      id: slug || "/",
+    const client = initRequestClient({
+      ...KlabbanConfig,
+      option: {
+        headers,
+      },
+    });
+    const data = await client.request(PageCustomUiDocument, {
+      id: slug,
+      preview: false,
       idType: Number.isNaN(Number(slug || "/"))
         ? PageIdType.Uri
         : PageIdType.DatabaseId,
-    },
-    option: {
-      headers,
-    },
-  });
-  return {
-    page: pageResult.page,
-    customUI: data.page,
-  };
+    });
+    const pageResult = await pageRequest({
+      ...KlabbanConfig,
+      variables: {
+        id: slug || "/",
+        idType: Number.isNaN(Number(slug || "/"))
+          ? PageIdType.Uri
+          : PageIdType.DatabaseId,
+      },
+      option: {
+        headers,
+      },
+    });
+    return {
+      page: pageResult.page,
+      customUI: data.page,
+    };
+  } catch (error) {
+    return {
+      page: undefined,
+      customUI: undefined,
+    };
+  }
 }
 
 export async function generateMetadata({ params }: CustomPageParams) {
