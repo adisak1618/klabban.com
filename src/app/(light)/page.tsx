@@ -14,7 +14,7 @@ export async function generateMetadata() {
 async function Page() {
   return homePage({
     params: {
-      pageSlug: "home",
+      pageSlug: "/",
     },
     searchParams: {},
   });
@@ -22,4 +22,6 @@ async function Page() {
 
 export default Page;
 
-export const dynamic = "force-static";
+export async function generateStaticParams() {
+  return [];
+}
