@@ -14,6 +14,7 @@ import { PageCustomUiDocument } from "../../gql/generated";
 import { MainMenu } from "components/MainMenu";
 import { FourceLogin } from "components/ForceLogin";
 import { getTokenByRefreshToken } from "libs/refreshToken";
+import { notFound } from "next/navigation";
 
 interface CustomPageParams extends PageSearchParams {
   params: {
@@ -90,8 +91,7 @@ async function Page(props: CustomPageParams) {
   //   id: props.params.pageSlug,
   //   preview: token ? true : false,
   // });
-  console.log("customUI", customUI);
-
+  if (!page && !isEnabled) return notFound();
   return (
     <>
       <PageContent page={page} pageCustomUI={customUI} />

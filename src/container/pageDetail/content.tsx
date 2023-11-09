@@ -1,7 +1,6 @@
 import { PageQuery } from "klabban-commerce";
 import { Breadcrumb } from "components/Breadcrumb";
 import { GutenbergContent } from "klabban-commerce/react";
-import { notFound } from "next/navigation";
 import { HeadlineSection } from "components/Headline";
 import { PageCustomUiQuery } from "../../gql/generated";
 import { HeroBlock } from "container/homePage/heroBlock";
@@ -10,7 +9,6 @@ import { TopCategories } from "container/homePage/TopCategories";
 import { EditorPickPosts } from "container/homePage/EditorPickPosts";
 import { LastestPosts } from "container/homePage/LatestPosts";
 import { MainMenu } from "components/MainMenu";
-import { Main } from "next/document";
 
 export function PageContent({
   page,
