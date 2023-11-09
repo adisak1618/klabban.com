@@ -106,7 +106,7 @@ export const revalidate = 60 * 60 * 24 * 30; // 1 month
 // export const revalidate = true;
 
 // export const fetchCache = "force-cache";
-export const runtime = "edge"; // 'nodejs' (default) | 'edge'
+export const runtime = "nodejs"; // 'nodejs' (default) | 'edge'
 export async function generateStaticParams() {
   const client = initRequestClient({ ...KlabbanConfig });
   const { pages } = await client.request(PagesDocument, {

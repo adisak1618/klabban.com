@@ -106,7 +106,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 
 export const revalidate = 60 * 60 * 24 * 30; // 1 month
 
-export const runtime = "edge"; // 'nodejs' (default) | 'edge'
+export const runtime = "nodejs"; // 'nodejs' (default) | 'edge'
 
 export async function generateStaticParams() {
   const client = initRequestClient({
