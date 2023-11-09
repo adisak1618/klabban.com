@@ -35,25 +35,48 @@ async function fetchData(slug: string, token: string | null) {
         headers,
       },
     });
-    const data = await client.request(PageCustomUiDocument, {
-      id: slug,
-      preview: false,
-      idType: Number.isNaN(Number(slug || "/"))
-        ? PageIdType.Uri
-        : PageIdType.DatabaseId,
-    });
-    const pageResult = await pageRequest({
-      ...KlabbanConfig,
-      variables: {
-        id: slug || "/",
+
+    const [pageResult, data] = await Promise.all([
+      pageRequest({
+        ...KlabbanConfig,
+        variables: {
+          id: slug || "/",
+          idType: Number.isNaN(Number(slug || "/"))
+            ? PageIdType.Uri
+            : PageIdType.DatabaseId,
+        },
+        option: {
+          headers,
+        },
+      }),
+      client.request(PageCustomUiDocument, {
+        id: slug,
+        preview: false,
         idType: Number.isNaN(Number(slug || "/"))
           ? PageIdType.Uri
           : PageIdType.DatabaseId,
-      },
-      option: {
-        headers,
-      },
-    });
+      }),
+    ]);
+
+    // const data = await client.request(PageCustomUiDocument, {
+    //   id: slug,
+    //   preview: false,
+    //   idType: Number.isNaN(Number(slug || "/"))
+    //     ? PageIdType.Uri
+    //     : PageIdType.DatabaseId,
+    // });
+    // const pageResult = await pageRequest({
+    //   ...KlabbanConfig,
+    //   variables: {
+    //     id: slug || "/",
+    //     idType: Number.isNaN(Number(slug || "/"))
+    //       ? PageIdType.Uri
+    //       : PageIdType.DatabaseId,
+    //   },
+    //   option: {
+    //     headers,
+    //   },
+    // });
     return {
       page: pageResult.page,
       customUI: data.page,
@@ -101,7 +124,7 @@ async function Page(props: CustomPageParams) {
   return (
     <>
       {isEnabled && <FourceLogin />}
-      <PageContent page={page} pageCustomUI={customUI} />
+      {/* <PageContent page={page} pageCustomUI={customUI} /> */}
     </>
   );
 }
