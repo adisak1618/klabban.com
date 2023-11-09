@@ -53,7 +53,9 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
     locale: "th_TH",
     type: "website",
     alternates: {
-      canonical: `${process.env.BASE_URL}/blog/${post?.slug}`,
+      canonical: post?.slug
+        ? `${process.env.BASE_URL}/blog/${post?.slug}`
+        : undefined,
     },
   };
 }

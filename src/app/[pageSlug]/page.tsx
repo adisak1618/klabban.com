@@ -42,6 +42,11 @@ export async function generateMetadata({ params }: CustomPageParams) {
     images: [page?.featuredImage?.node.medium_large],
     locale: "th_TH",
     type: "website",
+    alternates: {
+      canonical: page?.slug
+        ? `${process.env.BASE_URL}/blog/${page?.slug}`
+        : undefined,
+    },
   };
 }
 
