@@ -58,25 +58,6 @@ async function fetchData(slug: string, token: string | null) {
       }),
     ]);
 
-    // const data = await client.request(PageCustomUiDocument, {
-    //   id: slug,
-    //   preview: false,
-    //   idType: Number.isNaN(Number(slug || "/"))
-    //     ? PageIdType.Uri
-    //     : PageIdType.DatabaseId,
-    // });
-    // const pageResult = await pageRequest({
-    //   ...KlabbanConfig,
-    //   variables: {
-    //     id: slug || "/",
-    //     idType: Number.isNaN(Number(slug || "/"))
-    //       ? PageIdType.Uri
-    //       : PageIdType.DatabaseId,
-    //   },
-    //   option: {
-    //     headers,
-    //   },
-    // });
     return {
       page: pageResult.page,
       customUI: data.page,
@@ -111,20 +92,13 @@ export async function generateMetadata({ params }: CustomPageParams) {
 
 async function Page(props: CustomPageParams) {
   const { isEnabled } = draftMode();
-  // const token = isEnabled ? await getTokenByRefreshToken() : null;
-  const { page, customUI } = await fetchData(props.params.pageSlug, null);
-  // const client = initRequestClient({
-  //   ...KlabbanConfig,
-  // });
-  // const data = await client.request(PageCustomUiDocument, {
-  //   id: props.params.pageSlug,
-  //   preview: token ? true : false,
-  // });
+  const token = isEnabled ? await getTokenByRefreshToken() : null;
+  const { page, customUI } = await fetchData(props.params.pageSlug, token);
   if (!page && !isEnabled) return notFound();
   return (
     <>
       {isEnabled && <FourceLogin />}
-      {/* <PageContent page={page} pageCustomUI={customUI} /> */}
+      <PageContent page={page} pageCustomUI={customUI} />
     </>
   );
 }
