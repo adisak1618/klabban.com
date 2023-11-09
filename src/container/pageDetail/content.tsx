@@ -20,9 +20,9 @@ export function PageContent({
   // if (!page && !isDraftMode) return notFound();
   return (
     <>
-      <MainMenu
+      {/* <MainMenu
         light={pageCustomUI?.customPageUI?.mainContent?.lightNavigation}
-      />
+      /> */}
       {pageCustomUI?.customPageUI?.mainContent?.enable && (
         <div
           style={{
@@ -66,7 +66,7 @@ export function PageContent({
           />
         </div>
       )}
-      <div>
+      {/* <div>
         <div className="flex flex-col">
           {pageCustomUI?.customPageUI?.parallax?.enable && (
             <HeroBlock {...pageCustomUI?.customPageUI?.parallax} />
@@ -84,7 +84,7 @@ export function PageContent({
             <LastestPosts {...pageCustomUI?.customPageUI?.lastedPost} />
           )}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

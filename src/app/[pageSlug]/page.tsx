@@ -94,7 +94,7 @@ async function Page(props: CustomPageParams) {
   return (
     <>
       {isEnabled && <FourceLogin />}
-      {/* <PageContent page={page} pageCustomUI={customUI} /> */}
+      <PageContent page={page} pageCustomUI={customUI} />
     </>
   );
 }
