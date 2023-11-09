@@ -23,13 +23,13 @@ export function PageContent({
       <MainMenu
         light={pageCustomUI?.customPageUI?.mainContent?.lightNavigation}
       />
-      {/* {pageCustomUI?.customPageUI?.mainContent?.enable && (
+      {pageCustomUI?.customPageUI?.mainContent?.enable && (
         <div
           style={{
             order: pageCustomUI?.customPageUI?.mainContent?.order || 99,
           }}
         >
-          {pageCustomUI?.customPageUI?.mainContent?.headerStyle !== "simple" &&
+          {/* {pageCustomUI?.customPageUI?.mainContent?.headerStyle !== "simple" &&
             pageCustomUI?.customPageUI?.mainContent?.showHeader && (
               <HeadlineSection
                 className="h-[80vh] md:h-[40vh] !bg-center"
@@ -57,7 +57,7 @@ export function PageContent({
                 ]}
               />
             </div>
-          )}
+          )} */}
 
           <GutenbergContent
             // entryClassName="!my-0"
@@ -65,7 +65,7 @@ export function PageContent({
             content={page?.content || ""}
           />
         </div>
-      )} */}
+      )}
       <div>
         <div className="flex flex-col">
           {pageCustomUI?.customPageUI?.parallax?.enable && (
