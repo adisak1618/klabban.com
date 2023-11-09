@@ -2,7 +2,6 @@ import { siteName } from "config/siteConfig";
 import { draftMode } from "next/headers";
 import {
   PageIdType,
-  PageProvider,
   PagesDocument,
   initRequestClient,
   pageRequest,
