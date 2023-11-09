@@ -9,7 +9,7 @@ import {
 import { usePostsQuery, useCategoriesQuery } from "klabban-commerce/queryHooks";
 import clsx from "clsx";
 import { OutlineButton } from "components/Button/outline";
-import { BlogSearchSkeleton } from "./BlogSearchSkeleton";
+import { PostCardSkeleton } from "../PostCard/skeleton";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -126,7 +126,10 @@ export function BlogSearch({
             </div>
           )}
           <div className="flex flex-wrap justify-center -mx-3">
-            {loadingPosts && <BlogSearchSkeleton />}
+            {loadingPosts &&
+              [1, 2, 3, 4, 5, 6].map((index) => (
+                <PostCardSkeleton key={index} />
+              ))}
             {postsData?.posts?.nodes.map((post) => (
               <Link
                 className="basis-full md:basis-1/2 lg:basis-1/3 p-3"

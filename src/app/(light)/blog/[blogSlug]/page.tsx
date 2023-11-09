@@ -52,6 +52,9 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
     images: [post?.featuredImage?.node.medium],
     locale: "th_TH",
     type: "website",
+    alternates: {
+      canonical: `${process.env.BASE_URL}/blog/${post?.slug}`,
+    },
   };
 }
 
@@ -59,7 +62,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { isEnabled } = draftMode();
   const { post } = await fetchPost(params.blogSlug);
   // console.log("post", post);
-
+  if (!post && !isEnabled) return notFound();
   return (
     <>
       <>

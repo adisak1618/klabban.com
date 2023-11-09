@@ -28,7 +28,6 @@ export function BlogContent({
   post: PostQuery["post"];
   isDraftMode?: boolean;
 }) {
-  if (!post) return notFound();
   return (
     <>
       <HeadlineSection

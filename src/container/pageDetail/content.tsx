@@ -13,12 +13,10 @@ import { MainMenu } from "components/MainMenu";
 
 export function PageContent({
   page,
-  isDraftMode = false,
   pageCustomUI,
 }: {
   page: PageQuery["page"];
   pageCustomUI: PageCustomUiQuery["page"];
-  isDraftMode?: boolean;
 }) {
   // if (!page && !isDraftMode) return notFound();
   return (

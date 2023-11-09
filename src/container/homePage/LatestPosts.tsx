@@ -1,51 +1,34 @@
+"use client";
 import { PostCard } from "components/PostCard";
-import {
-  OrderEnum,
-  PostObjectsConnectionOrderbyEnum,
-  PostsDocument,
-  PostsProvider,
-} from "klabban-commerce";
-import { KlabbanConfig } from "libs/klabbanConfig";
+import { OrderEnum, PostObjectsConnectionOrderbyEnum } from "klabban-commerce";
 import Link from "next/link";
 import { PageCustomUiQuery } from "../../gql/generated";
 import { Button } from "components/ui/button";
+import { PostCardSkeleton } from "components/PostCard/skeleton";
 import { usePostsQuery } from "klabban-commerce/queryHooks";
-import { initRequestClient } from "klabban-commerce";
 
-export async function LastestPosts(
+export function LastestPosts(
   data: NonNullable<
     NonNullable<PageCustomUiQuery["page"]>["customPageUI"]
   >["lastedPost"]
 ) {
-  const client = initRequestClient({
-    ...KlabbanConfig,
-  });
-  const postsData = await client.request(PostsDocument, {
-    where: {
-      orderby: [
-        {
-          field: PostObjectsConnectionOrderbyEnum.Date,
-          order: OrderEnum.Desc,
-        },
-      ],
+  const { data: posts, loading } = usePostsQuery({
+    variables: {
+      first: 6,
+      where: {
+        orderby: [
+          {
+            field: PostObjectsConnectionOrderbyEnum.Date,
+            order: OrderEnum.Desc,
+          },
+        ],
+      },
     },
-    first: 6,
+    fetchPolicy: "cache-first",
   });
-  // const { data: postsData } = usePostsQuery({
-  //   variables: {
-  //     where: {
-  //       orderby: [
-  //         {
-  //           field: PostObjectsConnectionOrderbyEnum.Date,
-  //           order: OrderEnum.Desc,
-  //         },
-  //       ],
-  //     },
-  //     first: 6,
-  //   },
-  // });
+
   return (
-    <div style={{ order: data?.order }} className="bg-secondary py-10">
+    <div className="bg-secondary py-10" style={{ order: data?.order }}>
       <>
         <div className="container-content text-center mb-6">
           <h2 className="text-h2 font-title font-bold">{data?.title}</h2>
@@ -54,7 +37,11 @@ export async function LastestPosts(
         <div className="mx-auto !max-w-5xl my-3 lg:container px-5 md:flex justify-center md:gap-10 xl:gap-20">
           <div className="flex-1">
             <div className="flex flex-wrap justify-center -mx-3">
-              {postsData?.posts?.nodes.map((post) => (
+              {loading &&
+                [1, 2, 3].map((key) => (
+                  <PostCardSkeleton className="bg-white" key={key} />
+                ))}
+              {posts?.posts?.nodes.map((post) => (
                 <Link
                   className="basis-full md:basis-1/2 lg:basis-1/3 p-3"
                   key={post.id}

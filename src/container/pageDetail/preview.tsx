@@ -13,16 +13,10 @@ import {
 import { PageCustomUiQuery, PageCustomUiDocument } from "../../gql/generated";
 import { useQuery } from "klabban-commerce/react";
 
-export function PreviewPage({
-  slug,
-  isEnabled,
-}: {
-  slug: string;
-  isEnabled: boolean;
-}) {
-  const path = usePathname();
-  const searchParams = useSearchParams();
-  const paramsString = searchParams.toString();
+export function PreviewPage({ slug }: { slug: string }) {
+  // const path = usePathname();
+  // const searchParams = useSearchParams();
+  // const paramsString = searchParams.toString();
   const { status } = useSession();
   const { data, loading } = usePageQuery({
     variables: {
@@ -50,27 +44,23 @@ export function PreviewPage({
     }
   );
 
-  if (!searchParams.get("preview") && !isEnabled) return null;
-  if (searchParams.get("preview") === "true" && status === "unauthenticated") {
+  // if (!searchParams.get("preview")) return null;
+  if (status === "unauthenticated") {
     signIn();
   }
-  if (searchParams.get("preview") === "true" && !isEnabled) {
-    redirect(
-      `/api/draft-mode/enable?redirect=${path}${
-        paramsString ? `?${paramsString}` : ""
-      }`
-    );
-  }
+  // if (searchParams.get("preview") === "true" && !isEnabled) {
+  //   redirect(
+  //     `/api/draft-mode/enable?redirect=${path}${
+  //       paramsString ? `?${paramsString}` : ""
+  //     }`
+  //   );
+  // }
 
   // if (status === "unauthenticated") return <div></div>;
   return (
     <>
       {!loading && !loadingCustomData && (
-        <PageContent
-          page={data?.page}
-          isDraftMode={isEnabled}
-          pageCustomUI={customPageUIData?.page}
-        />
+        <PageContent page={data?.page} pageCustomUI={customPageUIData?.page} />
       )}
     </>
   );

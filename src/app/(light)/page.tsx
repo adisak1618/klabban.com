@@ -87,7 +87,7 @@ async function Page() {
   });
   return (
     <>
-      {isEnabled && <PreviewPage slug="/" isEnabled={isEnabled} />}
+      {isEnabled && <PreviewPage slug="/" />}
 
       {!isEnabled && <PageContent page={page} pageCustomUI={data.page} />}
     </>

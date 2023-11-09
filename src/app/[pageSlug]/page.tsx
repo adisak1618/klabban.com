@@ -1,7 +1,13 @@
 import { siteName } from "config/siteConfig";
-import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-import { PageIdType, PageProvider, initRequestClient } from "klabban-commerce";
+import {
+  OrderEnum,
+  PageIdType,
+  PageProvider,
+  PostObjectsConnectionOrderbyEnum,
+  PostsDocument,
+  initRequestClient,
+} from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { PageContent } from "container/pageDetail/content";
 import { PreviewPage } from "container/pageDetail/preview";
@@ -49,11 +55,23 @@ async function Page(props: CustomPageParams) {
     id: props.params.pageSlug,
     preview: false,
   });
+  if (data.page?.customPageUI?.lastedPost?.enable) {
+    const latestPosts = await client.request(PostsDocument, {
+      where: {
+        orderby: [
+          {
+            field: PostObjectsConnectionOrderbyEnum.Date,
+            order: OrderEnum.Desc,
+          },
+        ],
+      },
+      first: 6,
+    });
+  }
   return (
     <>
-      {isEnabled && (
-        <PreviewPage slug={props.params.pageSlug} isEnabled={isEnabled} />
-      )}
+      <MainMenu light={data.page?.customPageUI?.mainContent?.lightNavigation} />
+      {isEnabled && <PreviewPage slug={props.params.pageSlug} />}
       {/* <PageContent page={page} pageCustomUI={data.page} /> */}
       {!isEnabled && <PageContent page={page} pageCustomUI={data.page} />}
     </>
@@ -62,7 +80,10 @@ async function Page(props: CustomPageParams) {
 
 export default Page;
 
-export const revalidate = true;
-export async function generateStaticParams() {
-  return [];
-}
+export const revalidate = 60 * 60 * 24 * 30; // 1 month
+// export const revalidate = true;
+// export const runtime = "edge";
+// export const fetchCache = "force-cache";
+// export async function generateStaticParams() {
+//   return [];
+// }
