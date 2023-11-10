@@ -19,8 +19,8 @@ export function PreviewBox({ isEnabled }: { isEnabled: boolean }) {
             <a
               href={
                 isEnabled
-                  ? `/api/draft-mode/disable?redirect=/${path}`
-                  : `/api/draft-mode/enable?redirect=/${path}?${encodeURIComponent(
+                  ? `/api/draft-mode/disable?redirect=${path}`
+                  : `/api/draft-mode/enable?redirect=${path}?${encodeURIComponent(
                       allParams
                     )}`
               }

@@ -1,6 +1,6 @@
 import "./globals.css";
 import { draftMode } from "next/headers";
-import { PreviewModeBox } from "components/PreviewModeProvider";
+
 import type { Metadata } from "next";
 import { QueryProvider } from "klabban-commerce/react";
 import { authOptions, getServerSession } from "klabban-commerce/auth";
@@ -43,7 +43,6 @@ export default async function RootLayout({
         >
           <div className="min-h-[85vh]">{children}</div>
           <Footer />
-          <PreviewModeBox />
         </QueryProvider>
       </body>
     </html>

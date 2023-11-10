@@ -1,13 +1,8 @@
 import { draftMode } from "next/headers";
-import { notFound } from "next/navigation";
-import { authOptions, getServerSession } from "klabban-commerce/auth";
 import {
   OrderEnum,
-  PostIdType,
   PostObjectsConnectionOrderbyEnum,
-  PostRequest,
   PostsDocument,
-  RefreshTokenDocument,
   initRequestClient,
 } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
@@ -15,9 +10,7 @@ import { KlabbanConfig } from "libs/klabbanConfig";
 import { siteName } from "config/siteConfig";
 import NextPreviousPostLink from "container/blogDetail/nextPreviousPost";
 import { RelatePost } from "container/blogDetail/relatePost";
-import { BlogContent } from "container/blogDetail/content";
-import { FourceLogin } from "components/ForceLogin";
-import { getTokenByRefreshToken } from "libs/refreshToken";
+import { BlogContent, getPostData } from "container/blogDetail/content";
 
 export interface BlogDetailPageProps {
   params: {
@@ -27,33 +20,8 @@ export interface BlogDetailPageProps {
 
 // const option: RequestConfig = {};
 
-async function fetchPost(slug: string, token: string | null) {
-  const client = initRequestClient(KlabbanConfig);
-
-  const headers = token
-    ? {
-        Authorization: `Bearer ${token}`,
-      }
-    : {};
-  return await PostRequest({
-    ...KlabbanConfig,
-    variables: {
-      id: slug,
-      idType: Number.isNaN(Number(slug))
-        ? PostIdType.Slug
-        : PostIdType.DatabaseId,
-      includeNextPreviousPost: true,
-      includeTags: true,
-      asPreview: token ? true : false,
-    },
-    option: {
-      headers,
-    },
-  });
-}
-
 export async function generateMetadata({ params }: BlogDetailPageProps) {
-  const { post } = await fetchPost(params.blogSlug, null);
+  const { post } = await getPostData({ slug: params.blogSlug });
   return {
     title: `${siteName} | ${post?.title}`,
     description: post?.excerpt?.replaceAll(
@@ -75,16 +43,12 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { isEnabled } = draftMode();
-  const token = isEnabled ? await getTokenByRefreshToken() : null;
+  const { post } = await getPostData({ slug: params.blogSlug });
 
-  const { post } = await fetchPost(params.blogSlug, token);
-
-  if (!post && !isEnabled) return notFound();
   return (
     <>
       <>
-        <BlogContent post={post} />
-        {isEnabled && <FourceLogin />}
+        <BlogContent slug={params.blogSlug} />
 
         {post && !isEnabled && (
           <div className="space-y-10 py-6 bg-gray-100 overflow-hidden">
@@ -105,7 +69,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 }
 
 export const revalidate = 60 * 60 * 24 * 30; // 1 month
-
+export const dynamic = "force-static";
 export const runtime = "nodejs"; // 'nodejs' (default) | 'edge'
 
 export async function generateStaticParams() {
@@ -121,7 +85,7 @@ export async function generateStaticParams() {
         },
       ],
     },
-    first: 100,
+    first: 1,
   });
 
   return (

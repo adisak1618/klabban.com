@@ -1,19 +1,7 @@
 import { siteName } from "config/siteConfig";
-import { draftMode } from "next/headers";
-import {
-  PageIdType,
-  PagesDocument,
-  initRequestClient,
-  pageRequest,
-} from "klabban-commerce";
+import { PagesDocument, initRequestClient } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
-import { PageContent } from "container/pageDetail/content";
-import { PreviewPage } from "container/pageDetail/preview";
-import { PageCustomUiDocument } from "../../gql/generated";
-import { MainMenu } from "components/MainMenu";
-import { FourceLogin } from "components/ForceLogin";
-import { getTokenByRefreshToken } from "libs/refreshToken";
-import { notFound } from "next/navigation";
+import { PageContent, getPageData } from "container/pageDetail/content";
 
 interface CustomPageParams extends PageSearchParams {
   params: {
@@ -21,58 +9,8 @@ interface CustomPageParams extends PageSearchParams {
   };
 }
 
-async function fetchData(slug: string, token: string | null) {
-  try {
-    const headers = token
-      ? {
-          Authorization: `Bearer ${token}`,
-        }
-      : {};
-
-    const client = initRequestClient({
-      ...KlabbanConfig,
-      option: {
-        headers,
-      },
-    });
-
-    const [pageResult, data] = await Promise.all([
-      pageRequest({
-        ...KlabbanConfig,
-        variables: {
-          id: slug || "/",
-          asPreview: token ? true : false,
-          idType: Number.isNaN(Number(slug || "/"))
-            ? PageIdType.Uri
-            : PageIdType.DatabaseId,
-        },
-        option: {
-          headers,
-        },
-      }),
-      client.request(PageCustomUiDocument, {
-        id: slug,
-        preview: false,
-        idType: Number.isNaN(Number(slug || "/"))
-          ? PageIdType.Uri
-          : PageIdType.DatabaseId,
-      }),
-    ]);
-
-    return {
-      page: pageResult.page,
-      customUI: data.page,
-    };
-  } catch (error) {
-    return {
-      page: undefined,
-      customUI: undefined,
-    };
-  }
-}
-
 export async function generateMetadata({ params }: CustomPageParams) {
-  const { page } = await fetchData(params.pageSlug, null);
+  const { page } = await getPageData({ slug: params.pageSlug });
   return {
     title: `${siteName} | ${page?.title}`,
     description: page?.content
@@ -92,16 +30,9 @@ export async function generateMetadata({ params }: CustomPageParams) {
 }
 
 async function Page(props: CustomPageParams) {
-  const { isEnabled } = draftMode();
-  const token = isEnabled ? await getTokenByRefreshToken() : null;
-  const { page, customUI } = await fetchData(props.params.pageSlug, token);
-  if (!page && !isEnabled) return notFound();
-
   return (
     <>
-      {isEnabled && <FourceLogin />}
-
-      <PageContent page={page} pageCustomUI={customUI} />
+      <PageContent slug={props.params.pageSlug} />
     </>
   );
 }
@@ -110,14 +41,14 @@ export default Page;
 
 export const revalidate = 60 * 60 * 24 * 30; // 1 month
 // export const revalidate = true;
-// export const dynamic = "force-static";
+export const dynamic = "force-static";
 // 'auto' | 'force-dynamic' | 'error' | 'force-static'
 // export const fetchCache = "force-cache";
 export const runtime = "nodejs"; // 'nodejs' (default) | 'edge'
 export async function generateStaticParams() {
   const client = initRequestClient({ ...KlabbanConfig });
   const { pages } = await client.request(PagesDocument, {
-    first: 100,
+    first: 1,
   });
   return (pages?.nodes || []).map((page) => ({
     pageSlug: page.slug,

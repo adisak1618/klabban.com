@@ -1,40 +1,97 @@
-import { PageQuery } from "klabban-commerce";
+import {
+  PageIdType,
+  PageQuery,
+  initRequestClient,
+  pageRequest,
+} from "klabban-commerce";
+import { draftMode } from "next/headers";
 import { Breadcrumb } from "components/Breadcrumb";
 import { GutenbergContent } from "klabban-commerce/react";
 import { HeadlineSection } from "components/Headline";
-import { PageCustomUiQuery } from "../../gql/generated";
+import { PageCustomUiDocument, PageCustomUiQuery } from "../../gql/generated";
 import { HeroBlock } from "container/homePage/heroBlock";
 import { Slideshow } from "container/homePage/slideshow";
 import { TopCategories } from "container/homePage/TopCategories";
 import { EditorPickPosts } from "container/homePage/EditorPickPosts";
 import { LastestPosts } from "container/homePage/LatestPosts";
 import { MainMenu } from "components/MainMenu";
+import { KlabbanConfig } from "libs/klabbanConfig";
+import { getTokenByRefreshToken } from "libs/refreshToken";
+import { notFound } from "next/navigation";
+import { FourceLogin } from "components/ForceLogin";
 
-export function PageContent({
-  page,
-  pageCustomUI,
-}: {
-  page: PageQuery["page"];
-  pageCustomUI: PageCustomUiQuery["page"];
-}) {
-  // if (!page && !isDraftMode) return notFound();
+export async function getPageData({ slug }: { slug: string }) {
+  const { isEnabled } = draftMode();
+  const token = isEnabled ? await getTokenByRefreshToken() : null;
+  try {
+    const headers = token
+      ? {
+          Authorization: `Bearer ${token}`,
+        }
+      : {};
+
+    const client = initRequestClient({
+      ...KlabbanConfig,
+      option: {
+        headers,
+      },
+    });
+
+    const [pageResult, data] = await Promise.all([
+      pageRequest({
+        ...KlabbanConfig,
+        variables: {
+          id: slug || "/",
+          asPreview: token ? true : false,
+          idType: Number.isNaN(Number(slug || "/"))
+            ? PageIdType.Uri
+            : PageIdType.DatabaseId,
+        },
+        option: {
+          headers,
+        },
+      }),
+      client.request(PageCustomUiDocument, {
+        id: slug,
+        preview: false,
+        idType: Number.isNaN(Number(slug || "/"))
+          ? PageIdType.Uri
+          : PageIdType.DatabaseId,
+      }),
+    ]);
+
+    return {
+      page: pageResult.page,
+      customUI: data.page,
+    };
+  } catch (error) {
+    return {
+      page: undefined,
+      customUI: undefined,
+    };
+  }
+}
+
+export async function PageContent({ slug }: { slug: string }) {
+  const { isEnabled } = draftMode();
+  const { customUI, page } = await getPageData({ slug });
+
+  if (!page && !isEnabled) return notFound();
   return (
     <>
-      <MainMenu
-        light={pageCustomUI?.customPageUI?.mainContent?.lightNavigation}
-      />
+      {isEnabled && <FourceLogin />}
+      <MainMenu light={customUI?.customPageUI?.mainContent?.lightNavigation} />
 
       <div>
         <div className="flex flex-col">
-          {pageCustomUI?.customPageUI?.mainContent?.enable && (
+          {customUI?.customPageUI?.mainContent?.enable && (
             <div
               style={{
-                order: pageCustomUI?.customPageUI?.mainContent?.order || 99,
+                order: customUI?.customPageUI?.mainContent?.order || 99,
               }}
             >
-              {pageCustomUI?.customPageUI?.mainContent?.headerStyle !==
-                "simple" &&
-                pageCustomUI?.customPageUI?.mainContent?.showHeader && (
+              {customUI?.customPageUI?.mainContent?.headerStyle !== "simple" &&
+                customUI?.customPageUI?.mainContent?.showHeader && (
                   <HeadlineSection
                     className="h-[80vh] md:h-[40vh] !bg-center"
                     backgroundImage={page?.featuredImage?.node?.sourceUrl || ""}
@@ -44,16 +101,15 @@ export function PageContent({
                     hideSubTitle
                   />
                 )}
-              {pageCustomUI?.customPageUI?.mainContent?.headerStyle ===
-                "simple" &&
-                pageCustomUI?.customPageUI?.mainContent?.showHeader && (
+              {customUI?.customPageUI?.mainContent?.headerStyle === "simple" &&
+                customUI?.customPageUI?.mainContent?.showHeader && (
                   <div className="container-content pt-6">
                     <h1 className="text-h3 font-bold text-center">
                       {page?.title}
                     </h1>
                   </div>
                 )}
-              {pageCustomUI?.customPageUI?.mainContent?.showBreadcrumbs && (
+              {customUI?.customPageUI?.mainContent?.showBreadcrumbs && (
                 <div className="mx-auto !max-w-5xl mt-6 mb-4 lg:container px-5">
                   <Breadcrumb
                     links={[
@@ -73,20 +129,20 @@ export function PageContent({
               />
             </div>
           )}
-          {pageCustomUI?.customPageUI?.parallax?.enable && (
-            <HeroBlock {...pageCustomUI?.customPageUI?.parallax} />
+          {customUI?.customPageUI?.parallax?.enable && (
+            <HeroBlock {...customUI?.customPageUI?.parallax} />
           )}
-          {pageCustomUI?.customPageUI?.slideshow?.enable && (
-            <Slideshow {...pageCustomUI?.customPageUI?.slideshow} />
+          {customUI?.customPageUI?.slideshow?.enable && (
+            <Slideshow {...customUI?.customPageUI?.slideshow} />
           )}
-          {pageCustomUI?.customPageUI?.topCategories?.enable && (
-            <TopCategories {...pageCustomUI?.customPageUI?.topCategories} />
+          {customUI?.customPageUI?.topCategories?.enable && (
+            <TopCategories {...customUI?.customPageUI?.topCategories} />
           )}
-          {pageCustomUI?.customPageUI?.popularPosts?.enable && (
-            <EditorPickPosts {...pageCustomUI?.customPageUI?.popularPosts} />
+          {customUI?.customPageUI?.popularPosts?.enable && (
+            <EditorPickPosts {...customUI?.customPageUI?.popularPosts} />
           )}
-          {pageCustomUI?.customPageUI?.lastedPost?.enable && (
-            <LastestPosts {...pageCustomUI?.customPageUI?.lastedPost} />
+          {customUI?.customPageUI?.lastedPost?.enable && (
+            <LastestPosts {...customUI?.customPageUI?.lastedPost} />
           )}
         </div>
       </div>

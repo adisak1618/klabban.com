@@ -1,12 +1,46 @@
 import { Breadcrumb } from "components/Breadcrumb";
 import { HeadlineSection } from "components/Headline";
 import { format } from "date-fns";
-import { PostQuery, PostFragmentFragment } from "klabban-commerce";
+import {
+  PostFragmentFragment,
+  PostRequest,
+  PostIdType,
+} from "klabban-commerce";
 import { GutenbergContent } from "klabban-commerce/react";
 import Link from "next/link";
 import { AuthorCard } from "./author";
 import { PostTags } from "./tags";
 import { notFound } from "next/navigation";
+import { FourceLogin } from "components/ForceLogin";
+import { draftMode } from "next/headers";
+import { getTokenByRefreshToken } from "libs/refreshToken";
+import { KlabbanConfig } from "libs/klabbanConfig";
+
+export async function getPostData({ slug }: { slug: string }) {
+  const { isEnabled } = draftMode();
+  const token = isEnabled ? await getTokenByRefreshToken() : null;
+
+  const headers = token
+    ? {
+        Authorization: `Bearer ${token}`,
+      }
+    : {};
+  return await PostRequest({
+    ...KlabbanConfig,
+    variables: {
+      id: slug,
+      idType: Number.isNaN(Number(slug))
+        ? PostIdType.Slug
+        : PostIdType.DatabaseId,
+      includeNextPreviousPost: true,
+      includeTags: true,
+      asPreview: token ? true : false,
+    },
+    option: {
+      headers,
+    },
+  });
+}
 
 const findRootCategory = (categories: PostFragmentFragment["categories"]) => {
   const RootCategory = categories?.nodes.find(
@@ -22,14 +56,13 @@ const findRootCategory = (categories: PostFragmentFragment["categories"]) => {
   return [];
 };
 
-export function BlogContent({
-  post,
-}: {
-  post: PostQuery["post"];
-  isDraftMode?: boolean;
-}) {
+export async function BlogContent({ slug }: { slug: string }) {
+  const { isEnabled } = draftMode();
+  const { post } = await getPostData({ slug });
+  if (!isEnabled && !post) return notFound();
   return (
     <>
+      {isEnabled && <FourceLogin />}
       <HeadlineSection
         className="h-[80vh] md:h-[95vh] !bg-center"
         backgroundImage={post?.featuredImage?.node.sourceUrl || ""}
