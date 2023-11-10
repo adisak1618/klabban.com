@@ -112,7 +112,7 @@ async function Page(props: CustomPageParams) {
       <div className="container-content whitespace-break-spaces break-words">
         {JSON.stringify(customUI)}
       </div>
-      {/* {isEnabled && <FourceLogin />} */}
+      {isEnabled && <FourceLogin />}
       <PageContent page={page} pageCustomUI={customUI} />
     </div>
   );
