@@ -1,3 +1,4 @@
+import { RedirectPreviewUrl } from "components/PreviewModeProvider/redirectPreviewUrl";
 import homePage, {
   generateMetadata as pageGenerateMetadata,
 } from "./[pageSlug]/page";
@@ -12,12 +13,17 @@ export async function generateMetadata() {
 }
 
 async function Page() {
-  return homePage({
-    params: {
-      pageSlug: "/",
-    },
-    searchParams: {},
-  });
+  return (
+    <>
+      {homePage({
+        params: {
+          pageSlug: "/",
+        },
+        searchParams: {},
+      })}
+      <RedirectPreviewUrl />
+    </>
+  );
 }
 
 export default Page;

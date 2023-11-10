@@ -1,40 +1,14 @@
 "use client";
 import { Button } from "components/ui/button";
-// import Link from "next/link";
 import { Switch } from "components/ui/switch";
 import { signIn, signOut, useSession } from "klabban-commerce/auth";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-// import { useSession } from "klabban-commerce/auth";
-// import { useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export function PreviewBox({ isEnabled }: { isEnabled: boolean }) {
-  const router = useRouter();
   const { data, status } = useSession();
   const path = usePathname();
 
-  const havePostIdParams = useSearchParams().get("p");
-  const havePageIdParams = useSearchParams().get("page_id");
-  const havePreviewParams = useSearchParams().get("preview");
   const allParams = useSearchParams().toString();
-
-  useEffect(() => {
-    if (path === "/" && havePostIdParams && havePreviewParams) {
-      router.replace(
-        `/api/draft-mode/enable?redirect=/blog/${havePostIdParams}`
-      );
-    }
-    if (path === "/" && havePageIdParams && havePreviewParams) {
-      router.replace(`/api/draft-mode/enable?redirect=/${havePageIdParams}`);
-    }
-  }, [
-    havePostIdParams,
-    havePageIdParams,
-    havePreviewParams,
-    allParams,
-    path,
-    router,
-  ]);
 
   return (
     <>
@@ -45,8 +19,8 @@ export function PreviewBox({ isEnabled }: { isEnabled: boolean }) {
             <a
               href={
                 isEnabled
-                  ? `/api/draft-mode/disable?redirect=${path}`
-                  : `/api/draft-mode/enable?redirect=${path}?${encodeURIComponent(
+                  ? `/api/draft-mode/disable?redirect=/${path}`
+                  : `/api/draft-mode/enable?redirect=/${path}?${encodeURIComponent(
                       allParams
                     )}`
               }
