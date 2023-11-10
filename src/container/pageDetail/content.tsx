@@ -41,7 +41,7 @@ export function PageContent({
               />
             )}
           {pageCustomUI?.customPageUI?.mainContent?.headerStyle === "simple" &&
-            pageCustomUI.customPageUI.mainContent.showHeader && (
+            pageCustomUI?.customPageUI?.mainContent?.showHeader && (
               <div className="container-content pt-6">
                 <h1 className="text-h3 font-bold text-center">{page?.title}</h1>
               </div>
@@ -72,10 +72,10 @@ export function PageContent({
             <HeroBlock {...pageCustomUI?.customPageUI?.parallax} />
           )}
           {pageCustomUI?.customPageUI?.slideshow?.enable && (
-            <Slideshow {...pageCustomUI?.customPageUI.slideshow} />
+            <Slideshow {...pageCustomUI?.customPageUI?.slideshow} />
           )}
           {pageCustomUI?.customPageUI?.topCategories?.enable && (
-            <TopCategories {...pageCustomUI?.customPageUI.topCategories} />
+            <TopCategories {...pageCustomUI?.customPageUI?.topCategories} />
           )}
           {pageCustomUI?.customPageUI?.popularPosts?.enable && (
             <EditorPickPosts {...pageCustomUI?.customPageUI?.popularPosts} />
