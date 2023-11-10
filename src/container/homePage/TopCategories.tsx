@@ -24,6 +24,7 @@ export function TopCategories(
               <img
                 className="grayscale group-hover:grayscale-0 absolute w-full h-full"
                 src={cateogry?.cover?.sourceUrl}
+                srcSet={cateogry?.cover?.srcSet}
                 alt={cateogry?.cover?.altText}
               />
               <div className="absolute w-full h-full bg-black opacity-20 group-hover:opacity-0 transition-opacity" />
