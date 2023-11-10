@@ -97,6 +97,26 @@ async function Page(props: CustomPageParams) {
   const { page, customUI } = await fetchData(props.params.pageSlug, token);
   if (!page && !isEnabled) return notFound();
   return (
+    <div className="space-y-3">
+      <h1>Draft Mode</h1>
+      <div>
+        Page Type:{" "}
+        {Number.isNaN(Number("/")) ? PageIdType.Uri : PageIdType.DatabaseId}
+      </div>
+      <div className="container-content whitespace-break-spaces break-words">
+        {JSON.stringify(token)}
+      </div>
+      <div className="container-content whitespace-break-spaces break-words">
+        {JSON.stringify(page)}
+      </div>
+      <div className="container-content whitespace-break-spaces break-words">
+        {JSON.stringify(customUI)}
+      </div>
+      {/* {isEnabled && <FourceLogin />} */}
+      <PageContent page={page} pageCustomUI={customUI} />
+    </div>
+  );
+  return (
     <>
       {isEnabled && <FourceLogin />}
       <PageContent page={page} pageCustomUI={customUI} />
