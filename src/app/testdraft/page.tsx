@@ -3,6 +3,8 @@ import { getTokenByRefreshToken } from "libs/refreshToken";
 import { PageIdType, initRequestClient, pageRequest } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { PageCustomUiDocument } from "../../gql/generated";
+import { FourceLogin } from "components/ForceLogin";
+import { PageContent } from "container/pageDetail/content";
 
 async function fetchData(slug: string, token: string | null) {
   try {
@@ -74,6 +76,8 @@ async function Page() {
       <div className="container-content whitespace-break-spaces break-words">
         {JSON.stringify(customUI)}
       </div>
+      {isEnabled && <FourceLogin />}
+      <PageContent page={page} pageCustomUI={customUI} />
     </div>
   );
 }
