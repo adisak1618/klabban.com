@@ -77,8 +77,8 @@ async function Page() {
       <div className="container-content whitespace-break-spaces break-words">
         {JSON.stringify(customUI)}
       </div>
-      {isEnabled && <FourceLogin />}
-      <PageContent page={page} pageCustomUI={customUI} />
+      {/* {isEnabled && <FourceLogin />} */}
+      {/* <PageContent page={page} pageCustomUI={customUI} /> */}
     </div>
   );
 }
