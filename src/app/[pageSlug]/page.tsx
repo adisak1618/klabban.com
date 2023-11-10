@@ -70,25 +70,25 @@ async function fetchData(slug: string, token: string | null) {
   }
 }
 
-export async function generateMetadata({ params }: CustomPageParams) {
-  const { page } = await fetchData(params.pageSlug, null);
-  return {
-    title: `${siteName} | ${page?.title}`,
-    description: page?.content
-      ?.substring(0, 500)
-      ?.replaceAll(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>|\s/g, ""),
-    siteName,
-    url: `${process.env.BASE_URL}/${page?.slug}`,
-    images: [page?.featuredImage?.node.medium_large],
-    locale: "th_TH",
-    type: "website",
-    alternates: {
-      canonical: page?.slug
-        ? `${process.env.BASE_URL}/blog/${page?.slug}`
-        : undefined,
-    },
-  };
-}
+// export async function generateMetadata({ params }: CustomPageParams) {
+//   const { page } = await fetchData(params.pageSlug, null);
+//   return {
+//     title: `${siteName} | ${page?.title}`,
+//     description: page?.content
+//       ?.substring(0, 500)
+//       ?.replaceAll(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>|\s/g, ""),
+//     siteName,
+//     url: `${process.env.BASE_URL}/${page?.slug}`,
+//     images: [page?.featuredImage?.node.medium_large],
+//     locale: "th_TH",
+//     type: "website",
+//     alternates: {
+//       canonical: page?.slug
+//         ? `${process.env.BASE_URL}/blog/${page?.slug}`
+//         : undefined,
+//     },
+//   };
+// }
 
 async function Page(props: CustomPageParams) {
   const { isEnabled } = draftMode();
