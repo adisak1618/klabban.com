@@ -41,7 +41,7 @@ export function PageContent({
               />
             )}
           {pageCustomUI?.customPageUI?.mainContent?.headerStyle === "simple" &&
-            pageCustomUI?.customPageUI?.mainContent?.showHeader && (
+            pageCustomUI.customPageUI.mainContent.showHeader && (
               <div className="container-content pt-6">
                 <h1 className="text-h3 font-bold text-center">{page?.title}</h1>
               </div>
