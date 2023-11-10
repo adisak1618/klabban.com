@@ -78,7 +78,7 @@ async function Page() {
         {JSON.stringify(customUI)}
       </div>
       {/* {isEnabled && <FourceLogin />} */}
-      {/* <PageContent page={page} pageCustomUI={customUI} /> */}
+      <PageContent page={page} pageCustomUI={customUI} />
     </div>
   );
 }

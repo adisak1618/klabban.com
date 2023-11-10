@@ -23,7 +23,7 @@ export function PageContent({
       <MainMenu
         light={pageCustomUI?.customPageUI?.mainContent?.lightNavigation}
       />
-      {pageCustomUI?.customPageUI?.mainContent?.enable && (
+      {/* {pageCustomUI?.customPageUI?.mainContent?.enable && (
         <div
           style={{
             order: pageCustomUI?.customPageUI?.mainContent?.order || 99,
@@ -65,7 +65,7 @@ export function PageContent({
             content={page?.content || ""}
           />
         </div>
-      )}
+      )} */}
       <div>
         <div className="flex flex-col">
           {pageCustomUI?.customPageUI?.parallax?.enable && (
