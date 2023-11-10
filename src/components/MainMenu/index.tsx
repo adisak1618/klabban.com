@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { siteLogoRequest } from "klabban-commerce";
 import { MenuRequest } from "klabban-commerce";
 import { HamburgerMenu } from "./burgerMenu";
 import { MenuWrapper } from "./wrapper";
@@ -9,6 +10,7 @@ import { Social } from "./social";
 import { HeadroomWrapper } from "./headroom";
 import Link from "next/link";
 export async function MainMenu({ light = false }: { light?: boolean }) {
+  const { siteLogo } = await siteLogoRequest(KlabbanConfig);
   const { formatedMenu } = await MenuRequest({
     ...KlabbanConfig,
     input: {
@@ -29,10 +31,10 @@ export async function MainMenu({ light = false }: { light?: boolean }) {
         )}
       >
         <div className="container-content w-full flex flex-wrap items-center">
-          <HamburgerMenu menus={formatedMenu} />
+          <HamburgerMenu logo={siteLogo?.medium} menus={formatedMenu} />
           <MenuWrapper className="flex-1 md:flex-none flex items-center">
             <Link href="/" aria-label="go to home page">
-              <Logo />
+              <Logo logo={siteLogo?.medium} />
             </Link>
           </MenuWrapper>
           {/* <div className="md:hidden flex-1" /> */}

@@ -83,7 +83,13 @@ function RenderMenu({
   );
 }
 
-export function HamburgerMenu({ menus }: { menus: MenuType[] }) {
+export function HamburgerMenu({
+  menus,
+  logo,
+}: {
+  menus: MenuType[];
+  logo?: string;
+}) {
   const [isOpen, setOpen] = useState(false);
   useEffect(() => {
     if (isOpen) {
@@ -155,7 +161,7 @@ export function HamburgerMenu({ menus }: { menus: MenuType[] }) {
             aria-label="go to home page"
             className="flex justify-center mb-4 text-text-color"
           >
-            <Logo />
+            <Logo logo={logo} />
           </Link>
         </div>
         <div className="flex-1 text-text-color mt-3">
