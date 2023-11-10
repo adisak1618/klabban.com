@@ -26,6 +26,7 @@ async function fetchData(slug: string, token: string | null) {
         ...KlabbanConfig,
         variables: {
           id: slug || "/",
+          asPreview: token ? true : false,
           idType: Number.isNaN(Number(slug || "/"))
             ? PageIdType.Uri
             : PageIdType.DatabaseId,
