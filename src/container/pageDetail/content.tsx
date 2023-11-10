@@ -9,11 +9,11 @@ import { Breadcrumb } from "components/Breadcrumb";
 import { GutenbergContent } from "klabban-commerce/react";
 import { HeadlineSection } from "components/Headline";
 import { PageCustomUiDocument, PageCustomUiQuery } from "../../gql/generated";
-// import { HeroBlock } from "container/homePage/heroBlock";
-// import { Slideshow } from "container/homePage/slideshow";
-// import { TopCategories } from "container/homePage/TopCategories";
-// import { EditorPickPosts } from "container/homePage/EditorPickPosts";
-// import { LastestPosts } from "container/homePage/LatestPosts";
+import { HeroBlock } from "container/homePage/heroBlock";
+import { Slideshow } from "container/homePage/slideshow";
+import { TopCategories } from "container/homePage/TopCategories";
+import { EditorPickPosts } from "container/homePage/EditorPickPosts";
+import { LastestPosts } from "container/homePage/LatestPosts";
 import { MainMenu } from "components/MainMenu";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { getTokenByRefreshToken } from "libs/refreshToken";
@@ -129,7 +129,7 @@ export async function PageContent({ slug }: { slug: string }) {
               />
             </div>
           )}
-          {/* {customUI?.customPageUI?.parallax?.enable && (
+          {customUI?.customPageUI?.parallax?.enable && (
             <HeroBlock {...customUI?.customPageUI?.parallax} />
           )}
           {customUI?.customPageUI?.slideshow?.enable && (
@@ -143,7 +143,7 @@ export async function PageContent({ slug }: { slug: string }) {
           )}
           {customUI?.customPageUI?.lastedPost?.enable && (
             <LastestPosts {...customUI?.customPageUI?.lastedPost} />
-          )} */}
+          )}
         </div>
       </div>
     </>
