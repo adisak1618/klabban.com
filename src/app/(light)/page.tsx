@@ -1,6 +1,5 @@
-import homePage, {
-  generateMetadata as pageGenerateMetadata,
-} from "../[pageSlug]/page";
+import homePage from // generateMetadata as pageGenerateMetadata,
+"../[pageSlug]/page";
 
 // export async function generateMetadata() {
 //   return await pageGenerateMetadata({
