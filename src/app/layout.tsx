@@ -1,6 +1,6 @@
 import "./globals.css";
-
-import { PreviewModeProvider } from "components/PreviewModeProvider";
+import { draftMode } from "next/headers";
+import { PreviewModeBox } from "components/PreviewModeProvider";
 import type { Metadata } from "next";
 import { QueryProvider } from "klabban-commerce/react";
 import { authOptions, getServerSession } from "klabban-commerce/auth";
@@ -26,9 +26,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(
-    authOptions({ GQL_URL: KlabbanConfig.GQL_URL })
-  );
+  const { isEnabled } = draftMode();
+
+  // important!!! this line for static generattion will alway get unauthenticate session we disable server session on draftmode
+  const session = isEnabled
+    ? undefined
+    : await getServerSession(authOptions({ GQL_URL: KlabbanConfig.GQL_URL }));
+
   return (
     <html lang="th" className={anuphan.variable}>
       <body className="">
@@ -37,10 +41,9 @@ export default async function RootLayout({
           GQL_URL={process.env.GQL_URL as string}
           session={session}
         >
-          <PreviewModeProvider>
-            <div className="min-h-[85vh]">{children}</div>
-            <Footer />
-          </PreviewModeProvider>
+          <div className="min-h-[85vh]">{children}</div>
+          <Footer />
+          <PreviewModeBox />
         </QueryProvider>
       </body>
     </html>

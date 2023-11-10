@@ -4,7 +4,9 @@ import { useEffect } from "react";
 
 export function FourceLogin() {
   const { status } = useSession();
+
   useEffect(() => {
+    console.log("status", status);
     if (status === "unauthenticated") {
       signIn();
     }

@@ -1,19 +1,8 @@
 import { draftMode } from "next/headers";
 import { PreviewBox } from "./previewBox";
 
-interface PreviewModeProviderProps extends React.PropsWithChildren {}
-
-async function disablePreview() {
-  "use server";
-}
-
-export function PreviewModeProvider({ children }: PreviewModeProviderProps) {
+export function PreviewModeBox() {
   const { isEnabled } = draftMode();
 
-  return (
-    <>
-      {children}
-      {<PreviewBox isEnabled={isEnabled} />}
-    </>
-  );
+  return <>{isEnabled && <PreviewBox isEnabled={isEnabled} />}</>;
 }

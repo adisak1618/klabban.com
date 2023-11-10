@@ -71,54 +71,36 @@ async function fetchData(slug: string, token: string | null) {
   }
 }
 
-// export async function generateMetadata({ params }: CustomPageParams) {
-//   const { page } = await fetchData(params.pageSlug, null);
-//   return {
-//     title: `${siteName} | ${page?.title}`,
-//     description: page?.content
-//       ?.substring(0, 500)
-//       ?.replaceAll(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>|\s/g, ""),
-//     siteName,
-//     url: `${process.env.BASE_URL}/${page?.slug}`,
-//     images: [page?.featuredImage?.node.medium_large],
-//     locale: "th_TH",
-//     type: "website",
-//     alternates: {
-//       canonical: page?.slug
-//         ? `${process.env.BASE_URL}/blog/${page?.slug}`
-//         : undefined,
-//     },
-//   };
-// }
+export async function generateMetadata({ params }: CustomPageParams) {
+  const { page } = await fetchData(params.pageSlug, null);
+  return {
+    title: `${siteName} | ${page?.title}`,
+    description: page?.content
+      ?.substring(0, 500)
+      ?.replaceAll(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>|\s/g, ""),
+    siteName,
+    url: `${process.env.BASE_URL}/${page?.slug}`,
+    images: [page?.featuredImage?.node.medium_large],
+    locale: "th_TH",
+    type: "website",
+    alternates: {
+      canonical: page?.slug
+        ? `${process.env.BASE_URL}/blog/${page?.slug}`
+        : undefined,
+    },
+  };
+}
 
 async function Page(props: CustomPageParams) {
   const { isEnabled } = draftMode();
   const token = isEnabled ? await getTokenByRefreshToken() : null;
   const { page, customUI } = await fetchData(props.params.pageSlug, token);
   if (!page && !isEnabled) return notFound();
-  return (
-    <div className="space-y-3">
-      <h1>Draft Mode</h1>
-      <div>
-        Page Type:{" "}
-        {Number.isNaN(Number("/")) ? PageIdType.Uri : PageIdType.DatabaseId}
-      </div>
-      <div className="container-content whitespace-break-spaces break-words">
-        {JSON.stringify(token)}
-      </div>
-      <div className="container-content whitespace-break-spaces break-words">
-        {JSON.stringify(page)}
-      </div>
-      <div className="container-content whitespace-break-spaces break-words">
-        {JSON.stringify(customUI)}
-      </div>
-      {isEnabled && <FourceLogin />}
-      <PageContent page={page} pageCustomUI={customUI} />
-    </div>
-  );
+
   return (
     <>
       {isEnabled && <FourceLogin />}
+
       <PageContent page={page} pageCustomUI={customUI} />
     </>
   );
@@ -128,7 +110,8 @@ export default Page;
 
 export const revalidate = 60 * 60 * 24 * 30; // 1 month
 // export const revalidate = true;
-
+// export const dynamic = "force-static";
+// 'auto' | 'force-dynamic' | 'error' | 'force-static'
 // export const fetchCache = "force-cache";
 export const runtime = "nodejs"; // 'nodejs' (default) | 'edge'
 export async function generateStaticParams() {

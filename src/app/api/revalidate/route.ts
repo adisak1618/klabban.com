@@ -7,7 +7,7 @@ export const GET = (request: Request) => {
   const path = searchParams.get("path");
   if(path) {
     console.log("start revalidate path", path)
-    revalidatePath(path)
+    revalidatePath(path.replace(/\/+$/, ''))
   }
   const tag = searchParams.get("tag");
   if(tag) {
