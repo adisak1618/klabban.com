@@ -11,12 +11,14 @@ import { HeadroomWrapper } from "./headroom";
 import Link from "next/link";
 export async function MainMenu({ light = false }: { light?: boolean }) {
   const { siteLogo } = await siteLogoRequest(KlabbanConfig);
-  const { formatedMenu } = await MenuRequest({
-    ...KlabbanConfig,
-    input: {
-      id: "home",
-    },
-  });
+  const { formatedMenu } =
+    (await MenuRequest({
+      ...KlabbanConfig,
+      input: {
+        id: "home",
+      },
+    })) || [];
+
   return (
     <HeadroomWrapper light={light}>
       <div
