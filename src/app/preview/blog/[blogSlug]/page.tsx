@@ -1,7 +1,6 @@
 import { draftMode } from "next/headers";
-import NextPreviousPostLink from "container/blogDetail/nextPreviousPost";
-import { RelatePost } from "container/blogDetail/relatePost";
-import { BlogContent, getPostData } from "container/blogDetail/content";
+import { BlogContent } from "container/blogDetail/content";
+import { FourceLogin } from "components/ForceLogin";
 
 export interface BlogDetailPageProps {
   params: {
@@ -11,26 +10,12 @@ export interface BlogDetailPageProps {
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { isEnabled } = draftMode();
-  const { post } = await getPostData({ slug: params.blogSlug });
 
   return (
     <>
       <>
+        {isEnabled && <FourceLogin />}
         <BlogContent slug={params.blogSlug} />
-
-        {post && !isEnabled && (
-          <div className="space-y-10 py-6 bg-gray-100 overflow-hidden">
-            <NextPreviousPostLink {...post} />
-            <RelatePost
-              postId={post?.databaseId.toString()}
-              categoriesId={
-                post?.categories?.nodes?.map((category) =>
-                  category.databaseId.toString()
-                ) || []
-              }
-            />
-          </div>
-        )}
       </>
     </>
   );

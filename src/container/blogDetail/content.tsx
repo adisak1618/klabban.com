@@ -11,7 +11,6 @@ import Link from "next/link";
 import { AuthorCard } from "./author";
 import { PostTags } from "./tags";
 import { notFound } from "next/navigation";
-import { FourceLogin } from "components/ForceLogin";
 import { draftMode } from "next/headers";
 import { getTokenByRefreshToken } from "libs/refreshToken";
 import { KlabbanConfig } from "libs/klabbanConfig";
@@ -62,7 +61,6 @@ export async function BlogContent({ slug }: { slug: string }) {
   if (!isEnabled && !post) return notFound();
   return (
     <>
-      {isEnabled && <FourceLogin />}
       <HeadlineSection
         className="h-[80vh] md:h-[95vh] !bg-center"
         backgroundImage={post?.featuredImage?.node.sourceUrl || ""}

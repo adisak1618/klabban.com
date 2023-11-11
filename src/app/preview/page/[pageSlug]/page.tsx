@@ -1,4 +1,6 @@
+import { FourceLogin } from "components/ForceLogin";
 import { PageContent } from "container/pageDetail/content";
+import { draftMode } from "next/headers";
 
 interface CustomPageParams extends PageSearchParams {
   params: {
@@ -7,8 +9,10 @@ interface CustomPageParams extends PageSearchParams {
 }
 
 async function Page(props: CustomPageParams) {
+  const { isEnabled } = draftMode();
   return (
     <>
+      {isEnabled && <FourceLogin />}
       <PageContent slug={props.params.pageSlug} />
     </>
   );

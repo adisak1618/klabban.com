@@ -1,14 +1,9 @@
-import {
-  PageIdType,
-  PageQuery,
-  initRequestClient,
-  pageRequest,
-} from "klabban-commerce";
+import { PageIdType, initRequestClient, pageRequest } from "klabban-commerce";
 import { draftMode } from "next/headers";
 import { Breadcrumb } from "components/Breadcrumb";
 import { GutenbergContent } from "klabban-commerce/react";
 import { HeadlineSection } from "components/Headline";
-import { PageCustomUiDocument, PageCustomUiQuery } from "../../gql/generated";
+import { PageCustomUiDocument } from "../../gql/generated";
 import { HeroBlock } from "container/homePage/heroBlock";
 import { Slideshow } from "container/homePage/slideshow";
 import { TopCategories } from "container/homePage/TopCategories";
@@ -18,11 +13,16 @@ import { MainMenu } from "components/MainMenu";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { getTokenByRefreshToken } from "libs/refreshToken";
 import { notFound } from "next/navigation";
-import { FourceLogin } from "components/ForceLogin";
 
-export async function getPageData({ slug }: { slug: string }) {
+export async function getPageData({
+  slug,
+  asPreview,
+}: {
+  slug: string;
+  asPreview?: boolean;
+}) {
   const { isEnabled } = draftMode();
-  const token = isEnabled ? await getTokenByRefreshToken() : null;
+  const token = isEnabled && asPreview ? await getTokenByRefreshToken() : null;
   try {
     const headers = token
       ? {
@@ -72,14 +72,19 @@ export async function getPageData({ slug }: { slug: string }) {
   }
 }
 
-export async function PageContent({ slug }: { slug: string }) {
+export async function PageContent({
+  slug,
+  asPreview = false,
+}: {
+  slug: string;
+  asPreview?: boolean;
+}) {
   const { isEnabled } = draftMode();
-  const { customUI, page } = await getPageData({ slug });
+  const { customUI, page } = await getPageData({ slug, asPreview });
 
   if (!page && !isEnabled) return notFound();
   return (
     <>
-      {isEnabled && <FourceLogin />}
       <MainMenu light={customUI?.customPageUI?.mainContent?.lightNavigation} />
 
       <div>
