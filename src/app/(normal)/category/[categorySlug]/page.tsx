@@ -106,3 +106,5 @@ export default async function Page(props: PageProps) {
 }
 
 export const revalidate = 60 * 60 * 24 * 30; // 1 month
+
+export const dynamic = "force-static";

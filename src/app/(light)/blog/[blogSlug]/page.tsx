@@ -73,6 +73,12 @@ export const dynamic = "force-static";
 export const runtime = "nodejs"; // 'nodejs' (default) | 'edge'
 
 export async function generateStaticParams() {
+  if (
+    process.env.VERCEL_ENV === "preview" ||
+    process.env.VERCEL_ENV === "development"
+  ) {
+    return [];
+  }
   const client = initRequestClient({
     ...KlabbanConfig,
   });
@@ -85,7 +91,7 @@ export async function generateStaticParams() {
         },
       ],
     },
-    first: 1,
+    first: 100,
   });
 
   return (
