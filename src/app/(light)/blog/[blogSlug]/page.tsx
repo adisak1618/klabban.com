@@ -68,7 +68,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   );
 }
 
-export const revalidate = 60 * 60 * 24 * 30; // 1 month
+// export const revalidate = 60 * 60 * 24 * 30; // 1 month
 export const dynamic = "force-static";
 export const runtime = "nodejs"; // 'nodejs' (default) | 'edge'
 

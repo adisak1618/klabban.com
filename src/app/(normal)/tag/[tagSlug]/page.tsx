@@ -18,6 +18,9 @@ async function fetchData(slug: string) {
     variables: {
       id: slug,
     },
+    option: {
+      cache: "force-cache",
+    },
   });
 }
 

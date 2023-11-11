@@ -28,12 +28,16 @@ export async function getPageData({
       ? {
           Authorization: `Bearer ${token}`,
         }
-      : {};
+      : undefined;
 
     const client = initRequestClient({
       ...KlabbanConfig,
       option: {
         headers,
+        next: {
+          revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
+        },
+        cache: "force-cache",
       },
     });
 
@@ -49,6 +53,10 @@ export async function getPageData({
         },
         option: {
           headers,
+          // next: {
+          //   revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
+          // },
+          cache: "force-cache",
         },
       }),
       client.request(PageCustomUiDocument, {

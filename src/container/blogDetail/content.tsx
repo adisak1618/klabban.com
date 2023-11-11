@@ -23,7 +23,7 @@ export async function getPostData({ slug }: { slug: string }) {
     ? {
         Authorization: `Bearer ${token}`,
       }
-    : {};
+    : undefined;
   return await PostRequest({
     ...KlabbanConfig,
     variables: {
@@ -37,6 +37,10 @@ export async function getPostData({ slug }: { slug: string }) {
     },
     option: {
       headers,
+      // next: {
+      //   revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
+      // },
+      cache: "force-cache",
     },
   });
 }

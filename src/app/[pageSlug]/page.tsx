@@ -39,8 +39,7 @@ async function Page(props: CustomPageParams) {
 
 export default Page;
 
-export const revalidate = 60 * 60 * 24 * 30; // 1 month
-// export const revalidate = true;
+// export const revalidate = 60 * 60 * 24 * 30; // 1 month
 export const dynamic = "force-static";
 // 'auto' | 'force-dynamic' | 'error' | 'force-static'
 // export const fetchCache = "force-cache";
