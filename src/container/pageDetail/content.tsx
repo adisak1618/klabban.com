@@ -58,7 +58,7 @@ export async function getPageData({
         // cache: "force-cache",
       },
     });
-    console.log("Result", pageResult);
+
     const data = await client.request(PageCustomUiDocument, {
       id: slug,
       preview: false,
@@ -66,8 +66,6 @@ export async function getPageData({
         ? PageIdType.Uri
         : PageIdType.DatabaseId,
     });
-
-    console.log("Result");
 
     return {
       page: pageResult.page,
