@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import clsx from "clsx";
+import Image from "next/image";
 
 export function HeroBlock(
   data: NonNullable<
@@ -52,9 +53,13 @@ export function HeroBlock(
               y: backgroundY,
             }}
           >
-            <img
+            <Image
               alt="hero"
               ref={ref}
+              width={1000}
+              height={1000}
+              quality={50}
+              priority
               src={data?.mainImage?.sourceUrl || "/images/hero.webp"}
               className="absolute bottom-8 right-0"
             />

@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
 import { getTokenByRefreshToken } from "libs/refreshToken";
 import { KlabbanConfig } from "libs/klabbanConfig";
+import { NormalHeadlineSection } from "components/Headline/simple";
 
 export async function getPostData({ slug }: { slug: string }) {
   const { isEnabled } = draftMode();
@@ -40,7 +41,7 @@ export async function getPostData({ slug }: { slug: string }) {
       // next: {
       //   revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
       // },
-      cache: "force-cache",
+      cache: "no-cache",
     },
   });
 }
@@ -65,35 +66,65 @@ export async function BlogContent({ slug }: { slug: string }) {
   if (!isEnabled && !post) return notFound();
   return (
     <>
-      <HeadlineSection
-        className="h-[80vh] md:h-[95vh] !bg-center"
-        backgroundImage={post?.featuredImage?.node.sourceUrl || ""}
-        backgroundSrcSet={post?.featuredImage?.node.srcSet}
-        imageAlt={post?.featuredImage?.node.altText}
-        title={post?.title || ""}
-        subTitle={post?.excerpt}
-        hideSubTitle
-        footer={
-          <div className="">
-            <div className="flex gap-3 mt-3 md:mt-0 justify-center flex-wrap">
-              {post?.categories?.nodes.map((category) => (
-                <Link
-                  href={`/category/${category.slug}`}
-                  key={category.id}
-                  className="bg-white uppercase font-bold hover:bg-opacity-90 px-4 py-1 text-gray-800 rounded-full text-caption"
-                >
-                  {category.name}
-                </Link>
-              ))}
+      {!post?.featuredImage && (
+        <NormalHeadlineSection
+          title={post?.title || ""}
+          backgroundImage={""}
+          subTitle={post?.excerpt}
+          className="pt-20"
+          footer={
+            <div className="">
+              <div className="flex gap-3 mt-3 md:mt-0 justify-center flex-wrap">
+                {post?.categories?.nodes.map((category) => (
+                  <Link
+                    href={`/category/${category.slug}`}
+                    key={category.id}
+                    className="bg-white uppercase font-bold hover:bg-opacity-90 px-4 py-1 text-gray-800 rounded-full text-caption"
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+              </div>
+              <p className="  text-center md:pb-0 text-caption">
+                Updated On{" "}
+                {format(new Date(post?.date || new Date()), "MMMM dd, yyyy")} by{" "}
+                {post?.author?.node.name}
+              </p>
             </div>
-            <p className="py-3  text-center md:pb-0 text-caption text-white mt-1">
-              Updated On{" "}
-              {format(new Date(post?.date || new Date()), "MMMM dd, yyyy")} by{" "}
-              {post?.author?.node.name}
-            </p>
-          </div>
-        }
-      />
+          }
+        />
+      )}
+      {post?.featuredImage && (
+        <HeadlineSection
+          className="h-[80vh] md:h-[95vh] !bg-center"
+          backgroundImage={post?.featuredImage?.node.sourceUrl || ""}
+          backgroundSrcSet={post?.featuredImage?.node.srcSet}
+          imageAlt={post?.featuredImage?.node.altText}
+          title={post?.title || ""}
+          subTitle={post?.excerpt}
+          hideSubTitle
+          footer={
+            <div className="">
+              <div className="flex gap-3 mt-3 md:mt-0 justify-center flex-wrap">
+                {post?.categories?.nodes.map((category) => (
+                  <Link
+                    href={`/category/${category.slug}`}
+                    key={category.id}
+                    className="bg-white uppercase font-bold hover:bg-opacity-90 px-4 py-1 text-gray-800 rounded-full text-caption"
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+              </div>
+              <p className="py-3  text-center md:pb-0 text-caption text-white mt-1">
+                Updated On{" "}
+                {format(new Date(post?.date || new Date()), "MMMM dd, yyyy")} by{" "}
+                {post?.author?.node.name}
+              </p>
+            </div>
+          }
+        />
+      )}
       <div className="max-w-5xl mx-auto container px-5 my-3">
         <Breadcrumb
           links={[

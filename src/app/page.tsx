@@ -28,5 +28,5 @@ async function Page() {
 
 export default Page;
 
-export const revalidate = 60 * 60 * 24 * 30; // 1 month
+// export const revalidate = 60 * 60 * 24 * 30; // 1 month
 export const dynamic = "force-static";

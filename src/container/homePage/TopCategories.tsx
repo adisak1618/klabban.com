@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageCustomUiQuery } from "../../gql/generated";
+import Image from "next/image";
 
 export function TopCategories(
   data: NonNullable<
@@ -21,16 +22,23 @@ export function TopCategories(
             key={cateogry?.slug}
           >
             <div className="pb-[60%]">
-              <img
-                className="grayscale group-hover:grayscale-0 absolute w-full h-full"
-                src={cateogry?.cover?.sourceUrl}
-                srcSet={cateogry?.cover?.srcSet}
-                alt={cateogry?.cover?.altText}
-              />
+              {cateogry?.cover?.medium_large && (
+                <Image
+                  className="grayscale group-hover:grayscale-0 absolute w-full h-full"
+                  src={cateogry?.cover?.medium_large || ""}
+                  // srcSet={cateogry?.cover?.srcSet}
+                  width={200}
+                  height={150}
+                  quality={30}
+                  alt={cateogry?.cover?.altText || ""}
+                />
+              )}
               <div className="absolute w-full h-full bg-black opacity-20 group-hover:opacity-0 transition-opacity" />
-              <p className="p-3 drop-shadow-lg text-h5 text-white font-bold whitespace-pre-wrap break-words absolute w-full h-full flex justify-center items-center">
-                {cateogry?.name}
-              </p>
+              <div className="p-3 text-h5 text-white  font-bold whitespace-pre-wrap break-words absolute w-full h-full flex justify-center items-center">
+                <p className="bg-black/50 rounded-lg px-3 drop-shadow-2xl">
+                  {cateogry?.name}
+                </p>
+              </div>
             </div>
           </Link>
         ))}

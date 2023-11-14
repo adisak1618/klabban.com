@@ -1,1 +1,1 @@
-export const siteName = "Soryor.com"
+export const siteName = "Klabban"

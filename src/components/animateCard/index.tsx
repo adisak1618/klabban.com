@@ -39,9 +39,9 @@ export function AnimateCard({
             className={clsx(
               "transition-all ease-linea hidden text-secondary group-hover:text-third md:block absolute -scale-x-100 z-[2] top-0 bg-right-top  h-[200%] group-hover:top-[-100%]",
               !small &&
-                "w-[40px] right-[-10px] md:w-[50px] group-hover:w-[20px]  md:group-hover:w-[30px] duration-[800ms]",
+                "w-[40px] right-[-10px] md:w-[50px] group-hover:w-[20px]  md:group-hover:w-[30px] duration-700",
               small &&
-                "w-[20px] right-[-5px] md:w-[20px] group-hover:w-[10px]  md:group-hover:w-[15px] duration-[400ms]"
+                "w-[20px] right-[-5px] md:w-[20px] group-hover:w-[10px]  md:group-hover:w-[15px] duration-300"
             )}
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"

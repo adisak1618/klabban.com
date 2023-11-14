@@ -53,9 +53,11 @@ export async function generateStaticParams() {
   }
   const client = initRequestClient({ ...KlabbanConfig });
   const { pages } = await client.request(PagesDocument, {
-    first: 100,
+    first: 1000,
   });
-  return (pages?.nodes || []).map((page) => ({
-    pageSlug: page.slug,
-  }));
+  return (pages?.nodes || [])
+    .map((page) => ({
+      pageSlug: page.slug,
+    }))
+    .filter((slug) => !["blog"].includes(slug.pageSlug || ""));
 }

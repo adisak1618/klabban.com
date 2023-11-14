@@ -25,7 +25,7 @@ interface renderSlideProps
 function renderSlideComponent(slide: renderSlideProps) {
   if (slide.cta?.url)
     return (
-      <SwiperSlide className="!w-2/3  relative">
+      <SwiperSlide className="md:!w-2/3  relative">
         <Link href={slide?.cta?.url || "#"} target={slide?.cta?.url || "_self"}>
           <div className="relative bg-silver-3 pb-[50%] group overflow-hidden">
             <Image
@@ -36,10 +36,10 @@ function renderSlideComponent(slide: renderSlideProps) {
             />
             <div className="w-full h-full absolute top-0 left-0 bg-fade-black" />
             <div className="w-full absolute bottom-0 left-0 py-10 px-20 text-center line-clamp-2">
-              <h2 className="text-h3 font-bold font-title text-white relative transition group-hover:scale-105 duration-700">
+              <h2 className="text-h5 md:text-h3 font-bold font-title text-white relative transition group-hover:scale-105 duration-700">
                 {slide?.title}
               </h2>
-              <p className="text-white text-h6 line-clamp-3">
+              <p className="text-white md:text-h6 line-clamp-3">
                 {slide?.subTitle}
               </p>
             </div>
@@ -48,7 +48,7 @@ function renderSlideComponent(slide: renderSlideProps) {
       </SwiperSlide>
     );
   return (
-    <SwiperSlide className="!w-2/3  relative">
+    <SwiperSlide className="md:!w-2/3  relative">
       <div className="relative bg-silver-3 pb-[50%] group overflow-hidden">
         <Image
           className="object-cover transition group-hover:scale-105 duration-700"
@@ -58,10 +58,12 @@ function renderSlideComponent(slide: renderSlideProps) {
         />
         <div className="w-full h-full absolute top-0 left-0 bg-fade-black" />
         <div className="w-full absolute bottom-0 left-0 py-10 px-20 text-center line-clamp-2">
-          <h2 className="text-h3 font-bold font-title text-white relative transition group-hover:scale-105 duration-700">
+          <h2 className="text-h5 md:text-h3 font-bold font-title text-white relative transition group-hover:scale-105 duration-700">
             {slide?.title}
           </h2>
-          <p className="text-white text-h6 line-clamp-3">{slide?.subTitle}</p>
+          <p className="text-white md:text-h6 line-clamp-3">
+            {slide?.subTitle}
+          </p>
         </div>
       </div>
     </SwiperSlide>
@@ -96,9 +98,20 @@ export function Slideshow(
         modules={[Controller, Autoplay]}
         className="!overflow-hidden"
         spaceBetween={0}
-        slidesPerView={1.5}
+        slidesPerView={1}
+        breakpoints={{
+          // 0: {
+          //   slidesPerView: 1,
+          //   centeredSlides: true,
+          // },
+          640: {
+            slidesPerView: 1.5,
+            centeredSlides: true,
+          },
+        }}
         centeredSlides
-        loop
+        // loop
+
         autoplay={{
           delay: 3000,
           pauseOnMouseEnter: true,

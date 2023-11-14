@@ -1,6 +1,6 @@
-"use client";
 import { PostCard } from "components/PostCard";
-import { useRandomPostsQuery } from "klabban-commerce/queryHooks";
+import { RandomPostsDocument, initRequestClient } from "klabban-commerce";
+import { KlabbanConfig } from "libs/klabbanConfig";
 import Link from "next/link";
 
 interface RelatePostProps {
@@ -8,22 +8,14 @@ interface RelatePostProps {
   categoriesId: string[];
 }
 
-export function RelatePost({
-  postId,
-  categoriesId,
-}: RelatePostProps): JSX.Element {
-  const { data, loading } = useRandomPostsQuery({
-    variables: {
-      notIn: [postId],
-      categoryIn: categoriesId,
-      limit: 3,
-      includeContent: false,
-    },
-    fetchPolicy: "cache-first",
-    canonizeResults: false,
+export async function RelatePost({ postId, categoriesId }: RelatePostProps) {
+  const client = initRequestClient(KlabbanConfig);
+  const { randomPosts } = await client.request(RandomPostsDocument, {
+    notIn: [postId],
+    categoryIn: categoriesId,
+    limit: 3,
+    includeContent: false,
   });
-
-  if (loading || !data || data.randomPosts.length === 0) return <></>;
 
   return (
     <div>
@@ -33,7 +25,7 @@ export function RelatePost({
         </h2>
       </div>
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 container px-5">
-        {data?.randomPosts?.map((post) => (
+        {randomPosts?.map((post) => (
           <Link key={post.id} href={`/blog/${post.slug}`}>
             <PostCard {...post} />
           </Link>

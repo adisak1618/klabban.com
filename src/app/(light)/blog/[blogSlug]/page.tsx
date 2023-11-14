@@ -21,7 +21,7 @@ export interface BlogDetailPageProps {
 // const option: RequestConfig = {};
 
 export async function generateMetadata({ params }: BlogDetailPageProps) {
-  const { post } = await getPostData({ slug: params.blogSlug });
+  const { post } = await getPostData({ slug: decodeURI(params.blogSlug) });
   return {
     title: `${siteName} | ${post?.title}`,
     description: post?.excerpt?.replaceAll(
@@ -43,12 +43,12 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { isEnabled } = draftMode();
-  const { post } = await getPostData({ slug: params.blogSlug });
+  const { post } = await getPostData({ slug: decodeURI(params.blogSlug) });
 
   return (
     <>
       <>
-        <BlogContent slug={params.blogSlug} />
+        <BlogContent slug={decodeURI(params.blogSlug)} />
 
         {post && !isEnabled && (
           <div className="space-y-10 py-6 bg-gray-100 overflow-hidden">
@@ -68,9 +68,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   );
 }
 
-// export const revalidate = 60 * 60 * 24 * 30; // 1 month
 export const dynamic = "force-static";
-export const runtime = "nodejs"; // 'nodejs' (default) | 'edge'
 
 export async function generateStaticParams() {
   if (
@@ -91,7 +89,7 @@ export async function generateStaticParams() {
         },
       ],
     },
-    first: 100,
+    first: 1000,
   });
 
   return (

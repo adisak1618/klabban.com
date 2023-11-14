@@ -37,42 +37,44 @@ export async function getPageData({
         next: {
           revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
         },
-        cache: "force-cache",
+        // cache: "force-cache",
       },
     });
 
-    const [pageResult, data] = await Promise.all([
-      pageRequest({
-        ...KlabbanConfig,
-        variables: {
-          id: slug || "/",
-          asPreview: token ? true : false,
-          idType: Number.isNaN(Number(slug || "/"))
-            ? PageIdType.Uri
-            : PageIdType.DatabaseId,
-        },
-        option: {
-          headers,
-          // next: {
-          //   revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
-          // },
-          cache: "force-cache",
-        },
-      }),
-      client.request(PageCustomUiDocument, {
-        id: slug,
-        preview: false,
+    const pageResult = await pageRequest({
+      ...KlabbanConfig,
+      variables: {
+        id: slug || "/",
+        asPreview: token ? true : false,
         idType: Number.isNaN(Number(slug || "/"))
           ? PageIdType.Uri
           : PageIdType.DatabaseId,
-      }),
-    ]);
+      },
+      option: {
+        headers,
+        // next: {
+        //   revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
+        // },
+        // cache: "force-cache",
+      },
+    });
+    console.log("Result", pageResult);
+    const data = await client.request(PageCustomUiDocument, {
+      id: slug,
+      preview: false,
+      idType: Number.isNaN(Number(slug || "/"))
+        ? PageIdType.Uri
+        : PageIdType.DatabaseId,
+    });
+
+    console.log("Result");
 
     return {
       page: pageResult.page,
       customUI: data.page,
     };
   } catch (error) {
+    console.log("error", error);
     return {
       page: undefined,
       customUI: undefined,

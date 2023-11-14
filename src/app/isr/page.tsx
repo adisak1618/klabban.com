@@ -10,9 +10,8 @@ async function Page() {
 
   // gqlFetch(PostDocument, {});
 
-  console.log("res", res);
   const result = await res.json();
-  console.log("result", result);
+
   const client = initRequestClient({
     ...KlabbanConfig,
     option: {

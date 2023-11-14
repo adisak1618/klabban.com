@@ -1,9 +1,7 @@
 import { Breadcrumb } from "components/Breadcrumb";
-import { HeadlineSection } from "components/Headline";
-import { MainMenu } from "components/MainMenu";
 import { BlogSearch } from "components/blogSearch";
 import { siteName } from "config/siteConfig";
-import { TagProvider } from "klabban-commerce";
+import { tagRequest, tagsRequest } from "klabban-commerce";
 import { KlabbanConfig } from "libs/klabbanConfig";
 
 interface PageProps extends PageSearchParams {
@@ -13,19 +11,19 @@ interface PageProps extends PageSearchParams {
 }
 
 async function fetchData(slug: string) {
-  return await TagProvider({
+  return await tagRequest({
     ...KlabbanConfig,
     variables: {
       id: slug,
     },
     option: {
-      cache: "force-cache",
+      // cache: "force-cache",
     },
   });
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { data: tag } = await fetchData(params.tagSlug);
+  const { tag } = await fetchData(params.tagSlug);
   return {
     title: `${siteName} | หัวข้อ #${tag?.name}`,
     description: tag?.description
@@ -40,12 +38,10 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function Page(props: PageProps) {
-  const { Provider, data: tag } = await fetchData(props.params.tagSlug);
+  const { tag } = await fetchData(props.params.tagSlug);
   return (
     <>
-      <Provider {...KlabbanConfig}>
-        <>
-          {/* <HeadlineSection
+      {/* <HeadlineSection
               header={
                 <p className="text-body uppercase leading-[1em] text-white tracking-widest">
                   หัวข้อ
@@ -57,40 +53,48 @@ export default async function Page(props: PageProps) {
               subTitle={tag?.description}
               hideSubTitle
             /> */}
-          <div className="container-content pt-6">
-            <p className="text-body uppercase leading-[1em] text-text-color text-center tracking-widest">
-              หัวข้อ
-            </p>
-            <h1 className="text-h3 font-bold text-center leading-[1em]">
-              #{tag?.name}
-            </h1>
-            <p className="mt-3 mx-auto">{tag?.description}</p>
-          </div>
-          <div className="mx-auto !max-w-5xl mt-6 mb-4 lg:container px-5">
-            <Breadcrumb
-              links={[
-                {
-                  label: "Blog",
-                  href: "/blog",
-                },
-                {
-                  label: tag?.name || "",
-                  href: `/tag/${tag?.slug}`,
-                },
-              ]}
-            />
-          </div>
-        </>
-      </Provider>
-      <BlogSearch
-        tagName={props.params.tagSlug}
-        {...props}
-        pagePath={`/tag/${props.params.tagSlug}`}
-      />
+      <div className="container-content pt-6">
+        <p className="text-body uppercase leading-[1em] text-text-color text-center tracking-widest">
+          หัวข้อ
+        </p>
+        <h1 className="text-h3 font-bold text-center leading-[1em]">
+          #{tag?.name}
+        </h1>
+        <p className="mt-3 mx-auto">{tag?.description}</p>
+      </div>
+      <div className="mx-auto !max-w-5xl mt-6 mb-4 lg:container px-5">
+        <Breadcrumb
+          links={[
+            {
+              label: "Blog",
+              href: "/blog",
+            },
+            {
+              label: tag?.name || "",
+              href: `/tag/${tag?.slug}`,
+            },
+          ]}
+        />
+      </div>
+
+      <BlogSearch tagName={props.params.tagSlug} {...props} />
     </>
   );
 }
 
-export const revalidate = 60 * 60 * 24 * 30; // 1 month
-
 export const dynamic = "force-static";
+
+export async function generateStaticParams() {
+  const { tags } = await tagsRequest({
+    ...KlabbanConfig,
+    variables: {
+      first: 1000,
+    },
+  });
+
+  return (
+    tags?.nodes?.map((tag) => ({
+      tagSlug: tag.slug,
+    })) || []
+  );
+}

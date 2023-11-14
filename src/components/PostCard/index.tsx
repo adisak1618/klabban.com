@@ -20,6 +20,7 @@ export const PostCard = ({
             src={featuredImage?.node.sourceUrl || ""}
             width={250}
             height={200}
+            quality={50}
             // srcSet={featuredImage?.node.sourceUrl || ""}
           />
         )}
@@ -41,7 +42,7 @@ export const PostCard = ({
           <div className="flex-1"></div>
         )}
         <hr className="border-border !my-2.5" />
-        <div className="text-caption text-center leading-4 flex gap-3 text-text-third">
+        <div className="text-caption text-left leading-4 flex gap-3 text-text-third">
           <p className="">
             By {author?.node.name} On{" "}
             {format(new Date(date || new Date()), "MMMM dd, yyyy")}
