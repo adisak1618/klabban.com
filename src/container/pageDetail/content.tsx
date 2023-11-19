@@ -34,10 +34,10 @@ export async function getPageData({
       ...KlabbanConfig,
       option: {
         headers,
-        next: {
-          revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
-        },
-        // cache: "force-cache",
+        // next: {
+        //   revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
+        // },
+        cache: "force-cache",
       },
     });
 

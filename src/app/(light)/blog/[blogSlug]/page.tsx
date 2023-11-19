@@ -30,7 +30,23 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
     ),
     siteName,
     url: `${process.env.BASE_URL}/blog/${post?.slug}`,
-    images: [post?.featuredImage?.node.medium],
+    images: [post?.featuredImage?.node.medium_large],
+    openGraph: {
+      title: post?.title,
+      description: post?.excerpt?.replaceAll(
+        /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g,
+        ""
+      ),
+      url: `${process.env.BASE_URL}/blog/${post?.slug}`,
+      siteName: siteName,
+      images: [
+        {
+          url: post?.featuredImage?.node.medium_large,
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
     locale: "th_TH",
     type: "website",
     alternates: {

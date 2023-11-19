@@ -50,9 +50,7 @@ export async function MainMenu({ light = false }: { light?: boolean }) {
                   className="group leading-[70px] font-bold hover:text-primary hover:font-semibold content-stretch capitalize hover:border-b-2 border-primary"
                 >
                   <>
-                    <Link href={menu.uri || "#"} prefetch={false}>
-                      {menu.label}
-                    </Link>
+                    <Link href={menu.uri || "#"}>{menu.label}</Link>
                     {(menu.children || [])?.length > 0 && (
                       <div
                         className={clsx(

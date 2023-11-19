@@ -41,7 +41,7 @@ export async function getPostData({ slug }: { slug: string }) {
       // next: {
       //   revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
       // },
-      cache: "no-cache",
+      cache: "force-cache",
     },
   });
 }

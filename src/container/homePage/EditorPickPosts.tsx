@@ -18,7 +18,7 @@ export function EditorPickPosts(
       )}
     >
       <div className="container-content text-center mb-6">
-        <h2 className="text-h2 font-title font-bold text-primary">
+        <h2 className="text-h3 md:text-h2 font-title font-bold text-primary">
           {data?.title}
         </h2>
         <p className="text-h6 text-white">{data?.description}</p>

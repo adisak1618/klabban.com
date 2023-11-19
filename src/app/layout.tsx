@@ -8,6 +8,7 @@ import { Anuphan } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { Footer } from "components/Footer.tsx";
 import { KlabbanConfig } from "libs/klabbanConfig";
+import { GtmTag } from "components/GTM";
 
 const anuphan = Anuphan({
   display: "swap",
@@ -71,6 +72,7 @@ export default async function RootLayout({
           <div className="min-h-[85vh]">{children}</div>
           <Footer />
         </QueryProvider>
+        <GtmTag />
       </body>
     </html>
   );

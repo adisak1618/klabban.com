@@ -26,8 +26,11 @@ function renderSlideComponent(slide: renderSlideProps) {
   if (slide.cta?.url)
     return (
       <SwiperSlide className="md:!w-2/3  relative">
-        <Link href={slide?.cta?.url || "#"} target={slide?.cta?.url || "_self"}>
-          <div className="relative bg-silver-3 pb-[50%] group overflow-hidden">
+        <Link
+          href={slide?.cta?.url || "#"}
+          target={slide?.cta?.target || "_self"}
+        >
+          <div className="relative bg-silver-3 pb-[70%] md:pb-[60%] xl:pb-[50%] group overflow-hidden">
             <Image
               className="object-cover transition group-hover:scale-105 duration-700"
               alt={slide?.image?.altText || ""}
@@ -36,7 +39,7 @@ function renderSlideComponent(slide: renderSlideProps) {
             />
             <div className="w-full h-full absolute top-0 left-0 bg-fade-black" />
             <div className="w-full absolute bottom-0 left-0 py-10 px-20 text-center line-clamp-2">
-              <h2 className="text-h5 md:text-h3 font-bold font-title text-white relative transition group-hover:scale-105 duration-700">
+              <h2 className="text-h5 lg:text-h3 overflow-hidden font-bold font-title text-white relative transition group-hover:scale-105 duration-700">
                 {slide?.title}
               </h2>
               <p className="text-white md:text-h6 line-clamp-3">
@@ -104,7 +107,7 @@ export function Slideshow(
           //   slidesPerView: 1,
           //   centeredSlides: true,
           // },
-          640: {
+          768: {
             slidesPerView: 1.5,
             centeredSlides: true,
           },

@@ -21,6 +21,21 @@ export async function generateMetadata({ params }: CustomPageParams) {
     images: [page?.featuredImage?.node.medium_large],
     locale: "th_TH",
     type: "website",
+    openGraph: {
+      title: page?.title,
+      description: page?.content
+        ?.substring(0, 500)
+        ?.replaceAll(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>|\s/g, ""),
+      url: `${process.env.BASE_URL}/blog/${page?.slug}`,
+      siteName: siteName,
+      images: [
+        {
+          url: page?.featuredImage?.node.medium_large,
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
     alternates: {
       canonical: page?.slug
         ? `${process.env.BASE_URL}/blog/${page?.slug}`
