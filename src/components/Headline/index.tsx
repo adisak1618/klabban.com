@@ -55,9 +55,9 @@ export function HeadlineSection({
           backgroundImage && "dark-fade-bg"
         )}
       >
-        <div className="mx-auto container px-5 text-center relative z-10">
+        <div className="mx-auto container px-5 text-center relative z-10 ">
           {header}
-          <h1 className="text-h3 mb-6 sm:h3 md:text-h2 font-bold text-center inline-block leading-[1em] md:leading-[1em] text-white px-6 drop-shadow-2xl">
+          <h1 className=" inline mx-auto py-2 bg-opacity-50 text-h3 mb-6 sm:h3 md:text-h2 font-bold text-center  leading-[1.7em] md:leading-[1.565em] text-white px-3 drop-shadow-2xl">
             {title}
           </h1>
           <br />

@@ -1,4 +1,5 @@
 import { draftMode } from "next/headers";
+import "prismjs/themes/prism-tomorrow.css";
 import {
   OrderEnum,
   PostObjectsConnectionOrderbyEnum,

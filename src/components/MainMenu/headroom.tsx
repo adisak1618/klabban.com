@@ -31,7 +31,7 @@ export function HeadroomWrapper({
         light &&
           (!isSticky || isUnfix) &&
           "light-navigation absolute w-full top-0 left-0 !z-40",
-        isSticky && "border-b shadow-md pt-[60px]",
+        isSticky && "pt-[60px]",
         className
       )}
       onPin={() => {
@@ -47,7 +47,9 @@ export function HeadroomWrapper({
       }}
       style={(isSticky ? cssVars : {}) as any}
     >
-      {children as any}
+      <div className={clsx(isSticky && "border-b border-border shadow-sm")}>
+        {children as any}
+      </div>
     </Headroom>
   );
 }

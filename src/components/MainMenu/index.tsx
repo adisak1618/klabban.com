@@ -17,6 +17,11 @@ export async function MainMenu({ light = false }: { light?: boolean }) {
       input: {
         id: "home",
       },
+      option: {
+        next: {
+          tags: ["menu/home"],
+        },
+      },
     })) || [];
 
   return (

@@ -186,8 +186,8 @@
     --navigation-text: var(--bg);
     --navigation-bg: linear-gradient(
       180deg,
-      rgb(0 0 0 / 0.3) 0%,
-      transparent 90%
+      rgb(0 0 0 / 0.4) 0%,
+      transparent 100%
     );
   }
 }
@@ -251,8 +251,9 @@ h5 {
 .dark-fade-bg {
   background: linear-gradient(
     0deg,
-    rgb(0 0 0 / var(--tw-bg-opacity, 1)) 0%,
-    transparent 90%
+    rgb(0 0 0 / var(--tw-bg-opacity, 0.9)) 10%,
+    rgb(0 0 0 / var(--tw-bg-opacity, 0.4)) 70%,
+    transparent 100%
   );
 }
 
@@ -281,4 +282,9 @@ h5 {
 
 .headroom {
   z-index: 40 !important;
+}
+
+
+code[class*=language-] {
+  color: #f8f8f2 !important;
 }

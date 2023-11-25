@@ -1,6 +1,8 @@
 import { Breadcrumb } from "components/Breadcrumb";
 import { HeadlineSection } from "components/Headline";
 import { format } from "date-fns";
+import { PrismScript } from "./prismScript";
+import "prismjs/themes/prism-okaidia.min.css";
 import {
   PostFragmentFragment,
   PostRequest,
@@ -41,7 +43,7 @@ export async function getPostData({ slug }: { slug: string }) {
       // next: {
       //   revalidate: 60 * 60 * 24 * 30 * 12, // 1 years
       // },
-      cache: "force-cache",
+      // cache: "no-cache",
     },
   });
 }
@@ -66,6 +68,7 @@ export async function BlogContent({ slug }: { slug: string }) {
   if (!isEnabled && !post) return notFound();
   return (
     <>
+      <PrismScript />
       {!post?.featuredImage && (
         <NormalHeadlineSection
           title={post?.title || ""}

@@ -6,13 +6,13 @@ export const GET = (request: Request) => {
   console.log("searchParams", searchParams.get("path"), searchParams.get("tag"));
   const path = searchParams.get("path");
   if(path) {
-    console.log("start revalidate path", path)
-    revalidatePath(path.replace(/\/+$/, ''))
+    console.log("start revalidate path", path.replace(/\/+$/, ''));
+    revalidatePath(encodeURI(path.replace(/\/+$/, '')));
   }
   const tag = searchParams.get("tag");
   if(tag) {
     console.log("start revalidate tag", tag)
-    revalidateTag(tag)
+    revalidateTag(encodeURI(tag))
   }
   return NextResponse.json({
     success: true
