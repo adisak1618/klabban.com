@@ -113,8 +113,7 @@ export function Slideshow(
           },
         }}
         centeredSlides
-        // loop
-
+        loop
         autoplay={{
           delay: 3000,
           pauseOnMouseEnter: true,
@@ -126,12 +125,12 @@ export function Slideshow(
       >
         {slideshow?.content1 && slideshow?.content1.image?.sourceUrl && (
           <>
-            {renderSlide(slideshow?.content1)}
-            {renderSlide({ ...slideshow?.content2 })}
-            {renderSlide({ ...slideshow?.content3 })}
-            {renderSlide({ ...slideshow?.content4 })}
-            {renderSlide({ ...slideshow?.content5 })}
             {renderSlide({ ...slideshow?.content6 })}
+            {renderSlide({ ...slideshow?.content5 })}
+            {renderSlide({ ...slideshow?.content4 })}
+            {renderSlide({ ...slideshow?.content3 })}
+            {renderSlide({ ...slideshow?.content2 })}
+            {renderSlide(slideshow?.content1)}
           </>
         )}
       </Swiper>
