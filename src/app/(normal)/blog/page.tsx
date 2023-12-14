@@ -26,6 +26,9 @@ export async function generateMetadata({}: PageSearchParams) {
     images: [page?.featuredImage?.node.medium_large],
     locale: "th_TH",
     type: "website",
+    alternates: {
+      canonical: `${process.env.BASE_URL}/blog`,
+    },
   };
 }
 

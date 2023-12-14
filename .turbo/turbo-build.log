@@ -1,18 +1,10 @@
 
-> soryor.com@0.1.0 build /Users/adisakchaiyakul/klabban/klabban-commerce/apps/soryor.com
+> klabban.com@0.1.0 build /Users/adisakchaiyakul/klabban/klabban-commerce/apps/klabban.com
 > next build
 
-   ▲ Next.js 14.0.2-canary.26
+   ▲ Next.js 14.0.2
    - Environments: .env
 
    Creating an optimized production build ...
-(node:35067) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+(node:28817) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-
-warn - The class `duration-[400ms]` is ambiguous and matches multiple utilities.
-warn - If this is content and not a class, replace it with `duration-&lsqb;400ms&rsqb;` to silence this warning.
-
-warn - The class `duration-[800ms]` is ambiguous and matches multiple utilities.
-warn - If this is content and not a class, replace it with `duration-&lsqb;800ms&rsqb;` to silence this warning.
- ✓ Compiled successfully
-   Linting and checking validity of types ...

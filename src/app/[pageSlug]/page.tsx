@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: CustomPageParams) {
     },
     alternates: {
       canonical: page?.slug
-        ? `${process.env.BASE_URL}/blog/${page?.slug}`
+        ? `${process.env.BASE_URL}/${page?.slug}`
         : undefined,
     },
   };
@@ -74,5 +74,7 @@ export async function generateStaticParams() {
     .map((page) => ({
       pageSlug: page.slug,
     }))
-    .filter((slug) => !["blog"].includes(slug.pageSlug || ""));
+    .filter(
+      (slug) => !["blog", "about-me", "home"].includes(slug.pageSlug || "")
+    );
 }

@@ -26,7 +26,7 @@
       --font-anuphan,
       -apple-system,
       BlinkMacSystemFont,
-      "Segoe UI",
+      "Sukhumvit Set",
       Roboto,
       Oxygen-Sans,
       Ubuntu,
@@ -35,10 +35,15 @@
       sans-serif
     );
     --font-base: var(
+      --font-anuphan,
+      -apple-system,
+      BlinkMacSystemFont,
       "Sukhumvit Set",
+      Roboto,
+      Oxygen-Sans,
+      Ubuntu,
+      Cantarell,
       "Helvetica Neue",
-      Helvetica,
-      Arial,
       sans-serif
     );
     --temporary_content_font: -apple-system, default-fonts, "Helvetica Neue",
@@ -287,4 +292,9 @@ h5 {
 
 code[class*=language-] {
   color: #f8f8f2 !important;
+}
+
+.custom-text-border {
+  -webkit-filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3));
+          filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3));
 }

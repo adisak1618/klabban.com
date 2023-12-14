@@ -36,6 +36,7 @@ function renderSlideComponent(slide: renderSlideProps) {
               alt={slide?.image?.altText || ""}
               src={slide?.image?.sourceUrl || ""}
               fill
+              priority
             />
             <div className="w-full h-full absolute top-0 left-0 bg-fade-black" />
             <div className="w-full absolute bottom-0 left-0 py-10 px-20 text-center line-clamp-2">
@@ -58,6 +59,7 @@ function renderSlideComponent(slide: renderSlideProps) {
           alt={slide?.image?.altText || ""}
           src={slide?.image?.sourceUrl || ""}
           fill
+          priority
         />
         <div className="w-full h-full absolute top-0 left-0 bg-fade-black" />
         <div className="w-full absolute bottom-0 left-0 py-10 px-20 text-center line-clamp-2">

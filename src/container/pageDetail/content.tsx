@@ -83,9 +83,11 @@ export async function getPageData({
 export async function PageContent({
   slug,
   asPreview = false,
+  hideMenu = false,
 }: {
   slug: string;
   asPreview?: boolean;
+  hideMenu?: boolean;
 }) {
   const { isEnabled } = draftMode();
   const { customUI, page } = await getPageData({ slug, asPreview });
@@ -93,7 +95,11 @@ export async function PageContent({
   if (!page && !isEnabled) return notFound();
   return (
     <>
-      <MainMenu light={customUI?.customPageUI?.mainContent?.lightNavigation} />
+      {!hideMenu && (
+        <MainMenu
+          light={customUI?.customPageUI?.mainContent?.lightNavigation}
+        />
+      )}
 
       <div>
         <div className="flex flex-col">

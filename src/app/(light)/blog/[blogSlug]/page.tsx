@@ -23,6 +23,7 @@ export interface BlogDetailPageProps {
 
 export async function generateMetadata({ params }: BlogDetailPageProps) {
   const { post } = await getPostData({ slug: decodeURI(params.blogSlug) });
+
   return {
     title: `${siteName} | ${post?.title}`,
     description: post?.excerpt?.replaceAll(

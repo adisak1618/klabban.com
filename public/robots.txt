@@ -1,3 +1,9 @@
-# Allow all crawlers
+# *
 User-agent: *
 Allow: /
+
+# Host
+Host: https://www.klabban.com
+
+# Sitemaps
+Sitemap: https://www.klabban.com/sitemap.xml

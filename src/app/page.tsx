@@ -4,12 +4,18 @@ import homePage, {
 } from "./[pageSlug]/page";
 
 export async function generateMetadata() {
-  return await pageGenerateMetadata({
+  const generateMeta = await pageGenerateMetadata({
     params: {
       pageSlug: "home",
     },
     searchParams: {},
   });
+  return {
+    ...generateMeta,
+    alternates: {
+      canonical: `${process.env.BASE_URL}`,
+    },
+  };
 }
 
 async function Page() {

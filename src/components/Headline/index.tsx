@@ -91,6 +91,7 @@ export function HeadlineSection({
             alt={imageAlt || "cover"}
             // srcSet={backgroundSrcSet}
             fill
+            quality={100}
             sizes="(max-width: 5000px) 100vw"
             className="w-full h-full object-cover object-center absolute"
           />
