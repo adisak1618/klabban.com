@@ -1,7 +1,7 @@
 "use client";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { MenuWrapper } from "./wrapper";
+import { MenuLink } from "./wrapper";
 import { Logo } from "components/Logo";
 import { MenuType } from "klabban-commerce";
 import Link from "next/link";
@@ -24,7 +24,7 @@ function RenderMenu({
         <div className="" key={menu.label}>
           <div
             className={clsx(
-              "mt-2 flex gap-3 items-center w-full uppercase text-left text-text-color hover:text-[var(--text-link-hover)]",
+              "mt-2 flex gap-3 items-center w-full uppercase text-left text-text-color hover:text-primary",
               root && "text-h6 border-b border-border font-bold",
               (menu.children || [])?.length > 0 && "font-bold"
             )}
@@ -71,7 +71,7 @@ function RenderMenu({
           </div>
           <div
             className={clsx(
-              "pl-3 transition-all overflow-hidden",
+              "pl-6 transition-all overflow-hidden",
               activeMenu === menu.id ? "max-h-[700px]" : "max-h-[0px]"
             )}
           >
@@ -86,9 +86,11 @@ function RenderMenu({
 export function HamburgerMenu({
   menus,
   logo,
+  light = false,
 }: {
   menus: MenuType[];
   logo?: string;
+  light?: boolean;
 }) {
   const [isOpen, setOpen] = useState(false);
   useEffect(() => {
@@ -100,9 +102,12 @@ export function HamburgerMenu({
   }, [isOpen]);
   return (
     <>
-      <MenuWrapper
+      <MenuLink
         onClick={() => setOpen(true)}
-        className="py-3.5 !px-0 text-[var(--navigation-text)] lg:hidden hover:scale-110 transition-transform ease-in-out "
+        className={clsx(
+          "py-3.5 !px-0 lg:hidden hover:scale-110 transition-transform ease-in-out",
+          light ? "text-text-color" : "text-white"
+        )}
       >
         <svg
           version="1.1"
@@ -118,7 +123,7 @@ export function HamburgerMenu({
             <path d="M5,19h14c0.6,0,1-0.4,1-1s-0.4-1-1-1H5c-0.6,0-1,0.4-1,1S4.4,19,5,19z" />
           </g>
         </svg>
-      </MenuWrapper>
+      </MenuLink>
       {isOpen && (
         <div
           onClick={() => setOpen(false)}

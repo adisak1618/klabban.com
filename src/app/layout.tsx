@@ -4,17 +4,26 @@ import { draftMode } from "next/headers";
 import type { Metadata } from "next";
 import { QueryProvider } from "klabban-commerce/react";
 import { authOptions, getServerSession } from "klabban-commerce/auth";
-import { Anuphan } from "next/font/google";
+import { Kanit } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { Footer } from "components/Footer.tsx";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { GtmTag } from "components/GTM";
+import clsx from "clsx";
 
-const anuphan = Anuphan({
+const kanitFont = Kanit({
   display: "swap",
   preload: true,
-  variable: "--font-anuphan",
+  variable: "--font-kanit",
   subsets: ["thai"],
+  weight: ["700", "600", "400", "300"],
+});
+
+const MontserratFont = Montserrat({
+  preload: true,
+  variable: "--font-montserrat",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +44,10 @@ export default async function RootLayout({
     : await getServerSession(authOptions({ GQL_URL: KlabbanConfig.GQL_URL }));
 
   return (
-    <html lang="th" className={anuphan.variable}>
+    <html
+      lang="th"
+      className={clsx(kanitFont.variable, MontserratFont.variable)}
+    >
       <head>
         <link
           rel="apple-touch-icon"

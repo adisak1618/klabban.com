@@ -21,11 +21,10 @@
 @layer base {
   :root {
     /* wordpress */
-    --primary-color: #f0c029;
+    --primary-color: #286F6C;
     --header_font: var(
-      --font-anuphan,
+      --font-montserrat,
       -apple-system,
-      BlinkMacSystemFont,
       "Sukhumvit Set",
       Roboto,
       Oxygen-Sans,
@@ -35,9 +34,8 @@
       sans-serif
     );
     --font-base: var(
-      --font-anuphan,
+      --font-kanit,
       -apple-system,
-      BlinkMacSystemFont,
       "Sukhumvit Set",
       Roboto,
       Oxygen-Sans,

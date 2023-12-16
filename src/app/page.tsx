@@ -1,33 +1,28 @@
-import { RedirectPreviewUrl } from "components/PreviewModeProvider/redirectPreviewUrl";
-import homePage, {
-  generateMetadata as pageGenerateMetadata,
-} from "./[pageSlug]/page";
+import { MainMenu } from "components/MainMenu";
 
-export async function generateMetadata() {
-  const generateMeta = await pageGenerateMetadata({
-    params: {
-      pageSlug: "home",
-    },
-    searchParams: {},
-  });
-  return {
-    ...generateMeta,
-    alternates: {
-      canonical: `${process.env.BASE_URL}`,
-    },
-  };
-}
+// import { generateMetadata as pageGenerateMetadata } from "./[pageSlug]/page";
+
+// export async function generateMetadata() {
+//   const generateMeta = await pageGenerateMetadata({
+//     params: {
+//       pageSlug: "home",
+//     },
+//     searchParams: {},
+//   });
+//   return {
+//     ...generateMeta,
+//     alternates: {
+//       canonical: `${process.env.BASE_URL}`,
+//     },
+//   };
+// }
 
 async function Page() {
   return (
     <>
-      {homePage({
-        params: {
-          pageSlug: "/",
-        },
-        searchParams: {},
-      })}
-      <RedirectPreviewUrl />
+      <MainMenu light />
+      <div>home page</div>
+      {/* <RedirectPreviewUrl /> */}
     </>
   );
 }

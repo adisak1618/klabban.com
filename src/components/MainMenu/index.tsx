@@ -1,16 +1,20 @@
 import clsx from "clsx";
-import { siteLogoRequest } from "klabban-commerce";
 import { MenuRequest } from "klabban-commerce";
 import { HamburgerMenu } from "./burgerMenu";
-import { MenuWrapper } from "./wrapper";
+import { MenuLink } from "./wrapper";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { SubMenu } from "./subMenu";
 import { Logo } from "components/Logo";
 import { Social } from "./social";
 import { HeadroomWrapper } from "./headroom";
 import Link from "next/link";
-export async function MainMenu({ light = false }: { light?: boolean }) {
-  const { siteLogo } = await siteLogoRequest(KlabbanConfig);
+export async function MainMenu({
+  light = false,
+  textColor = "dark",
+}: {
+  light?: boolean;
+  textColor?: "light" | "dark";
+}) {
   const { formatedMenu } =
     (await MenuRequest({
       ...KlabbanConfig,
@@ -28,8 +32,8 @@ export async function MainMenu({ light = false }: { light?: boolean }) {
     <HeadroomWrapper light={light}>
       <div
         style={{
-          background: "var(--navigation-bg)",
-          color: "var(--navigation-text)",
+          // background: "var(--navigation-bg)",
+          color: textColor === "dark" ? "var(--text-color)" : "var(--bg)",
           height: "var(--header-height, 70px)",
         }}
         className={clsx(
@@ -37,30 +41,41 @@ export async function MainMenu({ light = false }: { light?: boolean }) {
           !light && "border-b border-border"
         )}
       >
-        <div className="container-content w-full flex flex-wrap items-center">
-          <HamburgerMenu logo={siteLogo?.medium} menus={formatedMenu} />
-          <MenuWrapper className="flex-1 md:flex-none flex items-center">
-            <Link href="/" aria-label="go to home page">
-              <Logo logo={siteLogo?.medium} />
+        <div className="mx-auto lg:container px-5 w-full flex flex-wrap items-center">
+          <HamburgerMenu menus={formatedMenu} light={light} />
+          <MenuLink className="flex-1 md:flex-none flex items-center">
+            <Link href="/" aria-label="home page">
+              <Logo />
             </Link>
-          </MenuWrapper>
+          </MenuLink>
           {/* <div className="md:hidden flex-1" /> */}
           <div className="hidden flex-1 md:flex flex-wrap lg:text-h6">
             {formatedMenu.map((menu) => {
               const isTree =
                 (menu.children || [])?.flatMap((a) => a.children).length > 0;
               return (
-                <MenuWrapper
-                  key={menu.id}
-                  className="group leading-[70px] font-bold hover:text-primary hover:font-semibold content-stretch capitalize hover:border-b-2 border-primary"
-                >
+                <div key={menu.id} className="group leading-[70px] capitalize">
                   <>
-                    <Link href={menu.uri || "#"}>{menu.label}</Link>
+                    <MenuLink
+                      className="flex items-center"
+                      href={menu.uri || "#"}
+                    >
+                      <>
+                        {menu.label || ""}
+                        {(menu.children || [])?.length > 0 ? (
+                          // eslint-disable-next-line jsx-a11y/alt-text
+                          <img
+                            className="w-6 h-6"
+                            src="/images/icons/chevron-down.svg"
+                          />
+                        ) : null}
+                      </>
+                    </MenuLink>
                     {(menu.children || [])?.length > 0 && (
                       <div
                         className={clsx(
-                          "hidden group-hover:block -mx-3 bg-secondary rounded-lg px-6 shadow",
-                          !isTree && "absolute py-3"
+                          "hidden group-hover:block -mx-3 bg-white rounded-b-md shadow overflow-hidden",
+                          !isTree && "absolute"
                         )}
                       >
                         <SubMenu
@@ -72,7 +87,7 @@ export async function MainMenu({ light = false }: { light?: boolean }) {
                       </div>
                     )}
                   </>
-                </MenuWrapper>
+                </div>
               );
             })}
           </div>
