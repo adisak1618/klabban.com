@@ -16,11 +16,15 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        heading: ['var(--font-heading)'],
+        body: ['var(--font-body)'],
+      },
       fontSize: {
         h1: "80px",
         h2: "60px",
         h3: "40px",
-        h4: "30px",
+        h4: "32px",
         h5: "24px",
         h6: "20px",
         body: "16px",
@@ -63,8 +67,10 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
         // old
+        "bg1": "#E2E2CA",
         "transparent": "transparent",
         "primary": "var(--primary-color)",
+        "hilight": "var(--hilight-color)",
         // "secondary": "var(--bg-secondary)",
         "light": "var(--text-light)",
         "third": "var(--bg-third)",

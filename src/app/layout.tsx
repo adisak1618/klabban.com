@@ -15,14 +15,14 @@ import clsx from "clsx";
 const kanitFont = Kanit({
   display: "swap",
   preload: true,
-  variable: "--font-kanit",
+  variable: "--font-body",
   subsets: ["thai"],
-  weight: ["700", "600", "400", "300"],
+  weight: ["900", "700", "600", "500", "400", "300"],
 });
 
 const MontserratFont = Montserrat({
   preload: true,
-  variable: "--font-montserrat",
+  variable: "--font-heading",
   subsets: ["latin"],
 });
 

@@ -4,46 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --lightblue: #87CEEB;
-  --text-black: #212429;
-  --darkpink: #F784AD;
-  --primary-color: #F784AD;
-  --secondary-color: #6BA9F9;
-  --base-color: #CACFD6;
-  --font-headings: var(--font-sriracha, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
-	--font-base: var(--font-anuphan, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
-  --small-diagonal-line: url("data:image/svg+xml,%3Csvg preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1183 42.14'%3E%3Cpath fill='%23fff' d='M0,0S535,78.49,1183,0V42.14H0Z'/%3E%3C/svg%3E%0A");
-} */
+
 @layer base {
   :root {
     /* wordpress */
     --primary-color: #286F6C;
-    --header_font: var(
-      --font-montserrat,
-      -apple-system,
-      "Sukhumvit Set",
-      Roboto,
-      Oxygen-Sans,
-      Ubuntu,
-      Cantarell,
-      "Helvetica Neue",
-      sans-serif
-    );
-    --font-base: var(
-      --font-kanit,
-      -apple-system,
-      "Sukhumvit Set",
-      Roboto,
-      Oxygen-Sans,
-      Ubuntu,
-      Cantarell,
-      "Helvetica Neue",
-      sans-serif
-    );
+    --hilight-color: #F2643F;
     --temporary_content_font: -apple-system, default-fonts, "Helvetica Neue",
       BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu,
       Cantarell, sans-serif;
@@ -51,7 +17,7 @@
     --bg-secondary: #f8f8f8;
     --bg-third: #f3f3f3;
     --bg-darker: #f8f8f8;
-    --text-color: #333;
+    --text-color: #0E2F3E;
     --text-hover: #b46e03;
     /* --text-hover: #0085a1; */
     --text-secondary: #4e4e4e;
@@ -199,7 +165,7 @@ html {
   color: var(--text-color);
   background: var(--bg);
   font-family: var(
-    --font-base,
+    --font-body,
     "Sukhumvit Set",
     "Helvetica Neue",
     Helvetica,

@@ -1,4 +1,7 @@
 import { MainMenu } from "components/MainMenu";
+import { Button } from "components/ui/button";
+import { HeroSection } from "container/homePage/HeroSection";
+import { motion } from "framer-motion";
 
 // import { generateMetadata as pageGenerateMetadata } from "./[pageSlug]/page";
 
@@ -21,7 +24,8 @@ async function Page() {
   return (
     <>
       <MainMenu light />
-      <div>home page</div>
+      <HeroSection />
+
       {/* <RedirectPreviewUrl /> */}
     </>
   );
