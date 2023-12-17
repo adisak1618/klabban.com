@@ -129,20 +129,31 @@ export function HeroSection() {
               }}
               transition={{ delay: 2, duration: 1 }}
             >
-              <motion.img
-                animate={{ scale: 1.1 }}
+              <motion.div
+                animate={{ scale: 1.05 }}
                 transition={{
                   duration: 1,
                   repeat: Infinity,
-                  delay: 0.2,
-                  repeatDelay: 0.3,
+                  delay: 0.5,
+                  repeatDelay: 0.5,
                   ease: "easeOut",
                 }}
-                draggable={false}
-                className="origin-right w-[200px] h-[114px] object-cover rounded-md shadow-md hover:shadow-xl transform duration-150"
-                alt="lasted-video"
-                src="/images/lasted-video.jpeg"
-              />
+                className="group first-letter:relative w-[200px] h-[114px] rounded-md overflow-hidden"
+              >
+                <img
+                  draggable={false}
+                  className="absolute w-full h-full object-cover"
+                  alt="lasted-video"
+                  src="/images/lasted-video.jpeg"
+                />
+                <div className="p-3 rounded-full transform duration-150 bg-black/40 group-hover:bg-black/70 w-12 h-12 absolute left-1/2 top-1/2 -ml-6 -mt-6">
+                  <img
+                    alt="play icon"
+                    src="/images/icons/play.svg"
+                    className="pl-1 pt-px"
+                  />
+                </div>
+              </motion.div>
               <p className="absolute font-heading w-[114px] text-sm top-full -right-5 text-center text-text-secondary rotate-90 origin-top-right">
                 Latest Video
               </p>

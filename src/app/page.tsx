@@ -25,6 +25,11 @@ async function Page() {
     <>
       <MainMenu light />
       <HeroSection />
+      <div>
+        <div className="container mx-auto">
+          <h1>asdf</h1>
+        </div>
+      </div>
 
       {/* <RedirectPreviewUrl /> */}
     </>
