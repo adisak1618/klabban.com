@@ -26,7 +26,14 @@ export const FocusLineSVG = ({
         // strokeLinecap="round"
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
-        transition={{ duration, delay, ease: "easeInOut" }}
+        transition={{
+          duration,
+          delay,
+          ease: "easeInOut",
+          repeat: Infinity,
+
+          repeatDelay: 10,
+        }}
       />
     </svg>
   );

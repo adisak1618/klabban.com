@@ -18,6 +18,7 @@
     --bg-third: #f3f3f3;
     --bg-darker: #f8f8f8;
     --text-color: #0E2F3E;
+    /* --text-color: rgb(29,29,31); */
     --text-hover: #b46e03;
     /* --text-hover: #0085a1; */
     --text-secondary: #4e4e4e;
@@ -153,11 +154,7 @@
   }
   .light-navigation {
     --navigation-text: var(--bg);
-    --navigation-bg: linear-gradient(
-      180deg,
-      rgb(0 0 0 / 0.4) 0%,
-      transparent 100%
-    );
+    --navigation-bg: transparent;
   }
 }
 html {
@@ -261,4 +258,8 @@ code[class*=language-] {
 .custom-text-border {
   -webkit-filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3));
           filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3));
+}
+
+.bottom-fade {
+  -webkit-mask-image: -webkit-gradient(linear, left 90%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
 }

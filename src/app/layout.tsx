@@ -17,7 +17,7 @@ const kanitFont = Kanit({
   preload: true,
   variable: "--font-body",
   subsets: ["thai"],
-  weight: ["900", "700", "600", "500", "400", "300"],
+  weight: ["900", "700", "600", "500", "400", "300", "200", "100"],
 });
 
 const MontserratFont = Montserrat({

@@ -122,7 +122,7 @@ export function AboutMeHeroBlock() {
           <p className="text-primary uppercase font-bold text-h3 lg:text-h2 md:leading-[60px] drop-shadow-xl custom-text-border">
             Adisak Chaiyakul
           </p>
-          <h1 className="text-[80px] uppercase sm:text-[140px] lg:text-[200px] font-bold font-title drop-shadow-xl leading-[80px] sm:leading-[140px] lg:leading-[170px] custom-text-border">
+          <h1 className="text-[80px] uppercase sm:text-[140px] lg:text-[200px] font-bold font-title drop-shadow-xl leading-[80px] sm:leading-[140px] lg:leading-[110px] custom-text-border">
             I&apos;m OTTO
           </h1>
           <p className="sm:hidden p-4 rounded-xl text-h6 overflow-hidden break-words font-bold custom-text-border text-center">

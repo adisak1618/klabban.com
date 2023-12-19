@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function ImTextAnimate() {
   const textIndex = useMotionValue(0);
   // const texts = ["Full Stack Developer", "Freelancer", "Music Lover"];
-  const texts = ["Full Stack Developer", "Freelancer", "Tech Content Creators"];
+  const texts = ["Full Stack Developer💻", "Freelancer", "Content Creators"];
 
   useEffect(() => {
     animate(count, 60, {

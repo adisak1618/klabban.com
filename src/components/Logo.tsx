@@ -13,7 +13,7 @@ export function Logo({ logo, alt }: { logo?: string; alt?: string }) {
       ) : (
         <img
           draggable="false"
-          className="w-full h-full text-white"
+          className="h-full text-white"
           src="/imotto-logo.png"
           alt="site Logo"
         />

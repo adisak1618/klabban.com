@@ -15,23 +15,31 @@ export function SubMenu({ menus, root, full = false }: SubMenuProps) {
   return (
     <div
       className={clsx(
-        "bg-white text-base text-text-color",
-        root && full && "shadow-sm border-b border-border",
-        full && "w-full py-2 absolute left-0 bg-white"
+        "text-base text-text-color",
+        // root && full && "shadow-sm border-b border-border",
+        full && "w-full py-2 absolute left-0 "
       )}
     >
       <div
         className={clsx(
           "w-full flex-wrap",
-          root && full && "container mx-auto py-3",
+          root && full && "container  mx-auto",
           // !full && root && "divide-y",
-          menus.length > 0 && root && full && "flex divide-x flex-wrap"
+          menus.length > 0 && root && full && "flex"
         )}
       >
-        {menus.map((menu) => (
-          <>
+        <div
+          className={clsx(
+            "bg-white",
+            menus.length > 0 &&
+              root &&
+              full &&
+              "flex divide-x flex-wrap py-4 rounded-md shadow-sm border border-secondary"
+          )}
+        >
+          {menus.map((menu) => (
             <div
-              key={menu.id}
+              key={menu.databaseId}
               className={clsx(
                 "block leading-[1em] ",
                 root && full && "px-10"
@@ -64,8 +72,8 @@ export function SubMenu({ menus, root, full = false }: SubMenuProps) {
                 </div>
               )}
             </div>
-          </>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
