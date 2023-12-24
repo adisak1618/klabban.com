@@ -14,12 +14,18 @@ const cursorVariants = {
   },
 };
 
-export default function CursorBlinker() {
+type CursorBlinkerProps = {
+  character?: string;
+};
+
+export default function CursorBlinker({ character = "I" }: CursorBlinkerProps) {
   return (
     <motion.div
       variants={cursorVariants}
       animate="blinking"
-      className="inline-block h-9 sm:h-[48px]  md:h-[60px] lg:h-[90px] w-1 md:w-2  lg:w-2.5 translate-y-1 bg-black"
-    />
+      className="inline-block "
+    >
+      {character}
+    </motion.div>
   );
 }

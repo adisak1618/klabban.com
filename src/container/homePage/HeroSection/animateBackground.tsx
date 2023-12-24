@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useMousePosition } from "./useMousePosition";
 import clsx from "clsx";
-import { Linefont } from "next/font/google";
 
 interface Rectangle {
   id: number;
@@ -17,8 +16,6 @@ interface Rectangle {
 }
 
 export const AnimateBackground: React.FC = () => {
-  const { x: mousePositionX, y: mousePositionY, scrollY } = useMousePosition();
-
   const [rectangles, setRectangles] = useState<Rectangle[]>([]);
 
   useEffect(() => {

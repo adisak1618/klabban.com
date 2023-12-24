@@ -1,12 +1,24 @@
 "use client";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+const CodeFont = Ubuntu_Mono({
+  subsets: ["latin"],
+  style: "italic",
+  weight: ["700", "400"],
+});
 import CursorBlinker from "./blinkCursor";
 import { useEffect } from "react";
+import { Ubuntu_Mono } from "next/font/google";
+import clsx from "clsx";
 
 export default function ImTextAnimate() {
   const textIndex = useMotionValue(0);
   // const texts = ["Full Stack Developer", "Freelancer", "Music Lover"];
-  const texts = ["Full Stack Developer💻", "Freelancer", "Content Creators"];
+  const texts = [
+    "OTTO",
+    "Full Stack Developer💻",
+    "Freelancer",
+    "Content Creators",
+  ];
 
   useEffect(() => {
     animate(count, 60, {
@@ -43,7 +55,9 @@ export default function ImTextAnimate() {
   return (
     <h1 className="flex-1 text-center md:text-left text-[36px] sm:text-[48px] md:text-[60px] lg:text-[90px] font-black font-heading leading-[1em] max-w-4xl">
       <span className="text-primary">I&apos;m a</span>&nbsp;
-      <motion.span className="inline">{displayText}</motion.span>
+      <motion.span className={clsx("inline text-text-secondary-color")}>
+        {displayText}
+      </motion.span>
       &nbsp;
       <CursorBlinker />
     </h1>

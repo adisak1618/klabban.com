@@ -35,8 +35,8 @@ export async function generateMetadata({}: PageSearchParams) {
 async function Page(props: PageSearchParams) {
   const { page } = await fetchData("blog");
   return (
-    <>
-      <div className="container-content mt-3 mb-4">
+    <div className="bg-bgLight">
+      <div className="container mx-auto pt-24 pb-4">
         <Breadcrumb
           links={[
             {
@@ -77,7 +77,7 @@ async function Page(props: PageSearchParams) {
         />
       </div>
       <BlogSearch {...props} parentCategoryId={null} />
-    </>
+    </div>
   );
 }
 

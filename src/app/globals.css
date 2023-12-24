@@ -8,8 +8,10 @@
 @layer base {
   :root {
     /* wordpress */
-    --primary-color: #286F6C;
+    /* --primary-color: #286F6C; */
+    --primary-color: rgb(40, 111, 96);
     --hilight-color: #F2643F;
+    --outline-color: var(--primary-color);
     --temporary_content_font: -apple-system, default-fonts, "Helvetica Neue",
       BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu,
       Cantarell, sans-serif;
@@ -17,7 +19,9 @@
     --bg-secondary: #f8f8f8;
     --bg-third: #f3f3f3;
     --bg-darker: #f8f8f8;
-    --text-color: #0E2F3E;
+    --text-color: #1d1d1f;
+    --text-color-secondary: #0E2F3E;
+    /* --text-color: #0E2F3E; */
     /* --text-color: rgb(29,29,31); */
     --text-hover: #b46e03;
     /* --text-hover: #0085a1; */
@@ -63,7 +67,7 @@
     --card-foreground: 20 14.3% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 20 14.3% 4.1%;
-    --primary: 47.9 95.8% 53.1%;
+    --primary: 	167 47% 30%;
     --primary-foreground: 26 83.3% 14.1%;
     --secondary: 60 4.8% 95.9%;
     --secondary-foreground: 24 9.8% 10%;
@@ -186,7 +190,7 @@ html {
     );
   }
   .zoom-in {
-    @apply transition-all ease-in-out hover:-translate-y-1 hover:scale-105;
+    @apply transition-all ease-in-out hover:scale-[1.02];
   }
 }
 
@@ -262,4 +266,39 @@ code[class*=language-] {
 
 .bottom-fade {
   -webkit-mask-image: -webkit-gradient(linear, left 90%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
+}
+
+.text-outline {
+  
+   
+    
+  /* text-shadow: 1px 1px 0 var(--primary-color); */
+ 
+  text-shadow:
+       1px 1px 0 var(--outline-color, --primary-color),
+     -1px -1px 0 var(--outline-color, --primary-color),
+      1px -1px 0 var(--outline-color, --primary-color),
+      -1px 1px 0 var(--outline-color, --primary-color),
+       1px 1px 0 var(--outline-color, --primary-color);
+      
+}
+
+.photo-grid {
+  display: grid;
+  gap: 1rem;
+
+  grid-template-columns: repeat(auto-fit, minmax(var(--col-width, 80px), 1fr));
+  grid-auto-rows: var(--col-width, 80px);
+}
+
+
+/* Medium screens */
+@media screen and (min-width: 600px) {
+  .card-tall {
+    grid-row: span 2 / auto;
+  }
+
+  .card-wide {
+    grid-column: span 2 / auto;
+  }
 }

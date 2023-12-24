@@ -4,24 +4,23 @@ import { draftMode } from "next/headers";
 import type { Metadata } from "next";
 import { QueryProvider } from "klabban-commerce/react";
 import { authOptions, getServerSession } from "klabban-commerce/auth";
-import { Kanit } from "next/font/google";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Noto_Sans_Thai } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { Footer } from "components/Footer.tsx";
 import { KlabbanConfig } from "libs/klabbanConfig";
 import { GtmTag } from "components/GTM";
 import clsx from "clsx";
 
-const kanitFont = Kanit({
-  display: "swap",
-  preload: true,
+const kanitFont = Noto_Sans_Thai({
+  // display: "swap",
+  // preload: true,
   variable: "--font-body",
-  subsets: ["thai"],
-  weight: ["900", "700", "600", "500", "400", "300", "200", "100"],
+  subsets: ["thai", "latin"],
+  // weight: ["700", "600", "400"],
 });
 
 const MontserratFont = Montserrat({
-  preload: true,
+  // preload: true,
   variable: "--font-heading",
   subsets: ["latin"],
 });

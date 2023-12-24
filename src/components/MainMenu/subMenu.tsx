@@ -30,11 +30,11 @@ export function SubMenu({ menus, root, full = false }: SubMenuProps) {
       >
         <div
           className={clsx(
-            "bg-white",
+            root && "bg-white",
             menus.length > 0 &&
               root &&
               full &&
-              "flex divide-x flex-wrap py-4 rounded-md shadow-sm border border-secondary"
+              "flex divide-x flex-wrap py-4 rounded-2xl shadow-sm border border-secondary"
           )}
         >
           {menus.map((menu) => (

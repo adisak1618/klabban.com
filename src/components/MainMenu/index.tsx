@@ -74,7 +74,7 @@ export async function MainMenu({
                   {(menu.children || [])?.length > 0 && (
                     <div
                       className={clsx(
-                        "hidden group-hover:block -mx-3 bg-white rounded-md shadow overflow-hidden",
+                        "hidden group-hover:block -mx-3  rounded-2xl shadow overflow-hidden",
                         !isTree && "absolute"
                       )}
                     >

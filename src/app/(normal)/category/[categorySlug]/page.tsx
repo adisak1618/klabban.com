@@ -50,7 +50,7 @@ export default async function Page(props: PageProps) {
               subTitle={category?.description}
             /> */}
 
-      <div className="mx-auto !max-w-5xl mt-6 mb-4 lg:container px-5">
+      <div className="mx-auto container mt-24  mb-4 lg:container px-5">
         <Breadcrumb
           links={[
             {

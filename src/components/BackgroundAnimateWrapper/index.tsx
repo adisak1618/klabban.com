@@ -2,13 +2,15 @@
 import clsx from "clsx";
 import { useBackgroundContext } from "components/BackgroundContext";
 import { useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 
-interface BackgroundAnimateWrapperProps {
+type BackgroundAnimateWrapperProps = {
   children: JSX.Element;
   className?: string;
   color: string;
-}
+};
+
+type Ref = HTMLDivElement;
 
 export const BackgroundAnimateWrapper = ({
   children,
@@ -16,18 +18,17 @@ export const BackgroundAnimateWrapper = ({
   color,
 }: BackgroundAnimateWrapperProps) => {
   const { setBackground } = useBackgroundContext();
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
+  const elmRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(elmRef, {
     margin: "-50%",
     amount: 0,
   });
   useEffect(() => {
-    console.log(color, "isInView", isInView);
     isInView && setBackground(color);
   }, [isInView]);
 
   return (
-    <div ref={ref} className={clsx(className, "relative")}>
+    <div ref={elmRef} className={clsx(className, "relative")}>
       {children}
     </div>
   );

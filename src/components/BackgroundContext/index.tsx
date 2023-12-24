@@ -19,8 +19,9 @@ export { useBackgroundContext };
 
 interface Props {
   children: JSX.Element;
+  className?: string;
 }
-export function BackgroundProvider({ children }: Props) {
+export function BackgroundProvider({ children, className }: Props) {
   const [backgroundState, setBackgroundState] =
     useState<BackgroundContextValue["background"]>(null);
   const [modeState, setModeState] =
@@ -48,6 +49,7 @@ export function BackgroundProvider({ children }: Props) {
     >
       <AnimatePresence>
         <motion.div
+          className={className}
           // initial={{ backgroundColor: "rgba(238, 238, 209, 1)" }}
           animate={{
             backgroundColor: backgroundState ? backgroundState : "#FFFFFF",

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function Logo({ logo, alt }: { logo?: string; alt?: string }) {
   return (
-    <div className="h-[30px] relative flex items-center gap-1">
+    <div className="h-[30px] mb-2 relative flex items-center gap-1">
       {logo ? (
         <Image
           width={100}

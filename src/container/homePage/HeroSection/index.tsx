@@ -1,21 +1,14 @@
 "use client";
 import { FocusLineSVG } from "components/CustomSVG/focusLine";
 import { Button } from "components/ui/button";
-import {
-  motion,
-  useAnimate,
-  useInView,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useAnimate, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import ImTextAnimate from "./imText";
 import clsx from "clsx";
 import { useBackgroundContext } from "components/BackgroundContext";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { MagneticFramer } from "./followPointer";
-import { MyServicesSection } from "../MyServices";
-import { BackgroundAnimateWrapper } from "../Projects/backgroundAnimateWrapper";
+import { BackgroundAnimateWrapper } from "components/BackgroundAnimateWrapper";
 
 const MotionLink = motion(Link);
 const MotionButton = motion(Button);
@@ -145,7 +138,7 @@ export function HeroSection() {
   const slideY = useTransform(scrollYProgress, [0, 1], ["0px", "300px"], {
     clamp: true,
   });
-  const slideLeft = useTransform(scrollYProgress, [0, 1], ["0px", "250px"], {
+  const slideLeft = useTransform(scrollYProgress, [0, 1], ["0px", "100px"], {
     clamp: true,
   });
 
@@ -155,7 +148,7 @@ export function HeroSection() {
         ref={ref}
         transition={{ duration: 0.5 }}
         className={clsx(
-          "relative  pt-20 select-none overflow-x-hidden"
+          "relative  pt-20 select-none overflow-hidden"
           // !background
           //   ? "bg-[rgba(40, 111, 108, 1)] bg-gradient-to-tl from-[#EEEED1] to-[#F8F7F1]"
           //   : "bg-[rgba(40, 111, 108, 0)]"
@@ -171,7 +164,7 @@ export function HeroSection() {
           className="bg-gradient-to-tl from-[#EEEED1] to-[#F8F7F1] absolute w-full h-full left-0 top-0 bottom-fade"
         />
 
-        <div className="container z-20 relative mx-auto pt-20 md:pt-[50px] text-text-color">
+        <div className="container z-20 relative mx-auto  pt-10 sm:pt-20 md:pt-[50px] text-text-color">
           <div className="md:hidden max-w-md block mx-auto w-full mb-10">
             <HeroBox animateDelay={0} />
           </div>
@@ -182,7 +175,7 @@ export function HeroSection() {
                 x: ["-10%", "0%"],
                 transition: { duration: 0.5 },
               }}
-              className="h-[96px] md:h-[125px] lg:h-[185px]"
+              className="h-[96px] md:h-[125px] md:mt-20 lg:h-[185px]"
             >
               <ImTextAnimate />
             </motion.div>
@@ -231,7 +224,7 @@ export function HeroSection() {
           <div className="flex flex-col md:flex-row gap-4">
             <motion.div
               style={{ y: slideLeft }}
-              className="flex-1 text-center md:text-left"
+              className="flex-1 text-center md:text-left "
             >
               <motion.p
                 whileInView={{
@@ -242,9 +235,13 @@ export function HeroSection() {
                 transition={{ duration: 0.25, delay: 0.25, ease: "easeInOut" }}
                 className="text-center md:text-left font-body text-h6 sm:text-h5 lg:text-h4 mt-8"
               >
-                👋 I&apos;m Adisak Chaiyakul, a web developer skilled in
+                👋 I&apos;m Adisak Chaiyakul. I specialize in crafting elevated
+                digital experiences that inspire and engage, connecting people
+                with your business through innovative development and intuitive
+                design.
+                {/* a web developer skilled in
                 Headless CMS, WordPress, Next.js, and GraphQL API. Dedicated to
-                crafting fast, user-friendly, and flexible websites
+                crafting fast, user-friendly, and flexible websites */}
               </motion.p>
 
               <motion.div
@@ -350,7 +347,7 @@ export function HeroSection() {
                     whileDrag={{ scale: 2.5, transition: { duration: 1.5 } }}
                     key={icon}
                     href="www.facebook.com"
-                    className=" p-2 rounded-md bg-bg1 transform duration-100 ease-in  hover:!scale-125"
+                    className=" p-2 rounded-md bg-white/80 transform duration-100 ease-in  hover:!scale-125"
                   >
                     <img
                       className="w-6 h-6 "
@@ -375,7 +372,7 @@ export function HeroSection() {
             </motion.div>
           </div>
         </div>
-        <div className="h-80 w-full" />
+        <div className="h-20 md:h-72 lg:h-80 w-full " />
       </motion.div>
     </BackgroundAnimateWrapper>
   );
